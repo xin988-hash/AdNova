@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdNova - 用户后台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B0B0B',
+                        secondary: '#FFFFFF',
+                        accent: '#3B82F6',
+                        dark: '#1E293B',
+                        'dark-light': '#334155',
+                        success: '#22C55E',
+                        warning: '#F59E0B',
+                        danger: '#EF4444'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            }
+            .nav-item-active {
+                border-left: 4px solid #3B82F6;
+                background-color: rgba(59, 130, 246, 0.1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- 侧边栏 -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-dark text-white">
+            <div class="flex items-center justify-center h-16 border-b border-dark-light">
+                <span class="text-xl font-bold">Ad<span class="text-accent">Nova</span></span>
+            </div>
+            <div class="flex-1 overflow-y-auto">
+                <nav class="mt-5 px-2">
+                    <div class="space-y-1">
+                        <a href="#dashboard" class="nav-item-active group flex items-center px-2 py-3 text-sm font-medium rounded-md" data-page="dashboard">
+                            <i class="fa fa-dashboard mr-3 text-accent"></i>
+                            总览
+                        </a>
+                        <a href="#ad-generate" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-generate">
+                            <i class="fa fa-magic mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                            AI广告生成
+                        </a>
+                        <a href="#templates" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="templates">
+                            <i class="fa fa-th-large mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                            模板库
+                        </a>
+                        <a href="#bot" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="bot">
+                            <i class="fa fa-comments mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                            Bot系统
+                        </a>
+                        <a href="#analytics" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="analytics">
+                            <i class="fa fa-bar-chart mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                            数据分析
+                        </a>
+                        <a href="#settings" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="settings">
+                            <i class="fa fa-cog mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                            设置
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <div class="flex-shrink-0 flex border-t border-dark-light p-4">
+                <div class="flex-shrink-0 w-full group block">
+                    <div class="flex items-center">
+                        <div>
+                            <svg class="h-8 w-8 rounded-full bg-gray-300 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium">张三</p>
+                            <p class="text-xs font-medium text-gray-400">专业版用户</p>
+                        </div>
+                        <button class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none">
+                            <i class="fa fa-sign-out"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- 顶部导航 -->
+            <header class="bg-white shadow-sm z-10">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center">
+                            <button id="mobile-sidebar-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none">
+                                <i class="fa fa-bars text-xl"></i>
+                            </button>
+                            <h1 id="page-title" class="ml-4 text-xl font-semibold text-gray-800">总览</h1>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="relative">
+                                <input type="text" placeholder="搜索..." class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                                <i class="fa fa-search absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                            <button class="text-gray-500 hover:text-gray-700 focus:outline-none relative">
+                                <i class="fa fa-bell text-xl"></i>
+                                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                            </button>
+                            <button class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                                <i class="fa fa-question-circle text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 移动端侧边栏 -->
+            <div id="mobile-sidebar" class="fixed inset-0 z-40 hidden">
+                <div class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
+                <div class="relative flex-1 flex flex-col max-w-xs w-full bg-dark text-white">
+                    <div class="absolute top-0 right-0 -mr-12 pt-2">
+                        <button id="close-mobile-sidebar" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                            <span class="sr-only">关闭侧边栏</span>
+                            <i class="fa fa-times text-white text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
+                        <div class="flex-shrink-0 flex items-center px-4">
+                            <span class="text-xl font-bold">Ad<span class="text-accent">Nova</span></span>
+                        </div>
+                        <nav class="mt-5 px-2 space-y-1">
+                            <a href="#dashboard" class="nav-item-active group flex items-center px-2 py-3 text-sm font-medium rounded-md" data-page="dashboard">
+                                <i class="fa fa-dashboard mr-3 text-accent"></i>
+                                总览
+                            </a>
+                            <a href="#ad-generate" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-generate">
+                                <i class="fa fa-magic mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                                AI广告生成
+                            </a>
+                            <a href="#templates" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="templates">
+                                <i class="fa fa-th-large mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                                模板库
+                            </a>
+                            <a href="#bot" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="bot">
+                                <i class="fa fa-comments mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                                Bot系统
+                            </a>
+                            <a href="#analytics" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="analytics">
+                                <i class="fa fa-bar-chart mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                                数据分析
+                            </a>
+                            <a href="#settings" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="settings">
+                                <i class="fa fa-cog mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                                设置
+                            </a>
+                        </nav>
+                    </div>
+                    <div class="flex-shrink-0 flex border-t border-dark-light p-4">
+                        <div class="flex-shrink-0 w-full group block">
+                            <div class="flex items-center">
+                                <div>
+                                    <svg class="h-8 w-8 rounded-full bg-gray-300 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">张三</p>
+                                    <p class="text-xs font-medium text-gray-400">专业版用户</p>
+                                </div>
+                                <button class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none">
+                                    <i class="fa fa-sign-out"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 页面内容 -->
+            <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-gray-50">
+                <!-- 总览页面 -->
+                <div id="dashboard-page" class="page-content">
+                    <!-- 数据卡片 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">今日点击数</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">1,248</p>
+                                    <p class="text-sm font-medium text-green-600 mt-1">
+                                        <i class="fa fa-arrow-up mr-1"></i>
+                                        <span>12.5% 较昨日</span>
+                                    </p>
+                                </div>
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-mouse-pointer text-accent text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">今日私信数</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">342</p>
+                                    <p class="text-sm font-medium text-green-600 mt-1">
+                                        <i class="fa fa-arrow-up mr-1"></i>
+                                        <span>8.3% 较昨日</span>
+                                    </p>
+                                </div>
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-comments text-green-600 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">今日潜在客户数</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">89</p>
+                                    <p class="text-sm font-medium text-green-600 mt-1">
+                                        <i class="fa fa-arrow-up mr-1"></i>
+                                        <span>15.2% 较昨日</span>
+                                    </p>
+                                </div>
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-users text-purple-600 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">转化率</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">6.3%</p>
+                                    <p class="text-sm font-medium text-red-600 mt-1">
+                                        <i class="fa fa-arrow-down mr-1"></i>
+                                        <span>2.1% 较昨日</span>
+                                    </p>
+                                </div>
+                                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-line-chart text-yellow-600 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 图表区域 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                        <!-- 趋势图 -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-lg font-semibold text-gray-900">7天趋势</h3>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1 text-xs font-medium bg-accent text-white rounded-full">点击</button>
+                                    <button class="px-3 py-1 text-xs font-medium bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors">私信</button>
+                                    <button class="px-3 py-1 text-xs font-medium bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors">潜在客户</button>
+                                </div>
+                            </div>
+                            <div class="h-64">
+                                <canvas id="trends-chart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 漏斗图 -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-lg font-semibold text-gray-900">转化漏斗</h3>
+                                <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <option>最近7天</option>
+                                    <option>最近30天</option>
+                                    <option>最近90天</option>
+                                </select>
+                            </div>
+                            <div class="h-64">
+                                <canvas id="funnel-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 最近活动 -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900">最近活动</h3>
+                            <button class="text-accent hover:text-blue-700 text-sm font-medium">查看全部</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">活动类型</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">详情</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                    <i class="fa fa-magic text-accent"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">AI广告生成</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">生成了3条美容行业广告</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-500">今天 14:32</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">成功</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-8 w-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                                    <i class="fa fa-comments text-purple-600"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Bot导入</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">导入了美容行业预约流程</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-500">今天 11:15</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">成功</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-8 w-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                                                    <i class="fa fa-download text-yellow-600"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">模板下载</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">下载了餐饮行业促销模板</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-500">昨天 16:45</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">成功</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-8 w-8 bg-red-100 rounded-full flex items-center justify-center">
+                                                    <i class="fa fa-exclamation-triangle text-red-600"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">广告生成失败</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">装修行业广告生成失败</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-500">昨天 10:23</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">失败</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI广告生成页面 -->
+                <div id="ad-generate-page" class="page-content hidden">
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">AI广告生成</h3>
+                        <p class="text-gray-600 mb-6">输入产品信息，AI将为您生成高质量的广告文案、标题和CTA按钮</p>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <!-- 输入区域 -->
+                            <div>
+                                <h4 class="text-md font-medium text-gray-900 mb-4">输入信息</h4>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">选择行业 <span class="text-red-500">*</span></label>
+                                    <select id="ad-industry" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                        <option value="">请选择行业</option>
+                                        <option value="beauty">美容美发</option>
+                                        <option value="food">餐饮美食</option>
+                                        <option value="decor">装修设计</option>
+                                        <option value="fitness">健身运动</option>
+                                        <option value="education">教育培训</option>
+                                        <option value="retail">零售购物</option>
+                                        <option value="service">生活服务</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">产品描述 <span class="text-red-500">*</span></label>
+                                    <textarea id="ad-description" rows="4" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" placeholder="请详细描述您的产品或服务特点、优势、价格等信息..."></textarea>
+                                    <p class="text-xs text-gray-500 mt-1">建议描述200字以上，越详细生成效果越好</p>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">目标国家/地区 <span class="text-red-500">*</span></label>
+                                    <select id="ad-country" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                        <option value="">请选择国家/地区</option>
+                                        <option value="china">中国</option>
+                                        <option value="singapore">新加坡</option>
+                                        <option value="malaysia">马来西亚</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">城市 <span class="text-red-500">*</span></label>
+                                    <select id="ad-city" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" disabled>
+                                        <option value="">请先选择国家/地区</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">营销目标 <span class="text-red-500">*</span></label>
+                                    <div class="flex space-x-4">
+                                        <label class="inline-flex items-center">
+                                            <input type="radio" name="ad-goal" value="leads" class="text-accent focus:ring-accent" checked>
+                                            <span class="ml-2 text-sm text-gray-700">获取潜在客户</span>
+                                        </label>
+                                        <label class="inline-flex items-center">
+                                            <input type="radio" name="ad-goal" value="traffic" class="text-accent focus:ring-accent">
+                                            <span class="ml-2 text-sm text-gray-700">增加网站流量</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">语气风格</label>
+                                    <select id="ad-tone" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                        <option value="professional">专业正式</option>
+                                        <option value="friendly">友好亲切</option>
+                                        <option value="humorous">幽默风趣</option>
+                                        <option value="urgent">紧急促销</option>
+                                        <option value="luxury">高端奢华</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">城市 <span class="text-red-500">*</span></label>
+                                    <select id="ad-city" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" disabled>
+                                        <option value="">请先选择国家/地区</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">语言</label>
+                                    <select id="ad-language" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                        <option value="zh">中文</option>
+                                        <option value="en">英文</option>
+                                        <option value="ms">马来文</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">城市 <span class="text-red-500">*</span></label>
+                                    <select id="ad-city" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" disabled>
+                                        <option value="">请先选择国家/地区</option>
+                                    </select>
+                                </div>
+
+                                <button id="generate-ads-btn" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium transition-colors">
+                                    生成广告
+                                </button>
+                            </div>
+
+                            <!-- 输出区域 -->
+                            <div>
+                                <h4 class="text-md font-medium text-gray-900 mb-4">生成结果</h4>
+                                
+                                <div id="ads-output" class="space-y-6">
+                                    <div class="p-6 border border-gray-200 rounded-lg bg-gray-50 text-center">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/6134/6134065.png" alt="AI生成" class="w-24 h-24 mx-auto mb-4 opacity-50">
+                                        <p class="text-gray-500">请在左侧填写信息并点击"生成广告"按钮</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 历史记录 -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900">历史记录</h3>
+                            <button class="text-accent hover:text-blue-700 text-sm font-medium">查看全部</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">生成时间</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">行业</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">目标</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">2025-01-15 14:32</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">美容美发</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">获取潜在客户</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">成功</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="text-accent hover:text-blue-700 mr-3">查看</a>
+                                            <a href="#" class="text-gray-600 hover:text-gray-900">复制</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">2025-01-15 11:15</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">餐饮美食</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">增加网站流量</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">成功</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="text-accent hover:text-blue-700 mr-3">查看</a>
+                                            <a href="#" class="text-gray-600 hover:text-gray-900">复制</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">2025-01-14 16:45</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">装修设计</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">获取潜在客户</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">失败</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="text-accent hover:text-blue-700 mr-3">重试</a>
+                                            <a href="#" class="text-gray-600 hover:text-gray-900">查看</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 模板库页面 -->
+                <div id="templates-page" class="page-content hidden">
+                    <!-- 搜索和筛选 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                            <div class="flex-1">
+                                <div class="relative">
+                                    <input type="text" placeholder="搜索模板..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                                    <i class="fa fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <select class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <option>所有行业</option>
+                                    <option>美容</option>
+                                    <option>餐饮</option>
+                                    <option>装修</option>
+                                    <option>健身</option>
+                                    <option>教育</option>
+                                </select>
+                                <select class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <option>所有类型</option>
+                                    <option>促销活动</option>
+                                    <option>新品上市</option>
+                                    <option>品牌宣传</option>
+                                    <option>节日营销</option>
+                                </select>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-md focus:outline-none">
+                                    <i class="fa fa-filter"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 模板分类 -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">热门分类</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fa fa-scissors text-accent text-xl"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">美容</p>
+                                <p class="text-xs text-gray-500">128个模板</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fa fa-cutlery text-red-600 text-xl"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">餐饮</p>
+                                <p class="text-xs text-gray-500">96个模板</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fa fa-home text-yellow-600 text-xl"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">装修</p>
+                                <p class="text-xs text-gray-500">72个模板</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fa fa-heartbeat text-green-600 text-xl"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">健身</p>
+                                <p class="text-xs text-gray-500">54个模板</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fa fa-graduation-cap text-purple-600 text-xl"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">教育</p>
+                                <p class="text-xs text-gray-500">48个模板</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fa fa-ellipsis-h text-gray-600 text-xl"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">更多</p>
+                                <p class="text-xs text-gray-500">查看全部</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 推荐模板 -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">推荐模板</h3>
+                            <a href="#" class="text-accent hover:text-blue-700 text-sm font-medium">查看全部</a>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- 模板1 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="美容模板" class="w-full h-48 object-cover">
+                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
+                                        美容
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-900 mb-2">高级护肤套餐</h4>
+                                    <p class="text-sm text-gray-600 mb-4">专业护肤方案，让肌肤焕发年轻光彩</p>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-download mr-1"></i> 下载
+                                        </button>
+                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-edit mr-1"></i> 编辑
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 模板2 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="餐饮模板" class="w-full h-48 object-cover">
+                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
+                                        餐饮
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-900 mb-2">美食特惠套餐</h4>
+                                    <p class="text-sm text-gray-600 mb-4">精选食材，匠心制作，满足您的味蕾</p>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-download mr-1"></i> 下载
+                                        </button>
+                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-edit mr-1"></i> 编辑
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 模板3 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="装修模板" class="w-full h-48 object-cover">
+                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
+                                        装修
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-900 mb-2">家居装修设计</h4>
+                                    <p class="text-sm text-gray-600 mb-4">专业设计师团队，打造您的理想家园</p>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-download mr-1"></i> 下载
+                                        </button>
+                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-edit mr-1"></i> 编辑
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 模板4 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="健身模板" class="w-full h-48 object-cover">
+                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
+                                        健身
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-900 mb-2">健身会员特惠</h4>
+                                    <p class="text-sm text-gray-600 mb-4">专业健身指导，科学训练计划，塑造完美身材</p>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-download mr-1"></i> 下载
+                                        </button>
+                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-edit mr-1"></i> 编辑
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 最新模板 -->
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">最新模板</h3>
+                            <a href="#" class="text-accent hover:text-blue-700 text-sm font-medium">查看全部</a>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- 模板5 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="美容模板" class="w-full h-48 object-cover">
+                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
+                                        美容
+                                    </div>
+                                    <div class="absolute top-2 left-2 bg-accent text-white rounded-full px-2 py-1 text-xs font-medium">
+                                        新
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-900 mb-2">美发造型优惠</h4>
+                                    <p class="text-sm text-gray-600 mb-4">时尚造型设计，展现您的独特魅力</p>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-download mr-1"></i> 下载
+                                        </button>
+                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-edit mr-1"></i> 编辑
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 模板6 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="餐饮模板" class="w-full h-48 object-cover">
+                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
+                                        餐饮
+                                    </div>
+                                    <div class="absolute top-2 left-2 bg-accent text-white rounded-full px-2 py-1 text-xs font-medium">
+                                        新
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-900 mb-2">咖啡时光</h4>
+                                    <p class="text-sm text-gray-600 mb-4">精品咖啡，享受悠闲时光</p>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-download mr-1"></i> 下载
+                                        </button>
+                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-edit mr-1"></i> 编辑
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 模板7 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="装修模板" class="w-full h-48 object-cover">
+                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
+                                        装修
+                                    </div>
+                                    <div class="absolute top-2 left-2 bg-accent text-white rounded-full px-2 py-1 text-xs font-medium">
+                                        新
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-900 mb-2">办公室装修</h4>
+                                    <p class="text-sm text-gray-600 mb-4">专业办公空间设计，提升企业形象</p>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-download mr-1"></i> 下载
+                                        </button>
+                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-edit mr-1"></i> 编辑
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 模板8 -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1579027989536-b7b1f875659b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="教育模板" class="w-full h-48 object-cover">
+                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
+                                        教育
+                                    </div>
+                                    <div class="absolute top-2 left-2 bg-accent text-white rounded-full px-2 py-1 text-xs font-medium">
+                                        新
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-semibold text-gray-900 mb-2">少儿编程课程</h4>
+                                    <p class="text-sm text-gray-600 mb-4">培养孩子逻辑思维，开启编程之旅</p>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-download mr-1"></i> 下载
+                                        </button>
+                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
+                                            <i class="fa fa-edit mr-1"></i> 编辑
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bot系统页面 -->
+                <div id="bot-page" class="page-content hidden">
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Bot系统</h3>
+                        <p class="text-gray-600 mb-6">选择行业和流程，一键导入到ManyChat，自动回复客户咨询</p>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <!-- 配置区域 -->
+                            <div>
+                                <h4 class="text-md font-medium text-gray-900 mb-4">Bot配置</h4>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">选择行业 <span class="text-red-500">*</span></label>
+                                    <select id="bot-industry" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                        <option value="">请选择行业</option>
+                                        <option value="beauty">美容美发</option>
+                                        <option value="food">餐饮美食</option>
+                                        <option value="decor">装修设计</option>
+                                        <option value="fitness">健身运动</option>
+                                        <option value="education">教育培训</option>
+                                        <option value="retail">零售购物</option>
+                                        <option value="service">生活服务</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">城市 <span class="text-red-500">*</span></label>
+                                    <select id="ad-city" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" disabled>
+                                        <option value="">请先选择国家/地区</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">选择流程 <span class="text-red-500">*</span></label>
+                                    <select id="bot-flow" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                        <option value="">请先选择行业</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">城市 <span class="text-red-500">*</span></label>
+                                    <select id="ad-city" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" disabled>
+                                        <option value="">请先选择国家/地区</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Bot名称</label>
+                                    <input type="text" id="bot-name" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" placeholder="输入Bot名称...">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">欢迎语</label>
+                                    <textarea id="bot-welcome" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" placeholder="输入欢迎语..."></textarea>
+                                </div>
+
+                                <div class="mb-6">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">关键词设置</label>
+                                    <div class="flex space-x-2 mb-2">
+                                        <input type="text" class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" placeholder="关键词1">
+                                        <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-md">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <input type="text" class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" placeholder="关键词2">
+                                        <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-md">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button id="import-manychat-btn" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium transition-colors flex items-center justify-center">
+                                    <i class="fa fa-upload mr-2"></i>
+                                    一键导入到ManyChat
+                                </button>
+                            </div>
+
+                            <!-- 预览区域 -->
+                            <div>
+                                <h4 class="text-md font-medium text-gray-900 mb-4">流程预览</h4>
+                                
+                                <div id="bot-preview" class="bg-gray-50 rounded-lg p-4 h-96 overflow-y-auto">
+                                    <div class="text-center py-16">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/3077/3077979.png" alt="Bot流程" class="w-24 h-24 mx-auto mb-4 opacity-50">
+                                        <p class="text-gray-500">请选择行业和流程查看预览</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 已导入Bot -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900">已导入Bot</h3>
+                            <button class="text-accent hover:text-blue-700 text-sm font-medium">查看全部</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bot名称</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">行业</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">流程类型</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">导入时间</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">美容预约助手</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">美容美发</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">预约流程</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-500">2025-01-15 11:15</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">运行中</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="text-accent hover:text-blue-700 mr-3">查看</a>
+                                            <a href="#" class="text-gray-600 hover:text-gray-900 mr-3">编辑</a>
+                                            <a href="#" class="text-red-600 hover:text-red-800">删除</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">餐厅询价助手</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">餐饮美食</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">询价流程</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-500">2025-01-14 16:45</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">运行中</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="text-accent hover:text-blue-700 mr-3">查看</a>
+                                            <a href="#" class="text-gray-600 hover:text-gray-900 mr-3">编辑</a>
+                                            <a href="#" class="text-red-600 hover:text-red-800">删除</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 数据分析页面 -->
+                <div id="analytics-page" class="page-content hidden">
+                    <!-- 数据卡片 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">平均获客成本 (CPL)</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">¥32.5</p>
+                                    <p class="text-sm font-medium text-green-600 mt-1">
+                                        <i class="fa fa-arrow-down mr-1"></i>
+                                        <span>8.2% 较上月</span>
+                                    </p>
+                                </div>
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-money text-accent text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">总体转化率</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">5.8%</p>
+                                    <p class="text-sm font-medium text-green-600 mt-1">
+                                        <i class="fa fa-arrow-up mr-1"></i>
+                                        <span>1.3% 较上月</span>
+                                    </p>
+                                </div>
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-percent text-green-600 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-600">平均回复时间</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">45秒</p>
+                                    <p class="text-sm font-medium text-green-600 mt-1">
+                                        <i class="fa fa-arrow-down mr-1"></i>
+                                        <span>15秒 较上月</span>
+                                    </p>
+                                </div>
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i class="fa fa-clock-o text-purple-600 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 图表区域 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                        <!-- 广告效果对比 -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-lg font-semibold text-gray-900">广告效果对比</h3>
+                                <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <option>最近30天</option>
+                                    <option>最近7天</option>
+                                    <option>最近90天</option>
+                                </select>
+                            </div>
+                            <div class="h-64">
+                                <canvas id="ads-comparison-chart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 客户来源 -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-lg font-semibold text-gray-900">客户来源</h3>
+                                <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <option>最近30天</option>
+                                    <option>最近7天</option>
+                                    <option>最近90天</option>
+                                </select>
+                            </div>
+                            <div class="h-64">
+                                <canvas id="customer-source-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 详细数据表格 -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900">详细数据</h3>
+                            <div class="flex space-x-2">
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm font-medium transition-colors">
+                                    <i class="fa fa-download mr-1"></i> 导出
+                                </button>
+                                <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <option>所有广告</option>
+                                    <option>AI生成广告</option>
+                                    <option>模板广告</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">广告名称</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">类型</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">曝光量</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">点击量</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">点击率</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">转化量</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">转化率</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CPL</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">美容护肤促销</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">AI生成</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">12,458</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">1,248</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">10.0%</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">89</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">7.1%</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">¥28.5</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">餐厅特惠活动</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">模板</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">8,742</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">699</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">8.0%</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">34</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">4.9%</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">¥35.2</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">装修设计咨询</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">AI生成</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">5,631</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">450</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">8.0%</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">18</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">4.0%</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">¥42.8</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">健身会员招募</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">模板</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">7,892</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">552</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">7.0%</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">22</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">4.0%</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">¥38.6</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 设置页面 -->
+                <div id="settings-page" class="page-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- 账号绑定 -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">账号绑定</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white">
+                                            <i class="fa fa-facebook"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">Facebook</p>
+                                            <p class="text-xs text-gray-500">绑定后可直接发布广告</p>
+                                        </div>
+                                    </div>
+                                    <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                                        绑定
+                                    </button>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white">
+                                            <i class="fa fa-instagram"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">Instagram</p>
+                                            <p class="text-xs text-gray-500">绑定后可直接发布广告</p>
+                                        </div>
+                                    </div>
+                                    <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                                        绑定
+                                    </button>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white">
+                                            <i class="fa fa-whatsapp"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">WhatsApp</p>
+                                            <p class="text-xs text-gray-500">绑定后可接收客户消息</p>
+                                        </div>
+                                    </div>
+                                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded text-sm font-medium transition-colors">
+                                        未开通
+                                    </button>
+                                </div>
+
+                                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center text-white">
+                                            <i class="fa fa-telegram"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">Telegram</p>
+                                            <p class="text-xs text-gray-500">绑定后可接收客户消息</p>
+                                        </div>
+                                    </div>
+                                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded text-sm font-medium transition-colors">
+                                        未开通
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 订阅管理 -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">订阅管理</h3>
+                            
+                            <div class="p-4 border border-accent rounded-lg bg-blue-50 mb-6">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-900">专业版用户</p>
+                                        <p class="text-xs text-gray-600">有效期至：2025-02-15</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4 mb-6">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-gray-600">每月广告生成次数</span>
+                                    <span class="text-sm font-medium text-gray-900">50/50</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+
+                                <div class="flex items-center justify-between mt-4">
+                                    <span class="text-sm text-gray-600">Bot流程数量</span>
+                                    <span class="text-sm font-medium text-gray-900">2/5</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 40%"></div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <button class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium transition-colors">
+                                    升级套餐
+                                </button>
+                                <button class="w-full bg-white border border-gray-300 text-gray-700 py-3 rounded-md font-medium transition-colors hover:bg-gray-50">
+                                    管理订阅
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- API Key配置 -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">API Key配置</h3>
+                            
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">ChatGPT API Key</label>
+                                <div class="flex">
+                                    <input type="password" value="sk-********************" class="flex-1 border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-r-md border border-l-0 border-gray-300">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">用于AI广告生成功能</p>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">ManyChat API Key</label>
+                                <div class="flex">
+                                    <input type="password" value="mc-********************" class="flex-1 border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-r-md border border-l-0 border-gray-300">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">用于Bot系统导入功能</p>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Canva API Key</label>
+                                <div class="flex">
+                                    <input type="password" placeholder="输入Canva API Key..." class="flex-1 border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-r-md border border-l-0 border-gray-300">
+                                        <i class="fa fa-eye-slash"></i>
+                                    </button>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">用于模板编辑功能（可选）</p>
+                            </div>
+
+                            <button class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium transition-colors">
+                                保存配置
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // 页面切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化页面
+            showPage('dashboard');
+            
+            // 导航点击事件
+            document.querySelectorAll('[data-page]').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.getAttribute('data-page');
+                    showPage(page);
+                    
+                    // 关闭移动端侧边栏
+                    document.getElementById('mobile-sidebar').classList.add('hidden');
+                });
+            });
+            
+            // 移动端侧边栏控制
+            document.getElementById('mobile-sidebar-button').addEventListener('click', function() {
+                document.getElementById('mobile-sidebar').classList.remove('hidden');
+            });
+            
+            document.getElementById('close-mobile-sidebar').addEventListener('click', function() {
+                document.getElementById('mobile-sidebar').classList.add('hidden');
+            });
+            
+            // 初始化图表
+            initCharts();
+            
+            // AI广告生成功能
+            initAdGenerate();
+            
+            // Bot系统功能
+            initBotSystem();
+        });
+        
+        // 显示指定页面
+        function showPage(pageName) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // 显示指定页面
+            const targetPage = document.getElementById(pageName + '-page');
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+            }
+            
+            // 更新页面标题
+            const pageTitle = document.getElementById('page-title');
+            if (pageTitle) {
+                switch(pageName) {
+                    case 'dashboard':
+                        pageTitle.textContent = '总览';
+                        break;
+                    case 'ad-generate':
+                        pageTitle.textContent = 'AI广告生成';
+                        break;
+                    case 'templates':
+                        pageTitle.textContent = '模板库';
+                        break;
+                    case 'bot':
+                        pageTitle.textContent = 'Bot系统';
+                        break;
+                    case 'analytics':
+                        pageTitle.textContent = '数据分析';
+                        break;
+                    case 'settings':
+                        pageTitle.textContent = '设置';
+                        break;
+                    default:
+                        pageTitle.textContent = '总览';
+                }
+            }
+            
+            // 更新导航状态
+            document.querySelectorAll('[data-page]').forEach(item => {
+                if (item.getAttribute('data-page') === pageName) {
+                    item.classList.add('nav-item-active');
+                } else {
+                    item.classList.remove('nav-item-active');
+                }
+            });
+        }
+        
+        // 初始化图表
+        function initCharts() {
+            // 趋势图
+            const trendsCtx = document.getElementById('trends-chart');
+            if (trendsCtx) {
+                new Chart(trendsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['1月9日', '1月10日', '1月11日', '1月12日', '1月13日', '1月14日', '1月15日'],
+                        datasets: [{
+                            label: '点击数',
+                            data: [820, 950, 780, 1050, 980, 1120, 1248],
+                            borderColor: '#3B82F6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 漏斗图
+            const funnelCtx = document.getElementById('funnel-chart');
+            if (funnelCtx) {
+                new Chart(funnelCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['曝光', '点击', '私信', '留资料'],
+                        datasets: [{
+                            label: '用户数量',
+                            data: [15000, 1248, 342, 89],
+                            backgroundColor: [
+                                'rgba(59, 130, 246, 0.8)',
+                                'rgba(59, 130, 246, 0.6)',
+                                'rgba(59, 130, 246, 0.4)',
+                                'rgba(59, 130, 246, 0.2)'
+                            ],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 广告效果对比图
+            const adsComparisonCtx = document.getElementById('ads-comparison-chart');
+            if (adsComparisonCtx) {
+                new Chart(adsComparisonCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['美容护肤', '餐厅特惠', '装修设计', '健身会员'],
+                        datasets: [{
+                            label: '点击量',
+                            data: [1248, 699, 450, 552],
+                            backgroundColor: '#3B82F6',
+                            order: 2
+                        }, {
+                            label: '转化量',
+                            data: [89, 34, 18, 22],
+                            backgroundColor: '#22C55E',
+                            order: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 客户来源饼图
+            const customerSourceCtx = document.getElementById('customer-source-chart');
+            if (customerSourceCtx) {
+                new Chart(customerSourceCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Facebook', 'Instagram', 'WhatsApp', '其他'],
+                        datasets: [{
+                            data: [45, 30, 20, 5],
+                            backgroundColor: [
+                                '#3B82F6',
+                                '#EC4899',
+                                '#22C55E',
+                                '#6B7280'
+                            ],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        
+        // 初始化AI广告生成功能
+        function initAdGenerate() {
+            const generateBtn = document.getElementById('generate-ads-btn');
+            if (generateBtn) {
+                generateBtn.addEventListener('click', function() {
+                    const industry = document.getElementById('ad-industry').value;
+                    const description = document.getElementById('ad-description').value;
+                    const region = document.getElementById('ad-region').value;
+                    
+                    // 表单验证
+                    if (!industry || !description || !region) {
+                        alert('请填写必填项');
+                        return;
+                    }
+                    
+                    // 显示加载状态
+                    const adsOutput = document.getElementById('ads-output');
+                    adsOutput.innerHTML = `
+                        <div class="p-6 border border-gray-200 rounded-lg bg-gray-50 text-center">
+                            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
+                            <p class="text-gray-500">AI正在生成广告，请稍候...</p>
+                        </div>
+                    `;
+                    
+                    // 模拟API调用延迟
+                    setTimeout(() => {
+                        // 根据行业生成不同的广告内容
+                        let ads = [];
+                        
+                        if (industry === 'beauty') {
+                            ads = [
+                                {
+                                    title: '【限时特惠】专业护肤方案，让您的肌肤焕发年轻光彩',
+                                    content: '我们提供专业的护肤方案，采用天然成分，温和不刺激，让您的肌肤重现年轻活力。现在预约可享受8折优惠，还送精美护肤礼品一份！',
+                                    cta: '立即预约'
+                                },
+                                {
+                                    title: '夏季护肤必备！专业美容院推荐的护肤秘诀',
+                                    content: '炎热夏季，肌肤容易出油、暗沉？我们的专业美容师为您量身定制护肤方案，让您的肌肤在夏日也能保持清爽水润。',
+                                    cta: '了解更多'
+                                },
+                                {
+                                    title: '专业护肤，从现在开始',
+                                    content: '不要让时间在您的脸上留下痕迹。我们的专业护肤团队将为您提供个性化的护肤方案，让您的肌肤焕发健康光彩。',
+                                    cta: '免费咨询'
+                                }
+                            ];
+                        } else if (industry === 'food') {
+                            ads = [
+                                {
+                                    title: '【新品上市】独家配方，引爆您的味蕾',
+                                    content: '我们的厨师团队精心研发的新品系列，采用新鲜食材，独特配方，让您享受前所未有的美食体验。现在下单还送精美甜点一份！',
+                                    cta: '立即下单'
+                                },
+                                {
+                                    title: '周末聚餐好去处！人均不到100元',
+                                    content: '周末不知道去哪里聚餐？来我们这里，环境优雅，菜品丰富，人均不到100元就能享受美食盛宴。',
+                                    cta: '查看菜单'
+                                },
+                                {
+                                    title: '品味生活，从美食开始',
+                                    content: '我们用心制作每一道菜品，只为给您带来最美味的体验。无论是家庭聚餐还是商务宴请，我们都是您的最佳选择。',
+                                    cta: '预订座位'
+                                }
+                            ];
+                        } else if (industry === 'decor') {
+                            ads = [
+                                {
+                                    title: '【装修特惠】专业团队，打造您的理想家园',
+                                    content: '我们拥有10年以上经验的专业设计团队，为您提供一站式装修服务，从设计到施工全程无忧。现在预约可享受免费设计方案！',
+                                    cta: '免费咨询'
+                                },
+                                {
+                                    title: '小户型也能有大空间！专业设计师为您支招',
+                                    content: '小户型装修不知道如何利用空间？我们的专业设计师有妙招，让您的小房子也能拥有大空间的既视感。',
+                                    cta: '预约设计'
+                                },
+                                {
+                                    title: '品质装修，从选择开始',
+                                    content: '选择我们，选择品质。我们用专业的技术和真诚的服务，为您打造一个温馨舒适的家。',
+                                    cta: '获取报价'
+                                }
+                            ];
+                        } else {
+                            ads = [
+                                {
+                                    title: '专业服务，值得信赖',
+                                    content: description + '我们提供专业的服务，满足您的各种需求。欢迎随时咨询，我们将竭诚为您服务。',
+                                    cta: '联系我们'
+                                },
+                                {
+                                    title: '限时优惠，机不可失',
+                                    content: '现在预约我们的服务，可享受限时优惠。专业团队，优质服务，是您的不二选择。',
+                                    cta: '立即预约'
+                                },
+                                {
+                                    title: '品质保证，服务至上',
+                                    content: '我们始终坚持品质第一，服务至上的理念，为客户提供最优质的产品和服务。',
+                                    cta: '了解更多'
+                                }
+                            ];
+                        }
+                        
+                        // 显示生成的广告
+                        let outputHtml = '';
+                        ads.forEach((ad, index) => {
+                            outputHtml += `
+                                <div class="p-4 border border-gray-200 rounded-lg mb-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h4 class="font-semibold text-gray-900">广告 ${index + 1}</h4>
+                                        <div class="flex space-x-2">
+                                            <button class="text-gray-500 hover:text-gray-700">
+                                                <i class="fa fa-copy"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700">
+                                                <i class="fa fa-download"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <p class="text-sm text-gray-600 mb-1">标题：</p>
+                                        <p class="font-medium">${ad.title}</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <p class="text-sm text-gray-600 mb-1">内容：</p>
+                                        <p>${ad.content}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-600 mb-1">CTA按钮：</p>
+                                        <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                                            ${ad.cta}
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        adsOutput.innerHTML = outputHtml;
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 初始化Bot系统功能
+        function initBotSystem() {
+            const industrySelect = document.getElementById('bot-industry');
+            const flowSelect = document.getElementById('bot-flow');
+            const importBtn = document.getElementById('import-manychat-btn');
+            
+            if (industrySelect && flowSelect) {
+                industrySelect.addEventListener('change', function() {
+                    const industry = this.value;
+                    
+                    // 根据行业加载流程选项
+                    flowSelect.innerHTML = '';
+                    
+                    if (!industry) {
+                        flowSelect.innerHTML = '<option value="">请先选择行业</option>';
+                        return;
+                    }
+                    
+                    let flows = [];
+                    
+                    if (industry === 'beauty') {
+                        flows = [
+                            { value: 'appointment', text: '预约流程' },
+                            { value: 'consultation', text: '咨询流程' },
+                            { value: 'promotion', text: '促销通知流程' }
+                        ];
+                    } else if (industry === 'food') {
+                        flows = [
+                            { value: 'reservation', text: '预订流程' },
+                            { value: 'inquiry', text: '询价流程' },
+                            { value: 'feedback', text: '反馈收集流程' }
+                        ];
+                    } else if (industry === 'decor') {
+                        flows = [
+                            { value: 'design', text: '设计咨询流程' },
+                            { value: 'quote', text: '报价流程' },
+                            { value: 'project', text: '项目跟进流程' }
+                        ];
+                    } else {
+                        flows = [
+                            { value: 'inquiry', text: '通用询价流程' },
+                            { value: 'appointment', text: '通用预约流程' },
+                            { value: 'support', text: '客户支持流程' }
+                        ];
+                    }
+                    
+                    flows.forEach(flow => {
+                        const option = document.createElement('option');
+                        option.value = flow.value;
+                        option.textContent = flow.text;
+                        flowSelect.appendChild(option);
+                    });
+                });
+                
+                flowSelect.addEventListener('change', function() {
+                    const industry = industrySelect.value;
+                    const flow = this.value;
+                    
+                    if (!industry || !flow) {
+                        document.getElementById('bot-preview').innerHTML = `
+                            <div class="text-center py-16">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3077/3077979.png" alt="Bot流程" class="w-24 h-24 mx-auto mb-4 opacity-50">
+                                <p class="text-gray-500">请选择行业和流程查看预览</p>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    // 显示流程预览
+                    let previewHtml = '';
+                    
+                    if (flow === 'appointment' || flow === 'reservation') {
+                        previewHtml = `
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-user text-accent"></i>
+                                    </div>
+                                    <div class="ml-3 bg-blue-50 rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">你好，我想预约服务</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start justify-end">
+                                    <div class="mr-3 bg-accent text-white rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">您好！欢迎咨询。请问您想预约什么时间的服务？</p>
+                                    </div>
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-robot text-white"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-user text-accent"></i>
+                                    </div>
+                                    <div class="ml-3 bg-blue-50 rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">明天下午3点</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start justify-end">
+                                    <div class="mr-3 bg-accent text-white rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">好的，明天下午3点有空位。请提供您的姓名和联系方式，我来为您预约。</p>
+                                    </div>
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-robot text-white"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-user text-accent"></i>
+                                    </div>
+                                    <div class="ml-3 bg-blue-50 rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">张三，13800138000</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start justify-end">
+                                    <div class="mr-3 bg-accent text-white rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">预约成功！我们已为您安排明天下午3点的服务。请准时到达，如有变动请提前联系。</p>
+                                    </div>
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-robot text-white"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (flow === 'inquiry' || flow === 'quote') {
+                        previewHtml = `
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-user text-accent"></i>
+                                    </div>
+                                    <div class="ml-3 bg-blue-50 rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">你好，我想咨询一下价格</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start justify-end">
+                                    <div class="mr-3 bg-accent text-white rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">您好！很高兴为您服务。请问您对我们的哪项服务感兴趣？</p>
+                                    </div>
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-robot text-white"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-user text-accent"></i>
+                                    </div>
+                                    <div class="ml-3 bg-blue-50 rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">${industry === 'beauty' ? '护肤套餐' : industry === 'food' ? '团体聚餐' : '装修设计'}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start justify-end">
+                                    <div class="mr-3 bg-accent text-white rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">我们的${industry === 'beauty' ? '护肤套餐' : industry === 'food' ? '团体聚餐' : '装修设计'}价格在¥${industry === 'beauty' ? '500-2000' : industry === 'food' ? '1000-5000' : '10000-100000'}之间，具体取决于您的需求。请问您需要了解更多详情吗？</p>
+                                    </div>
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-robot text-white"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-user text-accent"></i>
+                                    </div>
+                                    <div class="ml-3 bg-blue-50 rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">是的，我想了解更多</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start justify-end">
+                                    <div class="mr-3 bg-accent text-white rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">好的，我们的客服人员将在工作时间内尽快与您联系，为您提供详细的信息和报价。</p>
+                                    </div>
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-robot text-white"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        previewHtml = `
+                            <div class="space-y-4">
+                                <div class="flex items-start justify-end">
+                                    <div class="mr-3 bg-accent text-white rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">您好！欢迎咨询。请问有什么可以帮助您的？</p>
+                                    </div>
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-robot text-white"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-user text-accent"></i>
+                                    </div>
+                                    <div class="ml-3 bg-blue-50 rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">我想了解一下你们的服务</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start justify-end">
+                                    <div class="mr-3 bg-accent text-white rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">我们提供专业的${industry === 'beauty' ? '美容美发' : industry === 'food' ? '餐饮服务' : industry === 'decor' ? '装修设计' : '服务'}，请问您对哪方面感兴趣？</p>
+                                    </div>
+                                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-robot text-white"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    document.getElementById('bot-preview').innerHTML = previewHtml;
+                });
+            }
+            
+            if (importBtn) {
+                importBtn.addEventListener('click', function() {
+                    const industry = document.getElementById('bot-industry').value;
+                    const flow = document.getElementById('bot-flow').value;
+                    
+                    if (!industry || !flow) {
+                        alert('请选择行业和流程');
+                        return;
+                    }
+                    
+                    // 显示加载状态
+                    this.innerHTML = `
+                        <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                        正在导入...
+                    `;
+                    this.disabled = true;
+                    
+                    // 模拟API调用延迟
+                    setTimeout(() => {
+                        alert('Bot已成功导入到ManyChat！');
+                        
+                        // 恢复按钮状态
+                        this.innerHTML = `
+                            <i class="fa fa-upload mr-2"></i>
+                            一键导入到ManyChat
+                        `;
+                        this.disabled = false;
+                    }, 2000);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
