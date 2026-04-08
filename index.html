@@ -864,15 +864,60 @@
             });
         });
 
+        const COUNTRY_CITY_MAP = {
+            china: ['北京', '上海', '广州', '深圳', '杭州', '成都'],
+            singapore: ['Singapore'],
+            malaysia: ['Kuala Lumpur', 'Penang', 'Johor Bahru', 'Kota Kinabalu']
+        };
+
+        function initCountryCitySelect(countryId, cityId) {
+            const countrySelect = document.getElementById(countryId);
+            const citySelect = document.getElementById(cityId);
+            if (!countrySelect || !citySelect) return;
+
+            const resetCity = (placeholderText = '请先选择国家/地区') => {
+                citySelect.innerHTML = `<option value="">${placeholderText}</option>`;
+                citySelect.disabled = true;
+            };
+
+            resetCity();
+            countrySelect.addEventListener('change', function () {
+                const cities = COUNTRY_CITY_MAP[this.value] || [];
+                citySelect.innerHTML = '';
+
+                if (!cities.length) {
+                    resetCity();
+                    return;
+                }
+
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = '请选择城市';
+                citySelect.appendChild(defaultOption);
+
+                cities.forEach((city) => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+
+                citySelect.disabled = false;
+            });
+        }
+
+        initCountryCitySelect('country-select', 'city-select');
+
         // AI广告生成演示
         document.getElementById('generate-ad-btn').addEventListener('click', function() {
             const industry = document.getElementById('industry-select').value;
             const description = document.getElementById('product-description').value;
-            const region = document.getElementById('region-select').value;
+            const country = document.getElementById('country-select').value;
+            const city = document.getElementById('city-select').value;
             const goal = document.querySelector('input[name="goal"]:checked').value;
             
             // 表单验证
-            if (!industry || !description || !region) {
+            if (!industry || !description || !country || !city) {
                 alert('请填写完整信息');
                 return;
             }
