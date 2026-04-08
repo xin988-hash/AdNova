@@ -101,7 +101,7 @@
                             <p class="text-sm font-medium">张三</p>
                             <p class="text-xs font-medium text-gray-400">专业版用户</p>
                         </div>
-                        <button class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none">
+                        <button id="logout-btn" class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none" title="张三 - 退出账号">
                             <i class="fa fa-sign-out"></i>
                         </button>
                     </div>
@@ -191,7 +191,7 @@
                                     <p class="text-sm font-medium">张三</p>
                                     <p class="text-xs font-medium text-gray-400">专业版用户</p>
                                 </div>
-                                <button class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none">
+                                <button id="logout-btn-mobile" class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none" title="张三 - 退出账号">
                                     <i class="fa fa-sign-out"></i>
                                 </button>
                             </div>
@@ -1469,7 +1469,29 @@
 
             // 全局点击反馈
             initGlobalInteractions();
+
+            // 退出账号
+            initLogoutActions();
         });
+
+        function initLogoutActions() {
+            const bindLogout = (buttonId) => {
+                const button = document.getElementById(buttonId);
+                if (!button) return;
+
+                button.addEventListener('click', function() {
+                    const shouldLogout = confirm('确认退出张三的账号吗？');
+                    if (!shouldLogout) return;
+
+                    localStorage.removeItem('adnovaUser');
+                    sessionStorage.removeItem('adnovaUser');
+                    window.location.href = 'login.html';
+                });
+            };
+
+            bindLogout('logout-btn');
+            bindLogout('logout-btn-mobile');
+        }
         
         // 显示指定页面
         function showPage(pageName) {
