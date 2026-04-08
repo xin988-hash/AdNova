@@ -1476,6 +1476,9 @@
             
             // Bot系统功能
             initBotSystem();
+
+            // 全局点击反馈
+            initGlobalInteractions();
         });
         
         // 显示指定页面
@@ -1664,10 +1667,11 @@
                 generateBtn.addEventListener('click', function() {
                     const industry = document.getElementById('ad-industry').value;
                     const description = document.getElementById('ad-description').value;
-                    const region = document.getElementById('ad-region').value;
+                    const country = document.getElementById('ad-country').value;
+                    const city = document.querySelector('#ad-generate-page #ad-city')?.value || '';
                     
                     // 表单验证
-                    if (!industry || !description || !region) {
+                    if (!industry || !description || !country || !city) {
                         alert('请填写必填项');
                         return;
                     }
@@ -1768,10 +1772,10 @@
                                     <div class="flex items-center justify-between mb-3">
                                         <h4 class="font-semibold text-gray-900">广告 ${index + 1}</h4>
                                         <div class="flex space-x-2">
-                                            <button class="text-gray-500 hover:text-gray-700">
+                                            <button class="text-gray-500 hover:text-gray-700 js-copy-ad" data-title="${ad.title}" data-content="${ad.content}">
                                                 <i class="fa fa-copy"></i>
                                             </button>
-                                            <button class="text-gray-500 hover:text-gray-700">
+                                            <button class="text-gray-500 hover:text-gray-700 js-download-ad" data-title="${ad.title}">
                                                 <i class="fa fa-download"></i>
                                             </button>
                                         </div>
@@ -1790,6 +1794,9 @@
                                             ${ad.cta}
                                         </button>
                                     </div>
+                                    <a href="workspace.html?from=ad-generate&industry=${industry}&ad=${index + 1}" class="inline-flex items-center mt-4 text-sm text-accent hover:text-blue-700 font-medium">
+                                        下一步：进入投放工作台 <i class="fa fa-arrow-right ml-1"></i>
+                                    </a>
                                 </div>
                             `;
                         });
@@ -1798,6 +1805,40 @@
                     }, 2000);
                 });
             }
+        }
+
+        function toast(message) {
+            const el = document.createElement('div');
+            el.className = 'fixed top-6 right-6 z-50 bg-dark text-white px-4 py-3 rounded-lg shadow-lg text-sm';
+            el.textContent = message;
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 1800);
+        }
+
+        function initGlobalInteractions() {
+            document.addEventListener('click', (event) => {
+                const target = event.target.closest('button, a');
+                if (!target) return;
+
+                if (target.classList.contains('js-copy-ad')) {
+                    const adText = `${target.dataset.title}\n${target.dataset.content}`;
+                    navigator.clipboard.writeText(adText).then(() => {
+                        toast('广告文案已复制');
+                    }).catch(() => {
+                        toast('复制失败，请手动复制');
+                    });
+                    return;
+                }
+
+                if (target.classList.contains('js-download-ad')) {
+                    toast(`已加入下载队列：${target.dataset.title || '广告'}`);
+                    return;
+                }
+
+                if (target.matches('button') && !target.id && !target.classList.contains('js-copy-ad') && !target.classList.contains('js-download-ad')) {
+                    toast('已响应点击，功能可继续扩展');
+                }
+            });
         }
         
         // 初始化Bot系统功能

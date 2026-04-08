@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdNova - 投放工作台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B0B0B',
+                        accent: '#3B82F6',
+                        dark: '#1E293B',
+                        'dark-light': '#334155'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="min-h-screen">
+        <header class="bg-white shadow-sm border-b border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <a href="dashboard.html" class="text-xl font-bold text-primary">Ad<span class="text-accent">Nova</span></a>
+                <a href="dashboard.html" class="text-sm text-gray-600 hover:text-accent"><i class="fa fa-arrow-left mr-1"></i>返回后台</a>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">广告投放工作台</h1>
+                <p class="text-gray-600">这里是下一步页面，整体风格与主站保持一致：白底卡片、蓝色强调色、圆角+轻阴影。</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 space-y-6">
+                    <section class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">步骤 1：选择投放渠道</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="channels">
+                            <button data-channel="facebook" class="channel-btn border border-gray-200 rounded-lg p-3 text-left hover:border-accent hover:bg-blue-50 transition-colors">Facebook</button>
+                            <button data-channel="instagram" class="channel-btn border border-gray-200 rounded-lg p-3 text-left hover:border-accent hover:bg-blue-50 transition-colors">Instagram</button>
+                            <button data-channel="google" class="channel-btn border border-gray-200 rounded-lg p-3 text-left hover:border-accent hover:bg-blue-50 transition-colors">Google Ads</button>
+                        </div>
+                    </section>
+
+                    <section class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">步骤 2：预算与时间</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input id="budget" type="number" placeholder="每日预算（¥）" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                            <input id="days" type="number" placeholder="投放天数" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="bg-white rounded-xl shadow-md p-6 h-fit">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">实时预览</h2>
+                    <div id="summary" class="space-y-2 text-sm text-gray-700">
+                        <p>渠道：未选择</p>
+                        <p>预算：--</p>
+                        <p>周期：--</p>
+                    </div>
+                    <button id="launch-btn" class="mt-6 w-full bg-accent hover:bg-blue-600 text-white py-2.5 rounded-md font-medium transition-colors">开始投放</button>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const channelButtons = document.querySelectorAll('.channel-btn');
+        const summary = document.getElementById('summary');
+        const budgetInput = document.getElementById('budget');
+        const daysInput = document.getElementById('days');
+        const launchBtn = document.getElementById('launch-btn');
+
+        const state = { channel: '未选择', budget: '--', days: '--' };
+
+        function renderSummary() {
+            summary.innerHTML = `
+                <p>渠道：${state.channel}</p>
+                <p>预算：${state.budget === '--' ? '--' : `¥${state.budget}/天`}</p>
+                <p>周期：${state.days === '--' ? '--' : `${state.days} 天`}</p>
+            `;
+        }
+
+        channelButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                channelButtons.forEach(b => b.classList.remove('border-accent', 'bg-blue-50'));
+                btn.classList.add('border-accent', 'bg-blue-50');
+                state.channel = btn.textContent.trim();
+                renderSummary();
+            });
+        });
+
+        budgetInput.addEventListener('input', () => {
+            state.budget = budgetInput.value || '--';
+            renderSummary();
+        });
+
+        daysInput.addEventListener('input', () => {
+            state.days = daysInput.value || '--';
+            renderSummary();
+        });
+
+        launchBtn.addEventListener('click', () => {
+            if (state.channel === '未选择' || state.budget === '--' || state.days === '--') {
+                alert('请先完成渠道、预算和投放天数设置。');
+                return;
+            }
+            alert(`已创建投放计划：${state.channel} / ¥${state.budget} / ${state.days}天`);
+        });
+    </script>
+</body>
+</html>
