@@ -3,6 +3,14 @@ const ADNOVA_AUTH_KEYS = {
   currentUser: 'adnovaUser',
 };
 
+function normalizeEmail(email) {
+  return String(email || '').trim().toLowerCase();
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 function getRegisteredUsers() {
   try {
     const raw = localStorage.getItem(ADNOVA_AUTH_KEYS.users);
@@ -15,7 +23,13 @@ function getRegisteredUsers() {
 }
 
 function saveRegisteredUsers(users) {
-  localStorage.setItem(ADNOVA_AUTH_KEYS.users, JSON.stringify(users));
+  try {
+    localStorage.setItem(ADNOVA_AUTH_KEYS.users, JSON.stringify(users));
+    return { ok: true };
+  } catch (error) {
+    console.error('无法保存用户数据。', error);
+    return { ok: false, message: '当前浏览器不允许保存账号信息，请关闭无痕模式后重试。' };
+  }
 }
 
 function getCurrentUser() {
@@ -29,19 +43,34 @@ function getCurrentUser() {
 }
 
 function saveCurrentUser(user, persist = true) {
-  const data = JSON.stringify(user);
-  if (persist) {
-    localStorage.setItem(ADNOVA_AUTH_KEYS.currentUser, data);
-    sessionStorage.removeItem(ADNOVA_AUTH_KEYS.currentUser);
-    return;
-  }
+  try {
+    const data = JSON.stringify(user);
+    if (persist) {
+      localStorage.setItem(ADNOVA_AUTH_KEYS.currentUser, data);
+      sessionStorage.removeItem(ADNOVA_AUTH_KEYS.currentUser);
+      return { ok: true };
+    }
 
-  sessionStorage.setItem(ADNOVA_AUTH_KEYS.currentUser, data);
-  localStorage.removeItem(ADNOVA_AUTH_KEYS.currentUser);
+    sessionStorage.setItem(ADNOVA_AUTH_KEYS.currentUser, data);
+    localStorage.removeItem(ADNOVA_AUTH_KEYS.currentUser);
+    return { ok: true };
+  } catch (error) {
+    console.error('无法保存登录态。', error);
+    return { ok: false, message: '浏览器拦截了登录状态保存，请检查隐私设置。' };
+  }
 }
 
 function registerUser(email, password) {
-  const normalizedEmail = String(email || '').trim().toLowerCase();
+  const normalizedEmail = normalizeEmail(email);
+
+  if (!isValidEmail(normalizedEmail)) {
+    return { ok: false, message: '请输入有效的邮箱地址。' };
+  }
+
+  if (String(password || '').length < 6) {
+    return { ok: false, message: '密码至少需要 6 位。' };
+  }
+
   const users = getRegisteredUsers();
   const exists = users.some((user) => user.email === normalizedEmail);
 
@@ -55,12 +84,16 @@ function registerUser(email, password) {
     createdAt: new Date().toISOString(),
   });
 
-  saveRegisteredUsers(users);
+  const saveResult = saveRegisteredUsers(users);
+  if (!saveResult.ok) {
+    return saveResult;
+  }
+
   return { ok: true };
 }
 
 function loginUser(email, password, persist = true) {
-  const normalizedEmail = String(email || '').trim().toLowerCase();
+  const normalizedEmail = normalizeEmail(email);
   const users = getRegisteredUsers();
   const matchedUser = users.find((user) => user.email === normalizedEmail && user.password === password);
 
@@ -68,10 +101,14 @@ function loginUser(email, password, persist = true) {
     return { ok: false, message: '邮箱或密码不正确，请重试。' };
   }
 
-  saveCurrentUser({
+  const saveResult = saveCurrentUser({
     email: matchedUser.email,
     loginAt: new Date().toISOString(),
   }, persist);
+
+  if (!saveResult.ok) {
+    return saveResult;
+  }
 
   return { ok: true };
 }
