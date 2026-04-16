@@ -22,36 +22,58 @@
   </script>
   <script src="auth.js"></script>
 </head>
-<body class="bg-gray-50 min-h-screen font-sans flex items-center justify-center p-4">
-  <div class="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
-    <a href="index.html" class="inline-flex items-center text-sm text-gray-500 hover:text-accent mb-6">← 返回首页</a>
-
-    <h1 class="text-3xl font-bold text-primary mb-8">创建你的账户</h1>
-
-    <form id="register-form" class="space-y-5">
+<body class="bg-slate-100 min-h-screen font-sans">
+  <main class="min-h-screen grid lg:grid-cols-2">
+    <section class="hidden lg:flex bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white p-14 flex-col justify-between">
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-        <input id="email" type="email" placeholder="you@example.com" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+        <a href="index.html" class="inline-flex items-center text-sm text-blue-200 hover:text-white transition-colors">← 返回首页</a>
       </div>
-
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-        <input id="password" type="password" placeholder="••••••••" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+      <div class="space-y-6 max-w-lg">
+        <p class="text-xs tracking-[0.2em] text-blue-200 uppercase">AdNova Account Setup</p>
+        <h1 class="text-4xl font-semibold leading-tight">3 步完成注册，立刻开始投放和获客。</h1>
+        <ul class="space-y-3 text-blue-100 text-sm list-disc list-inside">
+          <li>创建账号并进入控制台</li>
+          <li>选择行业模板快速生成广告</li>
+          <li>连接 Bot 流程自动跟进客户</li>
+        </ul>
       </div>
+      <p class="text-xs text-blue-200">注册即代表你同意 AdNova 的服务条款与隐私政策。</p>
+    </section>
 
-      <div>
-        <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
-        <input id="confirm-password" type="password" placeholder="••••••••" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+    <section class="flex items-center justify-center p-6 md:p-10">
+      <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+        <a href="index.html" class="lg:hidden inline-flex items-center text-sm text-gray-500 hover:text-accent mb-6">← 返回首页</a>
+
+        <h2 class="text-3xl font-bold text-primary">创建你的账户</h2>
+        <p class="text-sm text-gray-500 mt-2">只需一分钟，即可开始使用 AI 营销工作流</p>
+
+        <form id="register-form" class="space-y-5 mt-8" novalidate>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">邮箱</label>
+            <input id="email" type="email" placeholder="you@example.com" autocomplete="email" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+          </div>
+
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">密码</label>
+            <input id="password" type="password" placeholder="至少 6 位，建议包含字母和数字" autocomplete="new-password" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+          </div>
+
+          <div>
+            <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-2">确认密码</label>
+            <input id="confirm-password" type="password" placeholder="再次输入密码" autocomplete="new-password" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+          </div>
+
+          <button id="register-submit" type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-70 disabled:cursor-not-allowed">注册并开始使用</button>
+        </form>
+
+        <p id="register-message" class="mt-4 text-sm hidden rounded-lg px-3 py-2"></p>
+
+        <p class="mt-6 text-sm text-gray-600 text-center">已有账号？
+          <a href="login.html" class="text-accent font-medium hover:underline">去登录</a>
+        </p>
       </div>
-
-      <button type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors">注册并开始使用</button>
-    </form>
-    <p id="register-message" class="mt-4 text-sm hidden"></p>
-
-    <div class="mt-6 text-sm text-right">
-      <a href="login.html" class="text-gray-600 hover:text-accent">已有账号？登录</a>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script>
     if (!redirectIfAuthenticated()) {
@@ -60,18 +82,35 @@
       const emailInput = document.getElementById('email');
       const passwordInput = document.getElementById('password');
       const confirmPasswordInput = document.getElementById('confirm-password');
+      const submitBtn = document.getElementById('register-submit');
 
       function showMessage(text, isError = true) {
         message.textContent = text;
-        message.classList.remove('hidden', 'text-green-600', 'text-red-600');
-        message.classList.add(isError ? 'text-red-600' : 'text-green-600');
+        message.classList.remove('hidden', 'text-green-700', 'bg-green-50', 'border-green-200', 'text-red-700', 'bg-red-50', 'border-red-200');
+        message.classList.add('border');
+        if (isError) {
+          message.classList.add('text-red-700', 'bg-red-50', 'border-red-200');
+        } else {
+          message.classList.add('text-green-700', 'bg-green-50', 'border-green-200');
+        }
+      }
+
+      function setLoading(isLoading) {
+        submitBtn.disabled = isLoading;
+        submitBtn.textContent = isLoading ? '注册中...' : '注册并开始使用';
       }
 
       form.addEventListener('submit', function(event) {
         event.preventDefault();
 
+        const email = emailInput.value.trim();
         const password = passwordInput.value;
         const confirmPassword = confirmPasswordInput.value;
+
+        if (!email) {
+          showMessage('请输入邮箱地址。');
+          return;
+        }
 
         if (password.length < 6) {
           showMessage('密码至少需要 6 位。');
@@ -83,18 +122,25 @@
           return;
         }
 
-        const result = registerUser(emailInput.value, password);
+        setLoading(true);
+        const result = registerUser(email, password);
         if (!result.ok) {
+          setLoading(false);
           showMessage(result.message);
           return;
         }
 
-        loginUser(emailInput.value, password, true);
-        showMessage('注册成功，正在跳转...', false);
+        const loginResult = loginUser(email, password, true);
+        if (!loginResult.ok) {
+          setLoading(false);
+          showMessage('注册成功，但自动登录失败，请前往登录页重试。');
+          return;
+        }
 
+        showMessage('注册成功，正在跳转到控制台...', false);
         setTimeout(() => {
           window.location.href = 'dashboard.html';
-        }, 250);
+        }, 450);
       });
     }
   </script>

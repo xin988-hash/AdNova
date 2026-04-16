@@ -22,32 +22,57 @@
   </script>
   <script src="auth.js"></script>
 </head>
-<body class="bg-gray-50 min-h-screen font-sans flex items-center justify-center p-4">
-  <div class="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
-    <a href="index.html" class="inline-flex items-center text-sm text-gray-500 hover:text-accent mb-6">← 返回首页</a>
-
-    <h1 class="text-3xl font-bold text-primary mb-8">登录你的账户</h1>
-
-    <form id="login-form" class="space-y-5">
+<body class="bg-slate-100 min-h-screen font-sans">
+  <main class="min-h-screen grid lg:grid-cols-2">
+    <section class="hidden lg:flex bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white p-14 flex-col justify-between">
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-        <input id="email" type="email" placeholder="you@example.com" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+        <a href="index.html" class="inline-flex items-center text-sm text-blue-200 hover:text-white transition-colors">← 返回首页</a>
       </div>
-
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-        <input id="password" type="password" placeholder="••••••••" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+      <div class="space-y-6 max-w-lg">
+        <p class="text-xs tracking-[0.2em] text-blue-200 uppercase">AdNova Secure Access</p>
+        <h1 class="text-4xl font-semibold leading-tight">像你常用的大平台一样，安全、清晰、好上手。</h1>
+        <p class="text-blue-100">登录后即可继续使用你的广告素材、投放计划和客户线索数据。为确保账号安全，建议使用 8 位以上密码并定期更换。</p>
       </div>
+      <p class="text-xs text-blue-200">© 2026 AdNova. All rights reserved.</p>
+    </section>
 
-      <button type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors">登录</button>
-    </form>
-    <p id="login-message" class="mt-4 text-sm hidden"></p>
+    <section class="flex items-center justify-center p-6 md:p-10">
+      <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+        <a href="index.html" class="lg:hidden inline-flex items-center text-sm text-gray-500 hover:text-accent mb-6">← 返回首页</a>
 
-    <div class="mt-6 flex items-center justify-between text-sm">
-      <a href="#" class="text-accent hover:underline">忘记密码？</a>
-      <a href="register.html" class="text-gray-600 hover:text-accent">去注册</a>
-    </div>
-  </div>
+        <h2 class="text-3xl font-bold text-primary">欢迎回来</h2>
+        <p class="text-sm text-gray-500 mt-2">请输入你的账号信息继续使用 AdNova</p>
+
+        <form id="login-form" class="space-y-5 mt-8" novalidate>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">邮箱</label>
+            <input id="email" type="email" placeholder="you@example.com" autocomplete="email" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="password" class="block text-sm font-medium text-gray-700">密码</label>
+              <a href="#" class="text-xs text-accent hover:underline">忘记密码？</a>
+            </div>
+            <input id="password" type="password" placeholder="请输入密码" autocomplete="current-password" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+          </div>
+
+          <label class="flex items-center text-sm text-gray-600 cursor-pointer">
+            <input id="remember-me" type="checkbox" class="mr-2 h-4 w-4 rounded border-gray-300 text-accent focus:ring-accent" checked>
+            记住我（下次自动登录）
+          </label>
+
+          <button id="login-submit" type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-70 disabled:cursor-not-allowed">登录</button>
+        </form>
+
+        <p id="login-message" class="mt-4 text-sm hidden rounded-lg px-3 py-2"></p>
+
+        <p class="mt-6 text-sm text-gray-600 text-center">还没有账号？
+          <a href="register.html" class="text-accent font-medium hover:underline">立即注册</a>
+        </p>
+      </div>
+    </section>
+  </main>
 
   <script>
     if (!redirectIfAuthenticated()) {
@@ -55,26 +80,49 @@
       const message = document.getElementById('login-message');
       const emailInput = document.getElementById('email');
       const passwordInput = document.getElementById('password');
+      const rememberMe = document.getElementById('remember-me');
+      const submitBtn = document.getElementById('login-submit');
 
       function showMessage(text, isError = true) {
         message.textContent = text;
-        message.classList.remove('hidden', 'text-green-600', 'text-red-600');
-        message.classList.add(isError ? 'text-red-600' : 'text-green-600');
+        message.classList.remove('hidden', 'text-green-700', 'bg-green-50', 'border-green-200', 'text-red-700', 'bg-red-50', 'border-red-200');
+        message.classList.add('border');
+        if (isError) {
+          message.classList.add('text-red-700', 'bg-red-50', 'border-red-200');
+        } else {
+          message.classList.add('text-green-700', 'bg-green-50', 'border-green-200');
+        }
+      }
+
+      function setLoading(isLoading) {
+        submitBtn.disabled = isLoading;
+        submitBtn.textContent = isLoading ? '登录中...' : '登录';
       }
 
       form.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        const result = loginUser(emailInput.value, passwordInput.value, true);
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        if (!email || !password) {
+          showMessage('请输入邮箱和密码。');
+          return;
+        }
+
+        setLoading(true);
+        const result = loginUser(email, password, rememberMe.checked);
+
         if (!result.ok) {
+          setLoading(false);
           showMessage(result.message, true);
           return;
         }
 
-        showMessage('登录成功，正在跳转...', false);
+        showMessage('登录成功，正在进入控制台...', false);
         setTimeout(() => {
           window.location.href = 'dashboard.html';
-        }, 250);
+        }, 450);
       });
     }
   </script>
