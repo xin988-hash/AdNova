@@ -38,6 +38,7 @@
             <div class="bg-white rounded-xl shadow-md p-6 mb-6">
                 <h1 class="text-2xl font-bold text-gray-900 mb-2">广告投放工作台</h1>
                 <p class="text-gray-600">这里是下一步页面，整体风格与主站保持一致：白底卡片、蓝色强调色、圆角+轻阴影。</p>
+                <div id="workspace-source" class="mt-4 p-3 rounded-lg bg-blue-50 text-sm text-blue-900 hidden"></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -54,7 +55,7 @@
                     <section class="bg-white rounded-xl shadow-md p-6">
                         <h2 class="text-lg font-semibold text-gray-900 mb-4">步骤 2：预算与时间</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input id="budget" type="number" placeholder="每日预算（¥）" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                            <input id="budget" type="number" placeholder="每日预算（RM）" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
                             <input id="days" type="number" placeholder="投放天数" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
                         </div>
                     </section>
@@ -81,13 +82,27 @@
         const launchBtn = document.getElementById('launch-btn');
 
         const state = { channel: '未选择', budget: '--', days: '--' };
+        const sourceBox = document.getElementById('workspace-source');
 
         function renderSummary() {
             summary.innerHTML = `
                 <p>渠道：${state.channel}</p>
-                <p>预算：${state.budget === '--' ? '--' : `¥${state.budget}/天`}</p>
+                <p>预算：${state.budget === '--' ? '--' : `RM${state.budget}/天`}</p>
                 <p>周期：${state.days === '--' ? '--' : `${state.days} 天`}</p>
             `;
+        }
+
+        function hydrateFromQuery() {
+            const params = new URLSearchParams(window.location.search);
+            const from = params.get('from');
+            const template = params.get('template');
+            const category = params.get('category');
+            const industry = params.get('industry');
+
+            if (!from && !template && !category && !industry) return;
+
+            sourceBox.classList.remove('hidden');
+            sourceBox.textContent = `已从「${from || '未知页面'}」进入。已选择：${template || '未命名模板'}${category ? `（${category}）` : ''}${industry ? `，行业：${industry}` : ''}。请继续设置预算并开始投放。`;
         }
 
         channelButtons.forEach(btn => {
@@ -114,8 +129,10 @@
                 alert('请先完成渠道、预算和投放天数设置。');
                 return;
             }
-            alert(`已创建投放计划：${state.channel} / ¥${state.budget} / ${state.days}天`);
+            alert(`已创建投放计划：${state.channel} / RM${state.budget} / ${state.days}天`);
         });
+
+        hydrateFromQuery();
     </script>
 </body>
 </html>

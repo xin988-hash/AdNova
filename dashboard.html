@@ -1184,7 +1184,7 @@
                                             <div class="text-sm text-gray-900">7.1%</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">¥28.5</div>
+                                            <div class="text-sm text-gray-900">RM28.5</div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1210,7 +1210,7 @@
                                             <div class="text-sm text-gray-900">4.9%</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">¥35.2</div>
+                                            <div class="text-sm text-gray-900">RM35.2</div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1236,7 +1236,7 @@
                                             <div class="text-sm text-gray-900">4.0%</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">¥42.8</div>
+                                            <div class="text-sm text-gray-900">RM42.8</div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1262,7 +1262,7 @@
                                             <div class="text-sm text-gray-900">4.0%</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">¥38.6</div>
+                                            <div class="text-sm text-gray-900">RM38.6</div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -1955,6 +1955,27 @@
                     return;
                 }
 
+                if (target.matches('#templates-page button')) {
+                    const actionText = target.textContent.replace(/\s+/g, '');
+                    const card = target.closest('.card-hover');
+                    const templateName = card?.querySelector('h4')?.textContent?.trim() || '模板';
+                    const templateCategory = card?.querySelector('.absolute.top-2.right-2')?.textContent?.trim() || '通用';
+
+                    if (actionText.includes('编辑')) {
+                        const url = new URL('workspace.html', window.location.href);
+                        url.searchParams.set('from', 'dashboard-templates');
+                        url.searchParams.set('category', templateCategory);
+                        url.searchParams.set('template', templateName);
+                        window.location.href = url.toString();
+                        return;
+                    }
+
+                    if (actionText.includes('下载')) {
+                        toast(`已下载模板：${templateName}`);
+                        return;
+                    }
+                }
+
                 if (target.matches('button') && !target.id && !target.classList.contains('js-copy-ad') && !target.classList.contains('js-download-ad')) {
                     toast('已响应点击，功能可继续扩展');
                 }
@@ -2123,7 +2144,7 @@
                                 
                                 <div class="flex items-start justify-end">
                                     <div class="mr-3 bg-accent text-white rounded-lg p-3 max-w-xs">
-                                        <p class="text-sm">我们的${industry === 'beauty' ? '护肤套餐' : industry === 'food' ? '团体聚餐' : '装修设计'}价格在¥${industry === 'beauty' ? '500-2000' : industry === 'food' ? '1000-5000' : '10000-100000'}之间，具体取决于您的需求。请问您需要了解更多详情吗？</p>
+                                        <p class="text-sm">我们的${industry === 'beauty' ? '护肤套餐' : industry === 'food' ? '团体聚餐' : '装修设计'}价格在RM${industry === 'beauty' ? '500-2000' : industry === 'food' ? '1000-5000' : '10000-100000'}之间，具体取决于您的需求。请问您需要了解更多详情吗？</p>
                                     </div>
                                     <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                                         <i class="fa fa-robot text-white"></i>
