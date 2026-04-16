@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AdNova - 注册</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -20,6 +22,7 @@
       }
     };
   </script>
+  <script src="auth.js"></script>
 </head>
 <body class="bg-gray-50 min-h-screen font-sans flex items-center justify-center p-4">
   <div class="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
@@ -27,7 +30,7 @@
 
     <h1 class="text-3xl font-bold text-primary mb-8">创建你的账户</h1>
 
-    <form class="space-y-5">
+    <form id="register-form" class="space-y-5">
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
         <input id="email" type="email" placeholder="you@example.com" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
@@ -43,12 +46,74 @@
         <input id="confirm-password" type="password" placeholder="••••••••" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
       </div>
 
-      <button type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors">注册并开始使用</button>
+      <button id="register-submit" type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed">注册并开始使用</button>
     </form>
+    <p id="register-message" class="mt-4 text-sm hidden"></p>
 
     <div class="mt-6 text-sm text-right">
       <a href="login.html" class="text-gray-600 hover:text-accent">已有账号？登录</a>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (await redirectIfAuthenticated()) return;
+
+      const form = document.getElementById('register-form');
+      const message = document.getElementById('register-message');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const confirmPasswordInput = document.getElementById('confirm-password');
+      const submitBtn = document.getElementById('register-submit');
+
+      function showMessage(text, isError = true) {
+        message.textContent = text;
+        message.classList.remove('hidden', 'text-green-600', 'text-red-600');
+        message.classList.add(isError ? 'text-red-600' : 'text-green-600');
+      }
+
+      form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        if (password.length < 6) {
+          showMessage('密码至少需要 6 位。');
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          showMessage('两次输入的密码不一致。');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = '注册中...';
+        showMessage('正在创建账号，请稍候...', false);
+
+        const result = await registerUser(emailInput.value, password);
+        if (!result.ok) {
+          showMessage(result.message);
+          submitBtn.disabled = false;
+          submitBtn.textContent = '注册并开始使用';
+          return;
+        }
+
+        if (result.needsEmailConfirm) {
+          showMessage('注册成功！请先到邮箱完成验证，再回来登录。', false);
+          submitBtn.disabled = false;
+          submitBtn.textContent = '注册并开始使用';
+          return;
+        }
+
+        showMessage('注册成功，正在跳转...', false);
+
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 250);
+      });
+    });
+  </script>
 </body>
 </html>

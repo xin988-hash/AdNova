@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AdNova - 登录</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -20,6 +22,7 @@
       }
     };
   </script>
+  <script src="auth.js"></script>
 </head>
 <body class="bg-gray-50 min-h-screen font-sans flex items-center justify-center p-4">
   <div class="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
@@ -27,7 +30,7 @@
 
     <h1 class="text-3xl font-bold text-primary mb-8">登录你的账户</h1>
 
-    <form class="space-y-5">
+    <form id="login-form" class="space-y-5">
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
         <input id="email" type="email" placeholder="you@example.com" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
@@ -38,13 +41,52 @@
         <input id="password" type="password" placeholder="••••••••" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
       </div>
 
-      <button type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors">登录</button>
+      <button id="login-submit" type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed">登录</button>
     </form>
+    <p id="login-message" class="mt-4 text-sm hidden"></p>
 
     <div class="mt-6 flex items-center justify-between text-sm">
       <a href="#" class="text-accent hover:underline">忘记密码？</a>
       <a href="register.html" class="text-gray-600 hover:text-accent">去注册</a>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (await redirectIfAuthenticated()) return;
+
+      const form = document.getElementById('login-form');
+      const message = document.getElementById('login-message');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const submitBtn = document.getElementById('login-submit');
+
+      function showMessage(text, isError = true) {
+        message.textContent = text;
+        message.classList.remove('hidden', 'text-green-600', 'text-red-600');
+        message.classList.add(isError ? 'text-red-600' : 'text-green-600');
+      }
+
+      form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = '登录中...';
+        showMessage('正在验证账号信息，请稍候...', false);
+
+        const result = await loginUser(emailInput.value, passwordInput.value, true);
+        if (!result.ok) {
+          showMessage(result.message, true);
+          submitBtn.disabled = false;
+          submitBtn.textContent = '登录';
+          return;
+        }
+
+        showMessage('登录成功，正在跳转...', false);
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 250);
+      });
+    });
+  </script>
 </body>
 </html>

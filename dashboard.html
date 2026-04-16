@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -98,10 +100,10 @@
                             </svg>
                         </div>
                         <div class="ml-3">
-                            <p class="text-sm font-medium">张三</p>
+                            <p id="sidebar-user-name" class="text-sm font-medium">-</p>
                             <p class="text-xs font-medium text-gray-400">专业版用户</p>
                         </div>
-                        <button id="logout-btn" class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none" title="张三 - 退出账号">
+                        <button id="logout-btn" class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none" title="退出账号">
                             <i class="fa fa-sign-out"></i>
                         </button>
                     </div>
@@ -188,10 +190,10 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm font-medium">张三</p>
+                                    <p id="mobile-user-name" class="text-sm font-medium">-</p>
                                     <p class="text-xs font-medium text-gray-400">专业版用户</p>
                                 </div>
-                                <button id="logout-btn-mobile" class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none" title="张三 - 退出账号">
+                                <button id="logout-btn-mobile" class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none" title="退出账号">
                                     <i class="fa fa-sign-out"></i>
                                 </button>
                             </div>
@@ -1432,8 +1434,15 @@
     </div>
 
     <script>
+        let currentUser = null;
+
         // 页面切换功能
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
+            currentUser = await requireAuth();
+            if (!currentUser) return;
+
+            hydrateCurrentUser();
+
             // 初始化页面
             showPage('dashboard');
             
@@ -1474,17 +1483,28 @@
             initLogoutActions();
         });
 
+        function hydrateCurrentUser() {
+            const email = (currentUser && currentUser.email) ? currentUser.email : '当前用户';
+            const userName = email.split('@')[0] || email;
+
+            const sidebarUserName = document.getElementById('sidebar-user-name');
+            const mobileUserName = document.getElementById('mobile-user-name');
+
+            if (sidebarUserName) sidebarUserName.textContent = userName;
+            if (mobileUserName) mobileUserName.textContent = userName;
+        }
+
         function initLogoutActions() {
             const bindLogout = (buttonId) => {
                 const button = document.getElementById(buttonId);
                 if (!button) return;
 
-                button.addEventListener('click', function() {
-                    const shouldLogout = confirm('确认退出张三的账号吗？');
+                button.addEventListener('click', async function() {
+                    const logoutName = (currentUser && currentUser.email) ? currentUser.email : '当前账号';
+                    const shouldLogout = confirm(`确认退出 ${logoutName} 吗？`);
                     if (!shouldLogout) return;
 
-                    localStorage.removeItem('adnovaUser');
-                    sessionStorage.removeItem('adnovaUser');
+                    await logoutUser();
                     window.location.href = 'login.html';
                 });
             };
