@@ -211,10 +211,10 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-sm font-medium text-gray-600">今日点击数</p>
-                                    <p class="text-2xl font-bold text-gray-900 mt-1">1,248</p>
+                                    <p id="kpi-clicks-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
                                     <p class="text-sm font-medium text-green-600 mt-1">
                                         <i class="fa fa-arrow-up mr-1"></i>
-                                        <span>12.5% 较昨日</span>
+                                        <span>暂无对比</span>
                                     </p>
                                 </div>
                                 <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
@@ -227,10 +227,10 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-sm font-medium text-gray-600">今日私信数</p>
-                                    <p class="text-2xl font-bold text-gray-900 mt-1">342</p>
+                                    <p id="kpi-messages-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
                                     <p class="text-sm font-medium text-green-600 mt-1">
                                         <i class="fa fa-arrow-up mr-1"></i>
-                                        <span>8.3% 较昨日</span>
+                                        <span>暂无对比</span>
                                     </p>
                                 </div>
                                 <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
@@ -243,10 +243,10 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-sm font-medium text-gray-600">今日潜在客户数</p>
-                                    <p class="text-2xl font-bold text-gray-900 mt-1">89</p>
+                                    <p id="kpi-leads-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
                                     <p class="text-sm font-medium text-green-600 mt-1">
                                         <i class="fa fa-arrow-up mr-1"></i>
-                                        <span>15.2% 较昨日</span>
+                                        <span>暂无对比</span>
                                     </p>
                                 </div>
                                 <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
@@ -259,10 +259,10 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-sm font-medium text-gray-600">转化率</p>
-                                    <p class="text-2xl font-bold text-gray-900 mt-1">6.3%</p>
+                                    <p id="kpi-conversion-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
                                     <p class="text-sm font-medium text-red-600 mt-1">
                                         <i class="fa fa-arrow-down mr-1"></i>
-                                        <span>2.1% 较昨日</span>
+                                        <span>暂无对比</span>
                                     </p>
                                 </div>
                                 <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
@@ -279,9 +279,9 @@
                             <div class="flex items-center justify-between mb-6">
                                 <h3 class="text-lg font-semibold text-gray-900">7天趋势</h3>
                                 <div class="flex space-x-2">
-                                    <button class="px-3 py-1 text-xs font-medium bg-accent text-white rounded-full">点击</button>
-                                    <button class="px-3 py-1 text-xs font-medium bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors">私信</button>
-                                    <button class="px-3 py-1 text-xs font-medium bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors">潜在客户</button>
+                                    <button data-trend-metric="clicks" class="px-3 py-1 text-xs font-medium bg-accent text-white rounded-full">点击</button>
+                                    <button data-trend-metric="messages" class="px-3 py-1 text-xs font-medium bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors">私信</button>
+                                    <button data-trend-metric="leads" class="px-3 py-1 text-xs font-medium bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors">潜在客户</button>
                                 </div>
                             </div>
                             <div class="h-64">
@@ -321,7 +321,7 @@
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
+                                <tbody id="recent-activities-body" class="bg-white divide-y divide-gray-200">
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
@@ -994,7 +994,7 @@
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
+                                <tbody id="ad-history-body" class="bg-white divide-y divide-gray-200">
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm font-medium text-gray-900">美容预约助手</div>
@@ -1053,10 +1053,10 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-sm font-medium text-gray-600">平均获客成本 (CPL)</p>
-                                    <p class="text-2xl font-bold text-gray-900 mt-1">¥32.5</p>
+                                    <p id="analytics-cpl-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
                                     <p class="text-sm font-medium text-green-600 mt-1">
                                         <i class="fa fa-arrow-down mr-1"></i>
-                                        <span>8.2% 较上月</span>
+                                        <span>暂无对比</span>
                                     </p>
                                 </div>
                                 <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
@@ -1069,10 +1069,10 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-sm font-medium text-gray-600">总体转化率</p>
-                                    <p class="text-2xl font-bold text-gray-900 mt-1">5.8%</p>
+                                    <p id="analytics-conversion-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
                                     <p class="text-sm font-medium text-green-600 mt-1">
                                         <i class="fa fa-arrow-up mr-1"></i>
-                                        <span>1.3% 较上月</span>
+                                        <span>暂无对比</span>
                                     </p>
                                 </div>
                                 <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
@@ -1085,10 +1085,10 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-sm font-medium text-gray-600">平均回复时间</p>
-                                    <p class="text-2xl font-bold text-gray-900 mt-1">45秒</p>
+                                    <p id="analytics-response-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
                                     <p class="text-sm font-medium text-green-600 mt-1">
                                         <i class="fa fa-arrow-down mr-1"></i>
-                                        <span>15秒 较上月</span>
+                                        <span>暂无对比</span>
                                     </p>
                                 </div>
                                 <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
@@ -1160,7 +1160,7 @@
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CPL</th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
+                                <tbody id="analytics-table-body" class="bg-white divide-y divide-gray-200">
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm font-medium text-gray-900">美容护肤促销</div>
@@ -1468,6 +1468,8 @@
             
             // 初始化图表
             initCharts();
+            initNewUserState();
+            initTrendMetricSwitcher();
             
             // AI广告生成功能
             initAdGenerate();
@@ -1562,88 +1564,107 @@
             });
         }
         
-        // 初始化图表
+        // 初始化图表（新用户空状态：图表存在但无样例业务数据）
         function initCharts() {
-            // 趋势图
+            const EMPTY_PLUGIN = {
+                id: 'adnovaEmptyState',
+                afterDraw(chart) {
+                    const hasData = chart.data.datasets.some((dataset) => {
+                        const values = dataset.data || [];
+                        return values.some((value) => Number(value) > 0);
+                    });
+                    if (hasData) return;
+
+                    const { ctx, chartArea } = chart;
+                    if (!chartArea) return;
+
+                    const x = (chartArea.left + chartArea.right) / 2;
+                    const y = (chartArea.top + chartArea.bottom) / 2;
+
+                    ctx.save();
+                    ctx.fillStyle = '#6B7280';
+                    ctx.font = '14px Inter, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('暂无数据', x, y - 6);
+                    ctx.font = '12px Inter, sans-serif';
+                    ctx.fillStyle = '#9CA3AF';
+                    ctx.fillText('完成广告生成并开始投放后自动显示', x, y + 16);
+                    ctx.restore();
+                }
+            };
+
+            const commonEmptyOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, suggestedMax: 10, ticks: { stepSize: 2 } }
+                }
+            };
+
             const trendsCtx = document.getElementById('trends-chart');
             if (trendsCtx) {
                 new Chart(trendsCtx, {
                     type: 'line',
+                    plugins: [EMPTY_PLUGIN],
                     data: {
-                        labels: ['1月9日', '1月10日', '1月11日', '1月12日', '1月13日', '1月14日', '1月15日'],
+                        labels: ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7'],
                         datasets: [{
                             label: '点击数',
-                            data: [820, 950, 780, 1050, 980, 1120, 1248],
+                            data: [0, 0, 0, 0, 0, 0, 0],
                             borderColor: '#3B82F6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.08)',
                             tension: 0.4,
                             fill: true
                         }]
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
+                    options: commonEmptyOptions
                 });
             }
-            
-            // 漏斗图
+
             const funnelCtx = document.getElementById('funnel-chart');
             if (funnelCtx) {
                 new Chart(funnelCtx, {
                     type: 'bar',
+                    plugins: [EMPTY_PLUGIN],
                     data: {
-                        labels: ['曝光', '点击', '私信', '留资料'],
+                        labels: ['曝光', '点击', '私信', '留资'],
                         datasets: [{
                             label: '用户数量',
-                            data: [15000, 1248, 342, 89],
+                            data: [0, 0, 0, 0],
                             backgroundColor: [
-                                'rgba(59, 130, 246, 0.8)',
-                                'rgba(59, 130, 246, 0.6)',
-                                'rgba(59, 130, 246, 0.4)',
+                                'rgba(59, 130, 246, 0.35)',
+                                'rgba(59, 130, 246, 0.3)',
+                                'rgba(59, 130, 246, 0.25)',
                                 'rgba(59, 130, 246, 0.2)'
                             ],
                             borderWidth: 0
                         }]
                     },
                     options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        indexAxis: 'y',
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        }
+                        ...commonEmptyOptions,
+                        indexAxis: 'y'
                     }
                 });
             }
-            
-            // 广告效果对比图
+
             const adsComparisonCtx = document.getElementById('ads-comparison-chart');
             if (adsComparisonCtx) {
                 new Chart(adsComparisonCtx, {
                     type: 'bar',
+                    plugins: [EMPTY_PLUGIN],
                     data: {
-                        labels: ['美容护肤', '餐厅特惠', '装修设计', '健身会员'],
+                        labels: ['广告A', '广告B', '广告C', '广告D'],
                         datasets: [{
                             label: '点击量',
-                            data: [1248, 699, 450, 552],
+                            data: [0, 0, 0, 0],
                             backgroundColor: '#3B82F6',
                             order: 2
                         }, {
                             label: '转化量',
-                            data: [89, 34, 18, 22],
+                            data: [0, 0, 0, 0],
                             backgroundColor: '#22C55E',
                             order: 1
                         }]
@@ -1651,44 +1672,65 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'top'
-                            }
-                        }
+                        plugins: { legend: { position: 'top' } },
+                        scales: { y: { beginAtZero: true, suggestedMax: 10 } }
                     }
                 });
             }
-            
-            // 客户来源饼图
+
             const customerSourceCtx = document.getElementById('customer-source-chart');
             if (customerSourceCtx) {
                 new Chart(customerSourceCtx, {
                     type: 'doughnut',
+                    plugins: [EMPTY_PLUGIN],
                     data: {
                         labels: ['Facebook', 'Instagram', 'WhatsApp', '其他'],
                         datasets: [{
-                            data: [45, 30, 20, 5],
-                            backgroundColor: [
-                                '#3B82F6',
-                                '#EC4899',
-                                '#22C55E',
-                                '#6B7280'
-                            ],
+                            data: [0, 0, 0, 0],
+                            backgroundColor: ['#BFDBFE', '#FBCFE8', '#BBF7D0', '#E5E7EB'],
                             borderWidth: 0
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
+                        plugins: { legend: { position: 'bottom' } }
                     }
                 });
             }
+        }
+
+        function setEmptyTableState(tbodyId, colSpan, message) {
+            const tbody = document.getElementById(tbodyId);
+            if (!tbody) return;
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="${colSpan}" class="px-6 py-8 text-center text-gray-500">
+                        ${message}
+                    </td>
+                </tr>
+            `;
+        }
+
+        function initNewUserState() {
+            setEmptyTableState('recent-activities-body', 4, '暂无活动，完成首次广告生成后将在这里显示。');
+            setEmptyTableState('ad-history-body', 5, '暂无广告生成记录，先创建第一条广告吧。');
+            setEmptyTableState('analytics-table-body', 8, '暂无分析数据，完成投放后会自动生成报表。');
+        }
+
+        function initTrendMetricSwitcher() {
+            const buttons = document.querySelectorAll('[data-trend-metric]');
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    buttons.forEach((item) => {
+                        item.classList.remove('bg-accent', 'text-white');
+                        item.classList.add('bg-gray-200', 'text-gray-700');
+                    });
+                    button.classList.remove('bg-gray-200', 'text-gray-700');
+                    button.classList.add('bg-accent', 'text-white');
+                    toast('当前为新用户状态，趋势图暂无数据。');
+                });
+            });
         }
         
         const COUNTRY_CITY_MAP = {
@@ -1752,6 +1794,8 @@
                     
                     // 显示加载状态
                     const adsOutput = document.getElementById('ads-output');
+                    generateBtn.disabled = true;
+                    generateBtn.textContent = '生成中...';
                     adsOutput.innerHTML = `
                         <div class="p-6 border border-gray-200 rounded-lg bg-gray-50 text-center">
                             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
@@ -1876,6 +1920,8 @@
                         });
                         
                         adsOutput.innerHTML = outputHtml;
+                        generateBtn.disabled = false;
+                        generateBtn.textContent = '生成广告';
                     }, 2000);
                 });
             }
