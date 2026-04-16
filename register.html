@@ -20,6 +20,7 @@
       }
     };
   </script>
+  <script src="auth.js"></script>
 </head>
 <body class="bg-gray-50 min-h-screen font-sans flex items-center justify-center p-4">
   <div class="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
@@ -27,7 +28,7 @@
 
     <h1 class="text-3xl font-bold text-primary mb-8">创建你的账户</h1>
 
-    <form class="space-y-5">
+    <form id="register-form" class="space-y-5">
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
         <input id="email" type="email" placeholder="you@example.com" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
@@ -45,10 +46,57 @@
 
       <button type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors">注册并开始使用</button>
     </form>
+    <p id="register-message" class="mt-4 text-sm hidden"></p>
 
     <div class="mt-6 text-sm text-right">
       <a href="login.html" class="text-gray-600 hover:text-accent">已有账号？登录</a>
     </div>
   </div>
+
+  <script>
+    if (!redirectIfAuthenticated()) {
+      const form = document.getElementById('register-form');
+      const message = document.getElementById('register-message');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const confirmPasswordInput = document.getElementById('confirm-password');
+
+      function showMessage(text, isError = true) {
+        message.textContent = text;
+        message.classList.remove('hidden', 'text-green-600', 'text-red-600');
+        message.classList.add(isError ? 'text-red-600' : 'text-green-600');
+      }
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        if (password.length < 6) {
+          showMessage('密码至少需要 6 位。');
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          showMessage('两次输入的密码不一致。');
+          return;
+        }
+
+        const result = registerUser(emailInput.value, password);
+        if (!result.ok) {
+          showMessage(result.message);
+          return;
+        }
+
+        loginUser(emailInput.value, password, true);
+        showMessage('注册成功，正在跳转...', false);
+
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 250);
+      });
+    }
+  </script>
 </body>
 </html>
