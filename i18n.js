@@ -15,7 +15,16 @@ const ADNOVA_TRANSLATIONS = {
     hero_cta_demo: '观看演示',
     hero_note: '无需信用卡 · 14天免费试用 · 随时取消',
     features_title: '核心功能',
-    features_desc: '专为中小企业打造的广告营销工具，让复杂的营销变得简单高效'
+    features_desc: '专为中小企业打造的广告营销工具，让复杂的营销变得简单高效',
+    pricing_title: '面试演示套餐',
+    pricing_desc: '按面试场景设计，开箱即演示完整营销流程',
+    plan_free_name: '面试体验版',
+    plan_free_desc: '适合快速展示产品能力',
+    plan_popular: '面试推荐',
+    plan_pro_name: '面试实战版',
+    plan_pro_desc: '适合完整演示获客闭环',
+    plan_enterprise_name: '面试团队版',
+    plan_enterprise_desc: '适合团队协作与高级权限演示'
   },
   en: {
     nav_features: 'Features',
@@ -31,7 +40,16 @@ const ADNOVA_TRANSLATIONS = {
     hero_cta_demo: 'Watch Demo',
     hero_note: 'No credit card · 14-day free trial · Cancel anytime',
     features_title: 'Core Features',
-    features_desc: 'Built for SMBs to make marketing simple, fast, and effective.'
+    features_desc: 'Built for SMBs to make marketing simple, fast, and effective.',
+    pricing_title: 'Interview-ready Plans',
+    pricing_desc: 'Purpose-built packages for product demos in interview scenarios.',
+    plan_free_name: 'Interview Starter',
+    plan_free_desc: 'Best for quick product capability demos',
+    plan_popular: 'Most Chosen',
+    plan_pro_name: 'Interview Pro',
+    plan_pro_desc: 'Best for full lead-generation walkthroughs',
+    plan_enterprise_name: 'Interview Team',
+    plan_enterprise_desc: 'Best for team collaboration and advanced permission demos'
   },
   ms: {
     nav_features: 'Ciri',
@@ -47,7 +65,16 @@ const ADNOVA_TRANSLATIONS = {
     hero_cta_demo: 'Tonton Demo',
     hero_note: 'Tiada kad kredit · Percubaan 14 hari · Batal bila-bila masa',
     features_title: 'Fungsi Utama',
-    features_desc: 'Dibina untuk SMB supaya pemasaran jadi lebih mudah, pantas, dan berkesan.'
+    features_desc: 'Dibina untuk SMB supaya pemasaran jadi lebih mudah, pantas, dan berkesan.',
+    pricing_title: 'Pelan Demo Temuduga',
+    pricing_desc: 'Pelan khas untuk demo produk dalam senario temuduga.',
+    plan_free_name: 'Pelan Asas Temuduga',
+    plan_free_desc: 'Sesuai untuk demo pantas keupayaan produk',
+    plan_popular: 'Paling Popular',
+    plan_pro_name: 'Pelan Pro Temuduga',
+    plan_pro_desc: 'Sesuai untuk demo lengkap aliran perolehan prospek',
+    plan_enterprise_name: 'Pelan Pasukan Temuduga',
+    plan_enterprise_desc: 'Sesuai untuk kolaborasi pasukan dan demo akses lanjutan'
   }
 };
 
