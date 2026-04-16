@@ -71,6 +71,10 @@
                             <i class="fa fa-magic mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                             AI广告生成
                         </a>
+                        <a href="#ad-publish" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-publish">
+                            <i class="fa fa-bullseye mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                            广告发布
+                        </a>
                         <a href="#templates" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="templates">
                             <i class="fa fa-th-large mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                             模板库
@@ -161,6 +165,10 @@
                             <a href="#ad-generate" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-generate">
                                 <i class="fa fa-magic mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                                 AI广告生成
+                            </a>
+                            <a href="#ad-publish" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-publish">
+                                <i class="fa fa-bullseye mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                                广告发布
                             </a>
                             <a href="#templates" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="templates">
                                 <i class="fa fa-th-large mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
@@ -530,63 +538,125 @@
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">2025-01-15 14:32</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">美容美发</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">获取潜在客户</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">成功</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="#" class="text-accent hover:text-blue-700 mr-3">查看</a>
-                                            <a href="#" class="text-gray-600 hover:text-gray-900">复制</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">2025-01-15 11:15</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">餐饮美食</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">增加网站流量</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">成功</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="#" class="text-accent hover:text-blue-700 mr-3">查看</a>
-                                            <a href="#" class="text-gray-600 hover:text-gray-900">复制</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">2025-01-14 16:45</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">装修设计</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">获取潜在客户</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">失败</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="#" class="text-accent hover:text-blue-700 mr-3">重试</a>
-                                            <a href="#" class="text-gray-600 hover:text-gray-900">查看</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <tbody id="ad-history-body" class="bg-white divide-y divide-gray-200"></tbody>
                             </table>
+                        </div>
+                    </div>
+
+                    <!-- 素材与发布中心 -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">素材与一键发布</h3>
+                            <p class="text-sm text-gray-500">先生成广告，再上传素材并发布到已绑定账号</p>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
+                            <select id="media-ad-select" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                <option value="">请选择广告记录</option>
+                            </select>
+                            <select id="media-platform-select" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                <option value="">选择发布平台</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="instagram">Instagram</option>
+                            </select>
+                            <input id="media-file-input" type="file" accept="image/*,video/*" class="border border-gray-300 rounded-md px-3 py-2">
+                        </div>
+                        <div class="flex flex-wrap gap-3 mb-4">
+                            <button id="upload-media-btn" class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                <i class="fa fa-upload mr-2"></i>上传素材
+                            </button>
+                            <button id="publish-ad-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                <i class="fa fa-send mr-2"></i>一键发布到已绑定账号
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">广告</th>
+                                        <th class="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">素材</th>
+                                        <th class="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">类型</th>
+                                        <th class="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">平台</th>
+                                        <th class="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="media-queue-body" class="bg-white divide-y divide-gray-200"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 模板确认页面 -->
+                <div id="template-review-page" class="page-content hidden">
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">选择生成模板</h3>
+                        <p class="text-gray-600">已根据你的输入生成模板。请先确认要使用的模板，确认后会自动进入广告发布设置。</p>
+                    </div>
+                    <div id="template-review-list" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+                </div>
+
+                <!-- 广告发布页面 -->
+                <div id="ad-publish-page" class="page-content hidden">
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">广告发布设置</h3>
+                        <p class="text-gray-600 mb-6">根据平台规则设置预算、天数、素材并一键创建投放计划（支持多平台）。</p>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">已选模板</label>
+                                    <div id="publish-selected-template" class="p-3 rounded-lg bg-blue-50 text-sm text-blue-900">未选择模板</div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">发布平台（可多选）</label>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <label class="flex items-center p-3 border border-gray-200 rounded-md">
+                                            <input type="checkbox" class="mr-2 publish-platform" value="facebook">
+                                            Facebook
+                                        </label>
+                                        <label class="flex items-center p-3 border border-gray-200 rounded-md">
+                                            <input type="checkbox" class="mr-2 publish-platform" value="instagram">
+                                            Instagram
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">每日预算（RM）</label>
+                                        <input id="publish-daily-budget" type="number" min="1" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">投放天数</label>
+                                        <input id="publish-days" type="number" min="1" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">投放目标</label>
+                                    <select id="publish-goal" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                        <option value="leads">获取潜在客户</option>
+                                        <option value="traffic">网站流量</option>
+                                        <option value="conversion">转化</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">选择已上传素材</label>
+                                    <select id="publish-media" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                        <option value="">请先选择模板和平台</option>
+                                    </select>
+                                </div>
+                                <button id="create-publish-plan-btn" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium transition-colors">
+                                    创建投放计划并发布
+                                </button>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="font-medium text-gray-900">平台规则提示（自动同步）</h4>
+                                <div id="platform-rules-box" class="p-4 rounded-lg bg-gray-50 text-sm text-gray-700">
+                                    请先选择发布平台，系统会显示对应的预算下限与投放建议。
+                                </div>
+                                <div class="p-4 rounded-lg border border-blue-100 bg-blue-50 text-sm text-blue-900">
+                                    <p class="font-medium mb-1">执行顺序</p>
+                                    <p>1) AI生成广告 → 2) 选择模板 → 3) 选择平台和素材 → 4) 按平台规则发布。</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -885,7 +955,7 @@
                 <div id="bot-page" class="page-content hidden">
                     <div class="bg-white rounded-xl shadow-md p-6 mb-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4">Bot系统</h3>
-                        <p class="text-gray-600 mb-6">选择行业和流程，一键导入到ManyChat，自动回复客户咨询</p>
+                        <p class="text-gray-600 mb-6">选择行业和流程，一键部署到已绑定账号，自动回复客户咨询</p>
                         
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             <!-- 配置区域 -->
@@ -958,7 +1028,7 @@
 
                                 <button id="import-manychat-btn" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium transition-colors flex items-center justify-center">
                                     <i class="fa fa-upload mr-2"></i>
-                                    一键导入到ManyChat
+                                    一键部署到已绑定账号
                                 </button>
                             </div>
 
@@ -994,52 +1064,7 @@
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
                                     </tr>
                                 </thead>
-                                <tbody id="ad-history-body" class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">美容预约助手</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">美容美发</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">预约流程</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">2025-01-15 11:15</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">运行中</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="#" class="text-accent hover:text-blue-700 mr-3">查看</a>
-                                            <a href="#" class="text-gray-600 hover:text-gray-900 mr-3">编辑</a>
-                                            <a href="#" class="text-red-600 hover:text-red-800">删除</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">餐厅询价助手</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">餐饮美食</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">询价流程</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">2025-01-14 16:45</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">运行中</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="#" class="text-accent hover:text-blue-700 mr-3">查看</a>
-                                            <a href="#" class="text-gray-600 hover:text-gray-900 mr-3">编辑</a>
-                                            <a href="#" class="text-red-600 hover:text-red-800">删除</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <tbody id="bot-history-body" class="bg-white divide-y divide-gray-200"></tbody>
                             </table>
                         </div>
                     </div>
@@ -1184,7 +1209,7 @@
                                             <div class="text-sm text-gray-900">7.1%</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">¥28.5</div>
+                                            <div class="text-sm text-gray-900">RM28.5</div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1210,7 +1235,7 @@
                                             <div class="text-sm text-gray-900">4.9%</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">¥35.2</div>
+                                            <div class="text-sm text-gray-900">RM35.2</div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1236,7 +1261,7 @@
                                             <div class="text-sm text-gray-900">4.0%</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">¥42.8</div>
+                                            <div class="text-sm text-gray-900">RM42.8</div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1262,7 +1287,7 @@
                                             <div class="text-sm text-gray-900">4.0%</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">¥38.6</div>
+                                            <div class="text-sm text-gray-900">RM38.6</div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -1289,7 +1314,7 @@
                                             <p class="text-xs text-gray-500">绑定后可直接发布广告</p>
                                         </div>
                                     </div>
-                                    <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                                    <button data-social-bind data-platform="facebook" class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
                                         绑定
                                     </button>
                                 </div>
@@ -1304,7 +1329,7 @@
                                             <p class="text-xs text-gray-500">绑定后可直接发布广告</p>
                                         </div>
                                     </div>
-                                    <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                                    <button data-social-bind data-platform="instagram" class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
                                         绑定
                                     </button>
                                 </div>
@@ -1319,8 +1344,8 @@
                                             <p class="text-xs text-gray-500">绑定后可接收客户消息</p>
                                         </div>
                                     </div>
-                                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded text-sm font-medium transition-colors">
-                                        未开通
+                                    <button data-social-bind data-platform="whatsapp" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded text-sm font-medium transition-colors">
+                                        未绑定
                                     </button>
                                 </div>
 
@@ -1334,8 +1359,8 @@
                                             <p class="text-xs text-gray-500">绑定后可接收客户消息</p>
                                         </div>
                                     </div>
-                                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded text-sm font-medium transition-colors">
-                                        未开通
+                                    <button data-social-bind data-platform="telegram" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded text-sm font-medium transition-colors">
+                                        未绑定
                                     </button>
                                 </div>
                             </div>
@@ -1434,11 +1459,82 @@
 
     <script>
         let currentUser = null;
+        const ADNOVA_APP_STATE_KEY = 'adnovaAppState';
+        let appState = null;
+
+        function getUserScopedStateKey() {
+            const email = currentUser?.email || 'guest';
+            return `${ADNOVA_APP_STATE_KEY}:${email}`;
+        }
+
+        function defaultAppState() {
+            return {
+                ads: [],
+                generatedTemplates: [],
+                selectedTemplate: null,
+                botDeployments: [],
+                activities: [],
+                mediaQueue: [],
+                socialBindings: {
+                    facebook: false,
+                    instagram: false,
+                    whatsapp: false,
+                    telegram: false
+                }
+            };
+        }
+
+        function loadAppState() {
+            try {
+                const raw = localStorage.getItem(getUserScopedStateKey());
+                const parsed = raw ? JSON.parse(raw) : {};
+                appState = {
+                    ...defaultAppState(),
+                    ...parsed,
+                    socialBindings: {
+                        ...defaultAppState().socialBindings,
+                        ...(parsed.socialBindings || {})
+                    }
+                };
+            } catch (error) {
+                console.warn('读取业务数据失败，已重置。', error);
+                appState = defaultAppState();
+            }
+        }
+
+        function saveAppState() {
+            if (!appState) return;
+            localStorage.setItem(getUserScopedStateKey(), JSON.stringify(appState));
+        }
+
+        function formatDateTime(value = new Date()) {
+            const d = value instanceof Date ? value : new Date(value);
+            const pad = (n) => String(n).padStart(2, '0');
+            return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        }
+
+        function pushActivity(type, detail, status = '成功') {
+            appState.activities.unshift({
+                type,
+                detail,
+                status,
+                time: new Date().toISOString()
+            });
+            appState.activities = appState.activities.slice(0, 20);
+            saveAppState();
+            renderRecentActivities();
+        }
+
+        function createId() {
+            if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+            return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        }
 
         // 页面切换功能
         document.addEventListener('DOMContentLoaded', function() {
             currentUser = requireAuth();
             if (!currentUser) return;
+            loadAppState();
 
             hydrateCurrentUser();
 
@@ -1469,6 +1565,9 @@
             // 初始化图表
             initCharts();
             initNewUserState();
+            initSocialBinding();
+            initMediaCenter();
+            initAdPublishFlow();
             initTrendMetricSwitcher();
             
             // AI广告生成功能
@@ -1536,6 +1635,12 @@
                         break;
                     case 'ad-generate':
                         pageTitle.textContent = 'AI广告生成';
+                        break;
+                    case 'template-review':
+                        pageTitle.textContent = '模板确认';
+                        break;
+                    case 'ad-publish':
+                        pageTitle.textContent = '广告发布';
                         break;
                     case 'templates':
                         pageTitle.textContent = '模板库';
@@ -1713,9 +1818,221 @@
         }
 
         function initNewUserState() {
-            setEmptyTableState('recent-activities-body', 4, '暂无活动，完成首次广告生成后将在这里显示。');
-            setEmptyTableState('ad-history-body', 5, '暂无广告生成记录，先创建第一条广告吧。');
+            renderRecentActivities();
+            renderAdHistory();
+            renderBotHistory();
+            renderMediaQueue();
+            renderAdOptions();
+            renderTemplateReview();
+            renderPublishSelectedTemplate();
+            renderPlatformRules();
+            hydratePublishMediaOptions();
             setEmptyTableState('analytics-table-body', 8, '暂无分析数据，完成投放后会自动生成报表。');
+        }
+
+        function renderRecentActivities() {
+            const tbody = document.getElementById('recent-activities-body');
+            if (!tbody) return;
+            if (!appState.activities.length) {
+                setEmptyTableState('recent-activities-body', 4, '暂无活动，完成首次广告生成后将在这里显示。');
+                return;
+            }
+
+            tbody.innerHTML = appState.activities.map((item) => `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm font-medium text-gray-900">${item.type}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">${item.detail}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-500">${formatDateTime(item.time)}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${item.status === '成功' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">${item.status}</span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAdHistory() {
+            const tbody = document.getElementById('ad-history-body');
+            if (!tbody) return;
+            if (!appState.ads.length) {
+                setEmptyTableState('ad-history-body', 5, '暂无广告生成记录，先创建第一条广告吧。');
+                return;
+            }
+
+            tbody.innerHTML = appState.ads.map((item) => `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">${formatDateTime(item.createdAt)}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">${item.industryLabel}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">${item.goalLabel}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${item.status === '已发布' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">${item.status}</span></td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600">已生成 ${item.adsCount} 条广告</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderBotHistory() {
+            const tbody = document.getElementById('bot-history-body');
+            if (!tbody) return;
+            if (!appState.botDeployments.length) {
+                setEmptyTableState('bot-history-body', 6, '暂无已部署 Bot，请先完成配置并部署。');
+                return;
+            }
+
+            tbody.innerHTML = appState.botDeployments.map((item) => `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm font-medium text-gray-900">${item.name}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">${item.industryLabel}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">${item.flowLabel}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-500">${formatDateTime(item.deployedAt)}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">运行中</span></td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600">${item.platformLabel}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAdOptions() {
+            const select = document.getElementById('media-ad-select');
+            if (!select) return;
+            select.innerHTML = '<option value="">请选择广告记录</option>';
+            appState.ads.forEach((item) => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = `${formatDateTime(item.createdAt)} - ${item.industryLabel} - ${item.goalLabel}`;
+                select.appendChild(option);
+            });
+        }
+
+        function renderMediaQueue() {
+            const tbody = document.getElementById('media-queue-body');
+            if (!tbody) return;
+            if (!appState.mediaQueue.length) {
+                setEmptyTableState('media-queue-body', 5, '暂无素材，上传图片或视频后将在这里展示。');
+                return;
+            }
+
+            tbody.innerHTML = appState.mediaQueue.map((item) => `
+                <tr>
+                    <td class="px-4 py-3 text-sm text-gray-900">${item.adSummary}</td>
+                    <td class="px-4 py-3 text-sm text-gray-900">${item.fileName}</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">${item.fileType}</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">${item.platformLabel}</td>
+                    <td class="px-4 py-3"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${item.status === '已发布' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">${item.status}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        const PLATFORM_RULES = {
+            facebook: { label: 'Facebook', minDailyBudget: 20, note: '建议至少 3 天测试期，优先使用 1:1 图片与 4:5 版位。' },
+            instagram: { label: 'Instagram', minDailyBudget: 15, note: '建议使用 9:16 竖版视频素材，文案长度建议在 125 字内。' }
+        };
+
+        function renderTemplateReview() {
+            const container = document.getElementById('template-review-list');
+            if (!container) return;
+            const templates = appState.generatedTemplates || [];
+            if (!templates.length) {
+                container.innerHTML = '<div class="col-span-full p-8 bg-white rounded-xl shadow-md text-center text-gray-500">暂无生成模板，请先完成 AI 广告生成。</div>';
+                return;
+            }
+
+            container.innerHTML = templates.map((tpl) => `
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h4 class="font-semibold text-gray-900 mb-2">${tpl.title}</h4>
+                    <p class="text-sm text-gray-600 mb-3">${tpl.content}</p>
+                    <div class="p-3 rounded-lg bg-blue-50 text-sm text-blue-900 mb-4">${tpl.visualTip}</div>
+                    <button class="w-full bg-accent hover:bg-blue-600 text-white py-2.5 rounded-md font-medium js-use-template" data-template-id="${tpl.id}">
+                        确认使用此模板并进入发布
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function renderPublishSelectedTemplate() {
+            const panel = document.getElementById('publish-selected-template');
+            if (!panel) return;
+            const template = appState.selectedTemplate;
+            panel.textContent = template ? `${template.title}（CTA：${template.cta}）` : '未选择模板';
+        }
+
+        function renderPlatformRules() {
+            const box = document.getElementById('platform-rules-box');
+            if (!box) return;
+            const selectedPlatforms = Array.from(document.querySelectorAll('.publish-platform:checked')).map((el) => el.value);
+            if (!selectedPlatforms.length) {
+                box.textContent = '请先选择发布平台，系统会显示对应的预算下限与投放建议。';
+                return;
+            }
+
+            box.innerHTML = selectedPlatforms.map((platform) => {
+                const rule = PLATFORM_RULES[platform];
+                return `<div class="mb-2"><p class="font-medium">${rule.label}</p><p>每日预算下限：RM${rule.minDailyBudget}</p><p class="text-gray-600">${rule.note}</p></div>`;
+            }).join('');
+        }
+
+        function hydratePublishMediaOptions() {
+            const select = document.getElementById('publish-media');
+            if (!select) return;
+            select.innerHTML = '<option value="">请选择素材</option>';
+            const selectedPlatforms = Array.from(document.querySelectorAll('.publish-platform:checked')).map((el) => el.value);
+            const templateId = appState.selectedTemplate?.recordId;
+            const matches = appState.mediaQueue.filter((item) => selectedPlatforms.includes(item.platform) && (!templateId || item.adId === templateId));
+
+            matches.forEach((item) => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = `${item.platformLabel} - ${item.fileName}（${item.fileType}）`;
+                select.appendChild(option);
+            });
+        }
+
+        function initAdPublishFlow() {
+            document.querySelectorAll('.publish-platform').forEach((checkbox) => {
+                checkbox.addEventListener('change', () => {
+                    renderPlatformRules();
+                    hydratePublishMediaOptions();
+                });
+            });
+
+            const createBtn = document.getElementById('create-publish-plan-btn');
+            if (!createBtn) return;
+            createBtn.addEventListener('click', () => {
+                const selectedPlatforms = Array.from(document.querySelectorAll('.publish-platform:checked')).map((el) => el.value);
+                const dailyBudget = Number(document.getElementById('publish-daily-budget').value);
+                const days = Number(document.getElementById('publish-days').value);
+                const selectedMediaId = document.getElementById('publish-media').value;
+                const goalText = document.getElementById('publish-goal').selectedOptions[0].textContent;
+
+                if (!appState.selectedTemplate) {
+                    alert('请先确认一个模板再发布。');
+                    return;
+                }
+                if (!selectedPlatforms.length) {
+                    alert('请至少选择一个发布平台。');
+                    return;
+                }
+                const violating = selectedPlatforms.find((platform) => dailyBudget < PLATFORM_RULES[platform].minDailyBudget);
+                if (violating) {
+                    alert(`${PLATFORM_RULES[violating].label} 每日预算下限为 RM${PLATFORM_RULES[violating].minDailyBudget}。`);
+                    return;
+                }
+                if (!days || days < 1) {
+                    alert('投放天数至少为 1 天。');
+                    return;
+                }
+                if (!selectedMediaId) {
+                    alert('请先选择可用素材。');
+                    return;
+                }
+                if (!selectedPlatforms.every((platform) => hasBoundPublishingAccount(platform))) {
+                    alert('所选平台中存在未绑定账号，请先到设置页完成绑定。');
+                    return;
+                }
+
+                selectedPlatforms.forEach((platform) => {
+                    pushActivity('投放计划', `${appState.selectedTemplate.title} 发布到 ${PLATFORM_RULES[platform].label}，预算 RM${dailyBudget}/天，${days} 天，目标：${goalText}`, '成功');
+                });
+                toast('投放计划已创建并进入发布队列');
+                showPage('dashboard');
+            });
         }
 
         function initTrendMetricSwitcher() {
@@ -1730,6 +2047,120 @@
                     button.classList.add('bg-accent', 'text-white');
                     toast('当前为新用户状态，趋势图暂无数据。');
                 });
+            });
+        }
+
+        function hasBoundPublishingAccount(platform) {
+            if (platform) return Boolean(appState.socialBindings[platform]);
+            return Boolean(appState.socialBindings.facebook || appState.socialBindings.instagram);
+        }
+
+        function initSocialBinding() {
+            const buttons = document.querySelectorAll('[data-social-bind]');
+            const labelMap = {
+                facebook: 'Facebook',
+                instagram: 'Instagram',
+                whatsapp: 'WhatsApp',
+                telegram: 'Telegram'
+            };
+
+            const render = () => {
+                buttons.forEach((button) => {
+                    const platform = button.dataset.platform;
+                    const isBound = Boolean(appState.socialBindings[platform]);
+                    if (isBound) {
+                        button.className = 'bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm font-medium transition-colors';
+                        button.textContent = '已绑定';
+                    } else {
+                        button.className = 'bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors';
+                        button.textContent = '绑定';
+                    }
+                });
+            };
+
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const platform = button.dataset.platform;
+                    const next = !appState.socialBindings[platform];
+                    appState.socialBindings[platform] = next;
+                    saveAppState();
+                    render();
+                    pushActivity('账号绑定', `${labelMap[platform] || platform}${next ? ' 已绑定' : ' 已解绑'}`, '成功');
+                    toast(`${labelMap[platform] || platform}${next ? '绑定成功' : '已解绑'}`);
+                });
+            });
+
+            render();
+        }
+
+        function initMediaCenter() {
+            const uploadBtn = document.getElementById('upload-media-btn');
+            const publishBtn = document.getElementById('publish-ad-btn');
+            const adSelect = document.getElementById('media-ad-select');
+            const platformSelect = document.getElementById('media-platform-select');
+            const fileInput = document.getElementById('media-file-input');
+            if (!uploadBtn || !publishBtn || !adSelect || !platformSelect || !fileInput) return;
+
+            uploadBtn.addEventListener('click', () => {
+                const adId = adSelect.value;
+                const platform = platformSelect.value;
+                const file = fileInput.files?.[0];
+                if (!adId || !platform || !file) {
+                    alert('请先选择广告记录、平台并上传素材文件。');
+                    return;
+                }
+
+                const adRecord = appState.ads.find((item) => item.id === adId);
+                if (!adRecord) {
+                    alert('广告记录不存在，请重新选择。');
+                    return;
+                }
+
+                appState.mediaQueue.unshift({
+                    id: createId(),
+                    adId,
+                    adSummary: `${adRecord.industryLabel} / ${adRecord.goalLabel}`,
+                    fileName: file.name,
+                    fileType: file.type.includes('video') ? '视频' : '图片',
+                    platform,
+                    platformLabel: platform === 'facebook' ? 'Facebook' : 'Instagram',
+                    status: '待发布',
+                    createdAt: new Date().toISOString()
+                });
+                saveAppState();
+                renderMediaQueue();
+                pushActivity('素材上传', `${file.name} 已加入${platform === 'facebook' ? 'Facebook' : 'Instagram'}发布队列`, '成功');
+                toast('素材上传成功，等待发布');
+                fileInput.value = '';
+            });
+
+            publishBtn.addEventListener('click', () => {
+                const adId = adSelect.value;
+                const platform = platformSelect.value;
+                if (!adId || !platform) {
+                    alert('请先选择广告记录和平台。');
+                    return;
+                }
+
+                if (!hasBoundPublishingAccount(platform)) {
+                    alert('请先在“设置-账号绑定”中绑定对应社交账号，再执行发布。');
+                    return;
+                }
+
+                const pending = appState.mediaQueue.find((item) => item.adId === adId && item.platform === platform && item.status === '待发布');
+                if (!pending) {
+                    alert('请先上传该广告在此平台的素材（图片或视频）。');
+                    return;
+                }
+
+                pending.status = '已发布';
+                const adRecord = appState.ads.find((item) => item.id === adId);
+                if (adRecord) adRecord.status = '已发布';
+                saveAppState();
+                renderMediaQueue();
+                renderAdHistory();
+                pushActivity('广告发布', `${pending.adSummary} 已发布到 ${pending.platformLabel}`, '成功');
+                toast(`发布成功：${pending.platformLabel}`);
             });
         }
         
@@ -1785,6 +2216,7 @@
                     const description = document.getElementById('ad-description').value;
                     const country = document.getElementById('ad-country').value;
                     const city = document.getElementById('ad-city')?.value || '';
+                    const goal = document.querySelector('input[name="ad-goal"]:checked')?.value || 'leads';
                     
                     // 表单验证
                     if (!industry || !description || !country || !city) {
@@ -1807,6 +2239,11 @@
                     setTimeout(() => {
                         // 根据行业生成不同的广告内容
                         let ads = [];
+                        const visualSuggestions = {
+                            beauty: '建议拍摄近景肌肤对比 + 护肤步骤短视频（15-30秒）',
+                            food: '建议拍摄菜品出餐特写 + 店内环境横版视频（20秒以内）',
+                            decor: '建议拍摄施工前后对比图 + 设计师讲解视频（30秒）'
+                        };
                         
                         if (industry === 'beauty') {
                             ads = [
@@ -1912,16 +2349,50 @@
                                             ${ad.cta}
                                         </button>
                                     </div>
-                                    <a href="workspace.html?from=ad-generate&industry=${industry}&ad=${index + 1}" class="inline-flex items-center mt-4 text-sm text-accent hover:text-blue-700 font-medium">
-                                        下一步：进入投放工作台 <i class="fa fa-arrow-right ml-1"></i>
-                                    </a>
+                                    <div class="mt-3 p-3 bg-blue-50 rounded-lg">
+                                        <p class="text-sm font-medium text-blue-900 mb-1">拍摄/素材建议</p>
+                                        <p class="text-sm text-blue-800">${visualSuggestions[industry] || '建议准备品牌主视觉图 + 15秒产品讲解短视频'}</p>
+                                        <p class="text-xs text-blue-700 mt-1">建议素材比例：1:1（信息流）和 9:16（短视频）各 1 份。</p>
+                                    </div>
+                                    <p class="inline-flex items-center mt-4 text-sm text-accent font-medium">
+                                        生成完成后将自动进入模板确认页面 <i class="fa fa-arrow-right ml-1"></i>
+                                    </p>
                                 </div>
                             `;
                         });
                         
                         adsOutput.innerHTML = outputHtml;
+                        const industryMap = { beauty: '美容美发', food: '餐饮美食', decor: '装修设计', fitness: '健身运动', education: '教育培训', retail: '零售购物', service: '生活服务' };
+                        const goalMap = { leads: '获取潜在客户', traffic: '增加网站流量' };
+                        appState.ads.unshift({
+                            id: createId(),
+                            industry,
+                            industryLabel: industryMap[industry] || industry,
+                            goal,
+                            goalLabel: goalMap[goal] || goal,
+                            adsCount: ads.length,
+                            createdAt: new Date().toISOString(),
+                            status: '待素材上传'
+                        });
+                        appState.ads = appState.ads.slice(0, 30);
+                        appState.generatedTemplates = ads.map((ad) => ({
+                            id: createId(),
+                            title: ad.title,
+                            content: ad.content,
+                            cta: ad.cta,
+                            visualTip: visualSuggestions[industry] || '建议准备品牌主视觉图 + 15秒产品讲解短视频',
+                            recordId: appState.ads[0].id
+                        }));
+                        appState.selectedTemplate = null;
+                        saveAppState();
+                        renderAdHistory();
+                        renderAdOptions();
+                        renderTemplateReview();
+                        renderPublishSelectedTemplate();
+                        pushActivity('AI广告生成', `生成了 ${ads.length} 条${industryMap[industry] || '通用'}广告`, '成功');
                         generateBtn.disabled = false;
                         generateBtn.textContent = '生成广告';
+                        showPage('template-review');
                     }, 2000);
                 });
             }
@@ -1952,6 +2423,46 @@
 
                 if (target.classList.contains('js-download-ad')) {
                     toast(`已加入下载队列：${target.dataset.title || '广告'}`);
+                    return;
+                }
+
+                if (target.matches('#templates-page button')) {
+                    const actionText = target.textContent.replace(/\s+/g, '');
+                    const card = target.closest('.card-hover');
+                    const templateName = card?.querySelector('h4')?.textContent?.trim() || '模板';
+                    const templateCategory = card?.querySelector('.absolute.top-2.right-2')?.textContent?.trim() || '通用';
+
+                    if (actionText.includes('编辑')) {
+                        const url = new URL('workspace.html', window.location.href);
+                        url.searchParams.set('from', 'dashboard-templates');
+                        url.searchParams.set('category', templateCategory);
+                        url.searchParams.set('template', templateName);
+                        window.location.href = url.toString();
+                        return;
+                    }
+
+                    if (actionText.includes('下载')) {
+                        toast(`已下载模板：${templateName}`);
+                        return;
+                    }
+                }
+
+                if (target.hasAttribute('data-social-bind')) {
+                    return;
+                }
+
+                if (target.classList.contains('js-use-template')) {
+                    const templateId = target.dataset.templateId;
+                    const selected = (appState.generatedTemplates || []).find((item) => item.id === templateId);
+                    if (!selected) {
+                        toast('模板不存在，请重新生成。');
+                        return;
+                    }
+                    appState.selectedTemplate = selected;
+                    saveAppState();
+                    renderPublishSelectedTemplate();
+                    hydratePublishMediaOptions();
+                    showPage('ad-publish');
                     return;
                 }
 
@@ -2123,7 +2634,7 @@
                                 
                                 <div class="flex items-start justify-end">
                                     <div class="mr-3 bg-accent text-white rounded-lg p-3 max-w-xs">
-                                        <p class="text-sm">我们的${industry === 'beauty' ? '护肤套餐' : industry === 'food' ? '团体聚餐' : '装修设计'}价格在¥${industry === 'beauty' ? '500-2000' : industry === 'food' ? '1000-5000' : '10000-100000'}之间，具体取决于您的需求。请问您需要了解更多详情吗？</p>
+                                        <p class="text-sm">我们的${industry === 'beauty' ? '护肤套餐' : industry === 'food' ? '团体聚餐' : '装修设计'}价格在RM${industry === 'beauty' ? '500-2000' : industry === 'food' ? '1000-5000' : '10000-100000'}之间，具体取决于您的需求。请问您需要了解更多详情吗？</p>
                                     </div>
                                     <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                                         <i class="fa fa-robot text-white"></i>
@@ -2192,27 +2703,55 @@
                     const flow = document.getElementById('bot-flow').value;
                     const country = document.getElementById('bot-country')?.value;
                     const city = document.getElementById('bot-city')?.value;
+                    const botName = document.getElementById('bot-name')?.value?.trim() || '未命名Bot';
+                    const welcome = document.getElementById('bot-welcome')?.value?.trim();
                     
                     if (!industry || !flow || !country || !city) {
                         alert('请选择行业、国家、城市和流程');
                         return;
                     }
+
+                    if (!welcome) {
+                        alert('请填写欢迎语后再部署 Bot。');
+                        return;
+                    }
+
+                    if (!hasBoundPublishingAccount()) {
+                        alert('请先在设置页绑定 Facebook 或 Instagram，才能部署到自己的账号。');
+                        return;
+                    }
+
+                    const deployPlatform = appState.socialBindings.facebook ? 'Facebook' : 'Instagram';
                     
                     // 显示加载状态
                     this.innerHTML = `
                         <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                        正在导入...
+                        正在部署...
                     `;
                     this.disabled = true;
                     
                     // 模拟API调用延迟
                     setTimeout(() => {
-                        alert('Bot已成功导入到ManyChat！');
+                        const industryMap = { beauty: '美容美发', food: '餐饮美食', decor: '装修设计', fitness: '健身运动', education: '教育培训' };
+                        const flowText = document.getElementById('bot-flow').selectedOptions?.[0]?.textContent || flow;
+                        appState.botDeployments.unshift({
+                            id: createId(),
+                            name: botName,
+                            industryLabel: industryMap[industry] || industry,
+                            flowLabel: flowText,
+                            platformLabel: deployPlatform,
+                            deployedAt: new Date().toISOString()
+                        });
+                        appState.botDeployments = appState.botDeployments.slice(0, 20);
+                        saveAppState();
+                        renderBotHistory();
+                        pushActivity('Bot部署', `${botName} 已部署到 ${deployPlatform}`, '成功');
+                        alert(`Bot已成功部署到${deployPlatform}账号！`);
                         
                         // 恢复按钮状态
                         this.innerHTML = `
                             <i class="fa fa-upload mr-2"></i>
-                            一键导入到ManyChat
+                            一键部署到已绑定账号
                         `;
                         this.disabled = false;
                     }, 2000);
