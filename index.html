@@ -312,11 +312,12 @@
                                 <option value="china">中国</option>
                                 <option value="singapore">新加坡</option>
                                 <option value="malaysia">马来西亚</option>
+                                <option value="thailand">泰国</option>
                             </select>
                         </div>
                         
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">城市</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">州/省/城市</label>
                             <select id="city-select" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" disabled>
                                 <option value="">请先选择国家/地区</option>
                             </select>
@@ -883,9 +884,10 @@
         });
 
         const COUNTRY_CITY_MAP = {
-            china: ['北京', '上海', '广州', '深圳', '杭州', '成都'],
-            singapore: ['Singapore'],
-            malaysia: ['Kuala Lumpur', 'Penang', 'Johor Bahru', 'Kota Kinabalu']
+            china: ['北京（华北）', '上海（华东）', '广州（华南）', '深圳（华南）', '杭州（华东）', '成都（西南）', '重庆（西南）', '武汉（华中）', '西安（西北）', '沈阳（东北）'],
+            singapore: ['中区 Central Region', '东区 East Region', '北区 North Region', '东北区 North-East Region', '西区 West Region'],
+            malaysia: ['吉隆坡 Kuala Lumpur', '雪兰莪 Selangor', '槟城 Penang', '柔佛 Johor', '霹雳 Perak', '沙巴 Sabah', '砂拉越 Sarawak', '马六甲 Melaka'],
+            thailand: ['曼谷 Bangkok', '清迈 Chiang Mai', '普吉 Phuket', '春武里 Chonburi', '呵叻 Nakhon Ratchasima', '孔敬 Khon Kaen', '合艾 Hat Yai', '芭堤雅 Pattaya']
         };
 
         function initCountryCitySelect(countryId, cityId) {
@@ -910,7 +912,7 @@
 
                 const defaultOption = document.createElement('option');
                 defaultOption.value = '';
-                defaultOption.textContent = '请选择城市';
+                defaultOption.textContent = '请选择州/省/城市';
                 citySelect.appendChild(defaultOption);
 
                 cities.forEach((city) => {

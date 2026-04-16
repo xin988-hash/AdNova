@@ -426,10 +426,10 @@
                         <h3 class="text-lg font-semibold text-gray-900 mb-4">AI广告生成</h3>
                         <p class="text-gray-600 mb-6">输入产品信息，AI将为您生成高质量的广告文案、标题和CTA按钮</p>
                         
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="grid grid-cols-1 gap-8">
                             <!-- 输入区域 -->
-                            <div>
-                                <h4 class="text-md font-medium text-gray-900 mb-4">输入信息</h4>
+                            <div class="max-w-3xl">
+                                <h4 class="text-md font-medium text-gray-900 mb-4">输入信息（填写后将跳转到结果页）</h4>
                                 
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700 mb-1">选择行业 <span class="text-red-500">*</span></label>
@@ -458,11 +458,12 @@
                                         <option value="china">中国</option>
                                         <option value="singapore">新加坡</option>
                                         <option value="malaysia">马来西亚</option>
+                                        <option value="thailand">泰国</option>
                                     </select>
                                 </div>
                                 
                                 <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">城市 <span class="text-red-500">*</span></label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">州/省/城市 <span class="text-red-500">*</span></label>
                                     <select id="ad-city" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" disabled>
                                         <option value="">请先选择国家/地区</option>
                                     </select>
@@ -506,18 +507,6 @@
                                     生成广告
                                 </button>
                             </div>
-
-                            <!-- 输出区域 -->
-                            <div>
-                                <h4 class="text-md font-medium text-gray-900 mb-4">生成结果</h4>
-                                
-                                <div id="ads-output" class="space-y-6">
-                                    <div class="p-6 border border-gray-200 rounded-lg bg-gray-50 text-center">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/6134/6134065.png" alt="AI生成" class="w-24 h-24 mx-auto mb-4 opacity-50">
-                                        <p class="text-gray-500">请在左侧填写信息并点击"生成广告"按钮</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -543,46 +532,6 @@
                         </div>
                     </div>
 
-                    <!-- 素材与发布中心 -->
-                    <div class="bg-white rounded-xl shadow-md p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-900">素材与一键发布</h3>
-                            <p class="text-sm text-gray-500">先生成广告，再上传素材并发布到已绑定账号</p>
-                        </div>
-                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
-                            <select id="media-ad-select" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
-                                <option value="">请选择广告记录</option>
-                            </select>
-                            <select id="media-platform-select" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
-                                <option value="">选择发布平台</option>
-                                <option value="facebook">Facebook</option>
-                                <option value="instagram">Instagram</option>
-                            </select>
-                            <input id="media-file-input" type="file" accept="image/*,video/*" class="border border-gray-300 rounded-md px-3 py-2">
-                        </div>
-                        <div class="flex flex-wrap gap-3 mb-4">
-                            <button id="upload-media-btn" class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium">
-                                <i class="fa fa-upload mr-2"></i>上传素材
-                            </button>
-                            <button id="publish-ad-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md text-sm font-medium">
-                                <i class="fa fa-send mr-2"></i>一键发布到已绑定账号
-                            </button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead>
-                                    <tr>
-                                        <th class="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">广告</th>
-                                        <th class="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">素材</th>
-                                        <th class="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">类型</th>
-                                        <th class="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">平台</th>
-                                        <th class="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">状态</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="media-queue-body" class="bg-white divide-y divide-gray-200"></tbody>
-                            </table>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- 模板确认页面（AI生成后自动跳转） -->
@@ -978,6 +927,7 @@
                                         <option value="china">中国</option>
                                         <option value="singapore">新加坡</option>
                                         <option value="malaysia">马来西亚</option>
+                                        <option value="thailand">泰国</option>
                                     </select>
                                 </div>
 
@@ -989,7 +939,7 @@
                                 </div>
                                 
                                 <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">城市 <span class="text-red-500">*</span></label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">州/省/城市 <span class="text-red-500">*</span></label>
                                     <select id="bot-city" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" disabled>
                                         <option value="">请先选择国家/地区</option>
                                     </select>
@@ -1535,8 +1485,10 @@
 
             hydrateCurrentUser();
 
-            // 初始化页面
-            showPage('dashboard');
+            // 初始化页面（支持从 hash 直接进入指定页面）
+            const initialHashPage = (window.location.hash || '').replace('#', '');
+            const supportedPages = ['dashboard', 'ad-generate', 'template-confirm', 'ad-publish', 'templates', 'bot', 'analytics', 'settings'];
+            showPage(supportedPages.includes(initialHashPage) ? initialHashPage : 'dashboard');
             
             // 导航点击事件
             document.querySelectorAll('[data-page]').forEach(item => {
@@ -2246,9 +2198,10 @@
         }
         
         const COUNTRY_CITY_MAP = {
-            china: ['北京', '上海', '广州', '深圳', '杭州', '成都'],
-            singapore: ['Singapore'],
-            malaysia: ['Kuala Lumpur', 'Penang', 'Johor Bahru', 'Kota Kinabalu']
+            china: ['北京（华北）', '上海（华东）', '广州（华南）', '深圳（华南）', '杭州（华东）', '成都（西南）', '重庆（西南）', '武汉（华中）', '西安（西北）', '沈阳（东北）'],
+            singapore: ['中区 Central Region', '东区 East Region', '北区 North Region', '东北区 North-East Region', '西区 West Region'],
+            malaysia: ['吉隆坡 Kuala Lumpur', '雪兰莪 Selangor', '槟城 Penang', '柔佛 Johor', '霹雳 Perak', '沙巴 Sabah', '砂拉越 Sarawak', '马六甲 Melaka'],
+            thailand: ['曼谷 Bangkok', '清迈 Chiang Mai', '普吉 Phuket', '春武里 Chonburi', '呵叻 Nakhon Ratchasima', '孔敬 Khon Kaen', '合艾 Hat Yai', '芭堤雅 Pattaya']
         };
 
         function initCountryCitySelect(countryId, cityId) {
@@ -2273,7 +2226,7 @@
 
                 const defaultOption = document.createElement('option');
                 defaultOption.value = '';
-                defaultOption.textContent = '请选择城市';
+                defaultOption.textContent = '请选择州/省/城市';
                 citySelect.appendChild(defaultOption);
 
                 cities.forEach((city) => {
@@ -2298,188 +2251,25 @@
                     const country = document.getElementById('ad-country').value;
                     const city = document.getElementById('ad-city')?.value || '';
                     const goal = document.querySelector('input[name="ad-goal"]:checked')?.value || 'leads';
+                    const tone = document.getElementById('ad-tone')?.value || 'professional';
+                    const language = document.getElementById('ad-language')?.value || 'zh';
                     
-                    // 表单验证
                     if (!industry || !description || !country || !city) {
                         alert('请填写必填项');
                         return;
                     }
-                    
-                    // 显示加载状态
-                    const adsOutput = document.getElementById('ads-output');
-                    generateBtn.disabled = true;
-                    generateBtn.textContent = '生成中...';
-                    adsOutput.innerHTML = `
-                        <div class="p-6 border border-gray-200 rounded-lg bg-gray-50 text-center">
-                            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
-                            <p class="text-gray-500">AI正在生成广告，请稍候...</p>
-                        </div>
-                    `;
-                    
-                    // 模拟API调用延迟
-                    setTimeout(() => {
-                        // 根据行业生成不同的广告内容
-                        let ads = [];
-                        const visualSuggestions = {
-                            beauty: '建议拍摄近景肌肤对比 + 护肤步骤短视频（15-30秒）',
-                            food: '建议拍摄菜品出餐特写 + 店内环境横版视频（20秒以内）',
-                            decor: '建议拍摄施工前后对比图 + 设计师讲解视频（30秒）'
-                        };
-                        
-                        if (industry === 'beauty') {
-                            ads = [
-                                {
-                                    title: '【限时特惠】专业护肤方案，让您的肌肤焕发年轻光彩',
-                                    content: '我们提供专业的护肤方案，采用天然成分，温和不刺激，让您的肌肤重现年轻活力。现在预约可享受8折优惠，还送精美护肤礼品一份！',
-                                    cta: '立即预约'
-                                },
-                                {
-                                    title: '夏季护肤必备！专业美容院推荐的护肤秘诀',
-                                    content: '炎热夏季，肌肤容易出油、暗沉？我们的专业美容师为您量身定制护肤方案，让您的肌肤在夏日也能保持清爽水润。',
-                                    cta: '了解更多'
-                                },
-                                {
-                                    title: '专业护肤，从现在开始',
-                                    content: '不要让时间在您的脸上留下痕迹。我们的专业护肤团队将为您提供个性化的护肤方案，让您的肌肤焕发健康光彩。',
-                                    cta: '免费咨询'
-                                }
-                            ];
-                        } else if (industry === 'food') {
-                            ads = [
-                                {
-                                    title: '【新品上市】独家配方，引爆您的味蕾',
-                                    content: '我们的厨师团队精心研发的新品系列，采用新鲜食材，独特配方，让您享受前所未有的美食体验。现在下单还送精美甜点一份！',
-                                    cta: '立即下单'
-                                },
-                                {
-                                    title: '周末聚餐好去处！人均不到100元',
-                                    content: '周末不知道去哪里聚餐？来我们这里，环境优雅，菜品丰富，人均不到100元就能享受美食盛宴。',
-                                    cta: '查看菜单'
-                                },
-                                {
-                                    title: '品味生活，从美食开始',
-                                    content: '我们用心制作每一道菜品，只为给您带来最美味的体验。无论是家庭聚餐还是商务宴请，我们都是您的最佳选择。',
-                                    cta: '预订座位'
-                                }
-                            ];
-                        } else if (industry === 'decor') {
-                            ads = [
-                                {
-                                    title: '【装修特惠】专业团队，打造您的理想家园',
-                                    content: '我们拥有10年以上经验的专业设计团队，为您提供一站式装修服务，从设计到施工全程无忧。现在预约可享受免费设计方案！',
-                                    cta: '免费咨询'
-                                },
-                                {
-                                    title: '小户型也能有大空间！专业设计师为您支招',
-                                    content: '小户型装修不知道如何利用空间？我们的专业设计师有妙招，让您的小房子也能拥有大空间的既视感。',
-                                    cta: '预约设计'
-                                },
-                                {
-                                    title: '品质装修，从选择开始',
-                                    content: '选择我们，选择品质。我们用专业的技术和真诚的服务，为您打造一个温馨舒适的家。',
-                                    cta: '获取报价'
-                                }
-                            ];
-                        } else {
-                            ads = [
-                                {
-                                    title: '专业服务，值得信赖',
-                                    content: description + '我们提供专业的服务，满足您的各种需求。欢迎随时咨询，我们将竭诚为您服务。',
-                                    cta: '联系我们'
-                                },
-                                {
-                                    title: '限时优惠，机不可失',
-                                    content: '现在预约我们的服务，可享受限时优惠。专业团队，优质服务，是您的不二选择。',
-                                    cta: '立即预约'
-                                },
-                                {
-                                    title: '品质保证，服务至上',
-                                    content: '我们始终坚持品质第一，服务至上的理念，为客户提供最优质的产品和服务。',
-                                    cta: '了解更多'
-                                }
-                            ];
-                        }
-                        
-                        const industryMap = { beauty: '美容美发', food: '餐饮美食', decor: '装修设计', fitness: '健身运动', education: '教育培训', retail: '零售购物', service: '生活服务' };
-                        const goalMap = { leads: '获取潜在客户', traffic: '增加网站流量' };
-                        const adRecordId = createId();
-                        const generatedTemplates = ads.map((ad, index) => ({
-                            id: createId(),
-                            adRecordId,
-                            industry,
-                            industryLabel: industryMap[industry] || industry,
-                            goal,
-                            goalLabel: goalMap[goal] || goal,
-                            title: ad.title,
-                            content: ad.content,
-                            cta: ad.cta,
-                            serialNo: index + 1,
-                            createdAt: new Date().toISOString()
-                        }));
+                    sessionStorage.setItem('adnova_ad_generate_payload', JSON.stringify({
+                        industry,
+                        description,
+                        country,
+                        city,
+                        goal,
+                        tone,
+                        language,
+                        from: 'dashboard'
+                    }));
 
-                        // 显示生成的广告
-                        let outputHtml = '';
-                        generatedTemplates.forEach((ad, index) => {
-                            outputHtml += `
-                                <div class="p-4 border border-gray-200 rounded-lg mb-4">
-                                    <div class="flex items-center justify-between mb-3">
-                                        <h4 class="font-semibold text-gray-900">广告 ${index + 1}</h4>
-                                        <div class="flex space-x-2">
-                                            <button class="text-gray-500 hover:text-gray-700 js-copy-ad" data-title="${ad.title}" data-content="${ad.content}">
-                                                <i class="fa fa-copy"></i>
-                                            </button>
-                                            <button class="text-gray-500 hover:text-gray-700 js-download-ad" data-title="${ad.title}">
-                                                <i class="fa fa-download"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <p class="text-sm text-gray-600 mb-1">标题：</p>
-                                        <p class="font-medium">${ad.title}</p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <p class="text-sm text-gray-600 mb-1">内容：</p>
-                                        <p>${ad.content}</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-600 mb-1">CTA按钮：</p>
-                                        <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
-                                            ${ad.cta}
-                                        </button>
-                                    </div>
-                                    <div class="mt-3 p-3 bg-blue-50 rounded-lg">
-                                        <p class="text-sm font-medium text-blue-900 mb-1">拍摄/素材建议</p>
-                                        <p class="text-sm text-blue-800">${visualSuggestions[industry] || '建议准备品牌主视觉图 + 15秒产品讲解短视频'}</p>
-                                        <p class="text-xs text-blue-700 mt-1">建议素材比例：1:1（信息流）和 9:16（短视频）各 1 份。</p>
-                                    </div>
-                                    <button class="inline-flex items-center mt-4 text-sm text-accent hover:text-blue-700 font-medium js-use-template" data-template-id="${ad.id}">
-                                        下一步：确认模板并去发布 <i class="fa fa-arrow-right ml-1"></i>
-                                    </button>
-                                </div>
-                            `;
-                        });
-                        
-                        adsOutput.innerHTML = outputHtml;
-                        appState.ads.unshift({
-                            id: adRecordId,
-                            industry,
-                            industryLabel: industryMap[industry] || industry,
-                            goal,
-                            goalLabel: goalMap[goal] || goal,
-                            adsCount: ads.length,
-                            createdAt: new Date().toISOString(),
-                            status: '待素材上传'
-                        });
-                        appState.generatedTemplates = [...generatedTemplates, ...appState.generatedTemplates].slice(0, 80);
-                        appState.ads = appState.ads.slice(0, 30);
-                        saveAppState();
-                        renderAdHistory();
-                        renderAdOptions();
-                        renderPublishTemplateOptions();
-                        pushActivity('AI广告生成', `生成了 ${ads.length} 条${industryMap[industry] || '通用'}广告`, '成功');
-                        generateBtn.disabled = false;
-                        generateBtn.textContent = '生成广告';
-                    }, 2000);
+                    window.location.href = 'ad-generate-result.html';
                 });
             }
         }

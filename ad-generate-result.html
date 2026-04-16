@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdNova - AI广告生成结果</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="auth.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0B0B0B',
+                        accent: '#3B82F6',
+                        dark: '#1E293B'
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="min-h-screen">
+        <header class="bg-white shadow-sm border-b border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <a href="dashboard.html" class="text-xl font-bold text-primary">Ad<span class="text-accent">Nova</span></a>
+                <a href="dashboard.html" class="text-sm text-gray-600 hover:text-accent"><i class="fa fa-arrow-left mr-1"></i>返回AI广告输入页</a>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+            <section class="bg-white rounded-xl shadow-md p-6">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">AI广告生成结果</h1>
+                <p id="context-line" class="text-gray-600">正在读取您刚刚提交的广告需求...</p>
+            </section>
+
+            <section class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold text-gray-900">广告标题/文案建议</h2>
+                    <button id="copy-all-btn" class="text-sm bg-accent hover:bg-blue-600 text-white px-3 py-1.5 rounded-md">复制全部</button>
+                </div>
+                <div id="ads-container" class="space-y-4"></div>
+            </section>
+
+            <section class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3">AI词汇与表达教学</h2>
+                <div id="vocab-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm"></div>
+            </section>
+
+            <section class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-3">视频/图片素材拍摄教程（详细）</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 text-sm text-gray-700">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">短视频教程（15-30秒）</h3>
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li><strong>前3秒钩子：</strong>先拍最吸引人的画面（效果对比/热卖场景），并叠加大字标题。</li>
+                            <li><strong>中段10-15秒：</strong>展示3个核心卖点（痛点→解决方式→结果），每个卖点3-4秒。</li>
+                            <li><strong>结尾5秒：</strong>加入CTA口播与字幕，例如“现在私信领取优惠/免费咨询”。</li>
+                            <li><strong>技术参数：</strong>建议9:16竖版，1080x1920，30fps，光线均匀，环境噪音低。</li>
+                            <li><strong>剪辑节奏：</strong>每2-3秒切一个镜头，加入品牌Logo与联系电话收尾。</li>
+                        </ol>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">图片素材教程（信息流）</h3>
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li><strong>主图构图：</strong>产品占画面60%-70%，背景简洁，避免信息过载。</li>
+                            <li><strong>文案排版：</strong>标题不超过12字，副标题1行，优惠信息单独高亮。</li>
+                            <li><strong>尺寸建议：</strong>1:1（1080x1080）和4:5（1080x1350）各准备1套。</li>
+                            <li><strong>信任元素：</strong>加入用户评价、门店实拍、认证标识提升转化。</li>
+                            <li><strong>A/B测试：</strong>同主题至少准备2版颜色和2版标题，观察点击率再放量。</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-xl shadow-md p-6 flex flex-wrap gap-3">
+                <a href="dashboard.html#ad-generate" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm">返回修改输入</a>
+                <a href="dashboard.html#ad-publish" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md text-sm">进入广告发布页面</a>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const ADNOVA_APP_STATE_KEY = 'adnovaAppState';
+        const currentUser = requireAuth();
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        }
+
+        function createId() {
+            if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+            return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        }
+
+        function getUserScopedStateKey() {
+            const email = currentUser?.email || 'guest';
+            return `${ADNOVA_APP_STATE_KEY}:${email}`;
+        }
+
+        function defaultAppState() {
+            return {
+                ads: [],
+                generatedTemplates: [],
+                selectedTemplateId: '',
+                materials: [],
+                publishPlans: [],
+                botDeployments: [],
+                activities: [],
+                mediaQueue: [],
+                socialBindings: {
+                    facebook: false,
+                    instagram: false,
+                    whatsapp: false,
+                    telegram: false
+                }
+            };
+        }
+
+        function loadAppState() {
+            try {
+                const raw = localStorage.getItem(getUserScopedStateKey());
+                const parsed = raw ? JSON.parse(raw) : {};
+                return {
+                    ...defaultAppState(),
+                    ...parsed,
+                    socialBindings: {
+                        ...defaultAppState().socialBindings,
+                        ...(parsed.socialBindings || {})
+                    }
+                };
+            } catch (error) {
+                return defaultAppState();
+            }
+        }
+
+        function saveAppState(state) {
+            localStorage.setItem(getUserScopedStateKey(), JSON.stringify(state));
+        }
+
+        const payloadRaw = sessionStorage.getItem('adnova_ad_generate_payload');
+        if (!payloadRaw) {
+            window.location.href = 'dashboard.html';
+        }
+
+        const payload = JSON.parse(payloadRaw);
+        const industryMap = { beauty: '美容美发', food: '餐饮美食', decor: '装修设计', fitness: '健身运动', education: '教育培训', retail: '零售购物', service: '生活服务' };
+        const goalMap = { leads: '获取潜在客户', traffic: '增加网站流量' };
+
+        const baseAds = {
+            beauty: [
+                ['焕肤体验限时礼遇，今天预约立减', '针对暗沉、缺水与细纹问题，定制护理流程，首单享专属折扣。', '立即预约'],
+                ['肌肤状态看得见，7天护理方案上线', '专业检测+个性化建议，帮助您建立可执行的日常护肤计划。', '免费咨询'],
+                ['门店爆款护理项目，口碑顾客都在做', '真实案例对比，护理过程透明可见，安心体验不踩雷。', '了解详情']
+            ],
+            food: [
+                ['招牌新品上线，第一口就记住的味道', '精选食材现点现做，限时套餐活动同步开启，到店更划算。', '立即下单'],
+                ['工作日午餐不将就，人均友好又好吃', '高复购热销组合，出餐快、分量足，适合办公室和家庭共享。', '查看菜单'],
+                ['周末聚餐就选这里，拍照出片还好吃', '氛围感空间+主厨推荐菜，聚会庆生一站解决。', '预订座位']
+            ],
+            decor: [
+                ['装修不踩坑：先看方案再开工', '1v1设计师沟通，预算清晰透明，施工节点可视化跟进。', '领取方案'],
+                ['老房翻新也能高级感，空间利用翻倍', '从动线、收纳到灯光，给您一套真正可落地的改造建议。', '预约设计'],
+                ['全案装修限时福利，签约送软装建议', '工艺标准化+项目经理全程跟进，品质和进度双保障。', '获取报价']
+            ]
+        };
+
+        const sourceAds = (baseAds[payload.industry] || [
+            ['高转化广告方案，一次生成多版本', `${payload.description.slice(0, 48)}...结合目标人群痛点，自动输出可投放文案。`, '联系我们'],
+            ['你的业务亮点，AI帮你说清楚', '从标题、正文到行动按钮，形成完整获客闭环。', '立即咨询'],
+            ['现在开始投放，让客户主动找上门', '匹配本地地区用户兴趣，快速验证素材效果并持续优化。', '马上开始']
+        ]);
+
+        const generatedAds = sourceAds.map((item, idx) => ({
+            id: createId(),
+            title: item[0],
+            content: item[1],
+            cta: item[2],
+            serialNo: idx + 1
+        }));
+
+        const contextLine = document.getElementById('context-line');
+        contextLine.textContent = `行业：${industryMap[payload.industry] || payload.industry} ｜目标：${goalMap[payload.goal] || payload.goal} ｜地区：${payload.country} / ${payload.city}`;
+
+        const adsContainer = document.getElementById('ads-container');
+        adsContainer.innerHTML = generatedAds.map((ad) => `
+            <article class="border border-gray-200 rounded-lg p-4">
+                <p class="text-xs text-gray-500 mb-1">广告 ${ad.serialNo}</p>
+                <h3 class="font-semibold text-gray-900 mb-2">${ad.title}</h3>
+                <p class="text-gray-700 mb-3">${ad.content}</p>
+                <div class="flex items-center justify-between">
+                    <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm">${ad.cta}</button>
+                    <button class="js-copy text-sm text-accent hover:text-blue-700" data-text="${ad.title}\n${ad.content}\nCTA:${ad.cta}"><i class="fa fa-copy mr-1"></i>复制此条</button>
+                </div>
+            </article>
+        `).join('');
+
+        const vocabByTone = {
+            professional: ['权威背书', '方案定制', '数据导向', '流程透明'],
+            friendly: ['贴心服务', '轻松上手', '真实体验', '立即来聊'],
+            humorous: ['有梗不尬', '轻松种草', '一看就懂', '快乐下单'],
+            urgent: ['限时', '倒计时', '名额有限', '马上行动'],
+            luxury: ['高端定制', '品质甄选', '尊享服务', '私享体验']
+        };
+
+        const vocabContainer = document.getElementById('vocab-container');
+        const vocabList = vocabByTone[payload.tone] || vocabByTone.professional;
+        vocabContainer.innerHTML = vocabList.map((word) => `
+            <div class="border border-blue-100 bg-blue-50 rounded-lg p-3">
+                <p class="text-xs text-blue-700 mb-1">推荐词汇</p>
+                <p class="font-medium text-blue-900">${word}</p>
+                <p class="text-xs text-blue-800 mt-1">用法：将该词放在标题前半句，强化价值表达。</p>
+            </div>
+        `).join('');
+
+        document.addEventListener('click', (event) => {
+            const copyTarget = event.target.closest('.js-copy');
+            if (!copyTarget) return;
+            navigator.clipboard.writeText(copyTarget.dataset.text || '').then(() => alert('已复制该条文案')).catch(() => alert('复制失败，请手动复制'));
+        });
+
+        document.getElementById('copy-all-btn').addEventListener('click', () => {
+            const text = generatedAds.map((ad) => `${ad.serialNo}. ${ad.title}\n${ad.content}\nCTA: ${ad.cta}`).join('\n\n');
+            navigator.clipboard.writeText(text).then(() => alert('已复制全部文案')).catch(() => alert('复制失败，请手动复制'));
+        });
+
+        const appState = loadAppState();
+        const adRecordId = createId();
+        const now = new Date().toISOString();
+        const templates = generatedAds.map((ad) => ({
+            id: createId(),
+            adRecordId,
+            industry: payload.industry,
+            industryLabel: industryMap[payload.industry] || payload.industry,
+            goal: payload.goal,
+            goalLabel: goalMap[payload.goal] || payload.goal,
+            title: ad.title,
+            content: ad.content,
+            cta: ad.cta,
+            serialNo: ad.serialNo,
+            createdAt: now
+        }));
+
+        appState.ads.unshift({
+            id: adRecordId,
+            industry: payload.industry,
+            industryLabel: industryMap[payload.industry] || payload.industry,
+            goal: payload.goal,
+            goalLabel: goalMap[payload.goal] || payload.goal,
+            adsCount: templates.length,
+            createdAt: now,
+            status: '待发布'
+        });
+        appState.generatedTemplates = [...templates, ...appState.generatedTemplates].slice(0, 80);
+        appState.ads = appState.ads.slice(0, 30);
+        appState.activities.unshift({
+            type: 'AI广告生成',
+            detail: `结果页生成了 ${templates.length} 条${industryMap[payload.industry] || '通用'}广告`,
+            status: '成功',
+            time: now
+        });
+        appState.activities = appState.activities.slice(0, 20);
+        saveAppState(appState);
+        sessionStorage.removeItem('adnova_ad_generate_payload');
+    </script>
+</body>
+</html>
