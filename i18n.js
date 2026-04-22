@@ -287,6 +287,46 @@ const ADNOVA_TRANSLATIONS = {
   }
 };
 
+
+const ADNOVA_EXTRA_TRANSLATIONS = {
+  zh: {
+    ad_gen_title: 'AI广告生成', ad_gen_desc: '通过结构化字段填写业务信息，生成可直接用于投放的广告资产。',
+    ad_gen_guide_title: '填写引导', ad_gen_guide_desc: '请先完成基础信息与受众信息，再补充优惠与交付方式，可显著提升生成结果质量。',
+    ad_gen_group_basic: '基础信息', ad_gen_group_product: '产品信息', ad_gen_group_audience: '受众信息', ad_gen_group_delivery: '投放信息',
+    ad_gen_ph_subcategory: '例如：轻医美、水光护理', ad_gen_ph_business_type: '例如：门店直营、线上咨询', ad_gen_ph_brand_name: '例如：Luma Clinic', ad_gen_ph_product_name: '例如：7天焕肤修护计划',
+    ad_gen_ph_price: '例如：RM299', ad_gen_ph_original_price: '例如：RM499', ad_gen_ph_offer: '例如：首单立减100 + 免费检测', ad_gen_ph_time_limit: '例如：仅限本周', ad_gen_ph_core_selling: '例如：30分钟见效、专业认证、过程可视', ad_gen_ph_delivery: '例如：到店服务 / 在线咨询 / 全国邮寄',
+    ad_gen_ph_age: '例如：25-40岁', ad_gen_ph_region: '例如：吉隆坡核心商圈', ad_gen_ph_pain: '例如：担心效果不稳定、价格不透明',
+    ad_gen_help_industry: '用于匹配行业策略。', ad_gen_help_subcategory: '建议描述到可直接投放的人群场景。', ad_gen_help_business_type: '影响 CTA 和引导动作设计。',
+    ad_gen_tip_subcategory: '请填业务最核心的细分方向。', ad_gen_tip_business_type: '用于确定转化路径。', ad_gen_submit: '生成广告资产',
+    ad_gen_ai_preview: 'AI预览', ad_gen_preview_hint_1: '系统会根据您的平台和受众自动调整文案结构。', ad_gen_preview_hint_2: '“书面语言”模式将默认使用正式表达和统一术语。',
+    ad_gen_preview_empty: '请先填写行业、品牌、产品和痛点，系统将实时生成广告方向预览。', ad_gen_preview_direction: '生成方向', ad_gen_preview_focus: '核心表达重点', ad_gen_preview_line: '预计输出至 {platform}，以“{goal}”为目标，采用“{tone}”语气（{language}）。',
+    ad_gen_history_title: '历史记录', ad_gen_history_empty: '暂无历史记录。请先生成首条广告资产。',
+    ad_gen_action_view: '查看详情', ad_gen_action_copy: '复制结果', ad_gen_action_regenerate: '重新生成', ad_gen_action_delete: '删除记录', ad_gen_copy_ok: '结果已复制。', ad_gen_delete_ok: '记录已删除。', ad_gen_error_required: '请完成所有必填字段后再生成。',
+    ad_gen_opt_select: '请选择', ad_gen_gender_all: '不限', ad_gen_gender_female: '女性', ad_gen_gender_male: '男性', ad_gen_stage_aware: '认知阶段', ad_gen_stage_consider: '考虑阶段', ad_gen_stage_decision: '决策阶段',
+    ad_gen_goal_dm: '私信', ad_gen_goal_leads: '留资', ad_gen_goal_click: '点击', ad_gen_goal_booking: '预约', ad_gen_goal_order: '下单', ad_gen_goal_store: '到店',
+    ad_gen_tone_professional: '专业正式', ad_gen_tone_casual: '轻松口语', ad_gen_tone_promo: '强促销', ad_gen_tone_premium: '高端品牌感', ad_gen_tone_trust: '亲和可信', ad_gen_tone_urgent: '紧迫感强', ad_gen_language_formal: '书面语言',
+    ad_result_context_rich: '行业：{industry}｜细分类目：{subcategory}｜平台：{platform}｜营销目标：{goal}｜语气：{tone}',
+    ad_result_section_headline: '广告标题', ad_result_section_body: '主文案', ad_result_section_cta: 'CTA按钮文案', ad_result_section_platformFit: '适合平台', ad_result_section_audienceFit: '适合受众', ad_result_section_creativeTips: '推荐素材建议', ad_result_section_whatsapp: 'WhatsApp首句', ad_result_section_botOpening: 'Bot开场白', ad_result_section_faq: 'FAQ回复建议',
+    ad_result_regenerate_item: '单独重生成', ad_result_favorite_item: '标记收藏', ad_result_version_history: '查看版本历史', ad_result_regenerated_suffix: '（已生成新版本）',
+    ad_result_default_offer: '限时权益', ad_result_default_group: '目标人群', ad_result_default_pain: '核心痛点', ad_result_cta_default: '立即咨询', ad_result_tip_1: '建议使用前后对比图并搭配关键数字', ad_result_tip_2: '首屏保留品牌与优惠信息', ad_result_whatsapp_opening: '您好，想了解', ad_result_bot_opening: '您好，欢迎咨询', ad_result_faq_q: '常见问题：费用如何计算', ad_result_faq_a: '回复建议：支持方式'
+  },
+  en: {},
+  ms: {},
+  formal: {
+    dashboard_overview: '总览面板', dashboard_ad_generate: '智能广告生成', dashboard_ad_publish: '广告发布管理', dashboard_templates: '模板资源库', dashboard_bot: '自动回复系统', dashboard_analytics: '数据分析中心', dashboard_settings: '系统设置', dashboard_search_placeholder: '请输入检索关键词…',
+    ad_gen_title: '智能广告生成', ad_gen_desc: '请使用结构化字段填写业务资料，系统将生成可直接用于投放的广告资产。', ad_gen_guide_title: '填写说明', ad_gen_guide_desc: '建议先完成基础信息与受众信息，再补充优惠与交付方式，以提升生成准确度。',
+    ad_gen_group_basic: '基础信息', ad_gen_group_product: '产品信息', ad_gen_group_audience: '受众信息', ad_gen_group_delivery: '投放设置', ad_gen_submit: '生成广告资产', ad_gen_ai_preview: '智能预览', ad_gen_history_title: '历史记录', ad_gen_history_empty: '当前尚无历史记录，请先生成广告资产。',
+    ad_gen_action_view: '查看详情', ad_gen_action_copy: '复制结果', ad_gen_action_regenerate: '重新生成', ad_gen_action_delete: '删除记录', ad_gen_error_required: '请完整填写所有必填字段后再执行生成。',
+    ad_gen_language_formal: '书面语言', ad_result_title: '智能广告生成结果', ad_result_back: '返回广告输入页', ad_result_back_edit: '返回并修改输入', ad_result_to_publish: '进入广告发布页面',
+    ad_result_copy_item: '复制', ad_result_regenerate_item: '单独重生成', ad_result_favorite_item: '收藏', ad_result_version_history: '查看版本记录', ad_result_copy_ok: '已复制至剪贴板。',
+    ad_result_section_headline: '广告标题', ad_result_section_body: '主体文案', ad_result_section_cta: '行动按钮文案', ad_result_section_platformFit: '适配平台', ad_result_section_audienceFit: '适配受众', ad_result_section_creativeTips: '素材建议', ad_result_section_whatsapp: 'WhatsApp 首句', ad_result_section_botOpening: 'Bot 开场语', ad_result_section_faq: '常见问题回复建议'
+  }
+};
+
+Object.keys(ADNOVA_EXTRA_TRANSLATIONS).forEach((lang) => {
+  ADNOVA_TRANSLATIONS[lang] = { ...(ADNOVA_TRANSLATIONS[lang] || ADNOVA_TRANSLATIONS.zh), ...ADNOVA_EXTRA_TRANSLATIONS[lang] };
+});
+
 function getCurrentLanguage() {
   return localStorage.getItem(ADNOVA_I18N_STORAGE_KEY) || 'zh';
 }
