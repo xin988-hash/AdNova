@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <script src="script.js"></script>
+    <script src="i18n.js"></script>
     <script src="auth.js"></script>
     <script>
         tailwind.config = {
@@ -65,31 +66,31 @@
                     <div class="space-y-1">
                         <a href="#dashboard" class="nav-item-active group flex items-center px-2 py-3 text-sm font-medium rounded-md" data-page="dashboard">
                             <i class="fa fa-dashboard mr-3 text-accent"></i>
-                            总览
+                            <span data-i18n-key="dashboard_overview">总览</span>
                         </a>
                         <a href="#ad-generate" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-generate">
                             <i class="fa fa-magic mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                            AI广告生成
+                            <span data-i18n-key="dashboard_ad_generate">AI广告生成</span>
                         </a>
                         <a href="#ad-publish" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-publish">
                             <i class="fa fa-bullhorn mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                            广告发布
+                            <span data-i18n-key="dashboard_ad_publish">广告发布</span>
                         </a>
                         <a href="#templates" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="templates">
                             <i class="fa fa-th-large mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                            模板库
+                            <span data-i18n-key="dashboard_templates">模板库</span>
                         </a>
                         <a href="#bot" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="bot">
                             <i class="fa fa-comments mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                            Bot系统
+                            <span data-i18n-key="dashboard_bot">Bot系统</span>
                         </a>
                         <a href="#analytics" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="analytics">
                             <i class="fa fa-bar-chart mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                            数据分析
+                            <span data-i18n-key="dashboard_analytics">数据分析</span>
                         </a>
                         <a href="#settings" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="settings">
                             <i class="fa fa-cog mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                            设置
+                            <span data-i18n-key="dashboard_settings">设置</span>
                         </a>
                     </div>
                 </nav>
@@ -104,9 +105,9 @@
                         </div>
                         <div class="ml-3">
                             <p id="sidebar-user-name" class="text-sm font-medium">-</p>
-                            <p class="text-xs font-medium text-gray-400">专业版用户</p>
+                            <p data-i18n-key="dashboard_pro_user" class="text-xs font-medium text-gray-400">专业版用户</p>
                         </div>
-                        <button id="logout-btn" class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none" title="退出账号">
+                        <button id="logout-btn" data-i18n-title="dashboard_logout" class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none" title="退出账号">
                             <i class="fa fa-sign-out"></i>
                         </button>
                     </div>
@@ -124,11 +125,16 @@
                             <button id="mobile-sidebar-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none">
                                 <i class="fa fa-bars text-xl"></i>
                             </button>
-                            <h1 id="page-title" class="ml-4 text-xl font-semibold text-gray-800">总览</h1>
+                            <h1 id="page-title" data-i18n-key="dashboard_overview" class="ml-4 text-xl font-semibold text-gray-800">总览</h1>
                         </div>
                         <div class="flex items-center space-x-4">
+                            <select data-language-selector class="border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-accent">
+                                <option value="zh">简体中文</option>
+                                <option value="en">English</option>
+                                <option value="ms">Bahasa Malaysia</option>
+                            </select>
                             <div class="relative">
-                                <input type="text" placeholder="搜索..." class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                                <input type="text" data-i18n-placeholder="dashboard_search_placeholder" placeholder="搜索..." class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
                                 <i class="fa fa-search absolute left-3 top-3 text-gray-400"></i>
                             </div>
                             <button class="text-gray-500 hover:text-gray-700 focus:outline-none relative">
@@ -160,31 +166,31 @@
                         <nav class="mt-5 px-2 space-y-1">
                             <a href="#dashboard" class="nav-item-active group flex items-center px-2 py-3 text-sm font-medium rounded-md" data-page="dashboard">
                                 <i class="fa fa-dashboard mr-3 text-accent"></i>
-                                总览
+                                <span data-i18n-key="dashboard_overview">总览</span>
                             </a>
                             <a href="#ad-generate" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-generate">
                                 <i class="fa fa-magic mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                                AI广告生成
+                                <span data-i18n-key="dashboard_ad_generate">AI广告生成</span>
                             </a>
                             <a href="#ad-publish" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-publish">
                                 <i class="fa fa-bullhorn mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                                广告发布
+                                <span data-i18n-key="dashboard_ad_publish">广告发布</span>
                             </a>
                             <a href="#templates" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="templates">
                                 <i class="fa fa-th-large mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                                模板库
+                                <span data-i18n-key="dashboard_templates">模板库</span>
                             </a>
                             <a href="#bot" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="bot">
                                 <i class="fa fa-comments mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                                Bot系统
+                                <span data-i18n-key="dashboard_bot">Bot系统</span>
                             </a>
                             <a href="#analytics" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="analytics">
                                 <i class="fa fa-bar-chart mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                                数据分析
+                                <span data-i18n-key="dashboard_analytics">数据分析</span>
                             </a>
                             <a href="#settings" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="settings">
                                 <i class="fa fa-cog mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                                设置
+                                <span data-i18n-key="dashboard_settings">设置</span>
                             </a>
                         </nav>
                     </div>
@@ -198,9 +204,9 @@
                                 </div>
                                 <div class="ml-3">
                                     <p id="mobile-user-name" class="text-sm font-medium">-</p>
-                                    <p class="text-xs font-medium text-gray-400">专业版用户</p>
+                                    <p data-i18n-key="dashboard_pro_user" class="text-xs font-medium text-gray-400">专业版用户</p>
                                 </div>
-                                <button id="logout-btn-mobile" class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none" title="退出账号">
+                                <button id="logout-btn-mobile" data-i18n-title="dashboard_logout" class="ml-auto flex-shrink-0 bg-dark-light rounded-full p-1 text-gray-400 hover:text-white focus:outline-none" title="退出账号">
                                     <i class="fa fa-sign-out"></i>
                                 </button>
                             </div>
@@ -1578,34 +1584,41 @@
             // 更新页面标题
             const pageTitle = document.getElementById('page-title');
             if (pageTitle) {
-                switch(pageName) {
-                    case 'dashboard':
-                        pageTitle.textContent = '总览';
-                        break;
-                    case 'ad-generate':
-                        pageTitle.textContent = 'AI广告生成';
-                        break;
-                    case 'templates':
-                        pageTitle.textContent = '模板库';
-                        break;
-                    case 'template-confirm':
-                        pageTitle.textContent = '模板确认';
-                        break;
-                    case 'ad-publish':
-                        pageTitle.textContent = '广告发布';
-                        break;
-                    case 'bot':
-                        pageTitle.textContent = 'Bot系统';
-                        break;
-                    case 'analytics':
-                        pageTitle.textContent = '数据分析';
-                        break;
-                    case 'settings':
-                        pageTitle.textContent = '设置';
-                        break;
-                    default:
-                        pageTitle.textContent = '总览';
-                }
+                const currentLanguage = localStorage.getItem('adnovaLanguage') || 'zh';
+                const pageTitles = {
+                    zh: {
+                        dashboard: '总览',
+                        'ad-generate': 'AI广告生成',
+                        templates: '模板库',
+                        'template-confirm': '模板确认',
+                        'ad-publish': '广告发布',
+                        bot: 'Bot系统',
+                        analytics: '数据分析',
+                        settings: '设置'
+                    },
+                    en: {
+                        dashboard: 'Overview',
+                        'ad-generate': 'AI Ad Generation',
+                        templates: 'Templates',
+                        'template-confirm': 'Template Confirmation',
+                        'ad-publish': 'Ad Publishing',
+                        bot: 'Bot System',
+                        analytics: 'Analytics',
+                        settings: 'Settings'
+                    },
+                    ms: {
+                        dashboard: 'Gambaran Keseluruhan',
+                        'ad-generate': 'Penjanaan Iklan AI',
+                        templates: 'Templat',
+                        'template-confirm': 'Pengesahan Templat',
+                        'ad-publish': 'Penerbitan Iklan',
+                        bot: 'Sistem Bot',
+                        analytics: 'Analitik',
+                        settings: 'Tetapan'
+                    }
+                };
+                const localizedTitles = pageTitles[currentLanguage] || pageTitles.zh;
+                pageTitle.textContent = localizedTitles[pageName] || localizedTitles.dashboard;
             }
             
             // 更新导航状态

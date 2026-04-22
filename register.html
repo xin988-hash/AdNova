@@ -20,56 +20,64 @@
       }
     };
   </script>
+  <script src="i18n.js"></script>
   <script src="auth.js"></script>
 </head>
 <body class="bg-slate-100 min-h-screen font-sans">
+  <div class="fixed top-3 right-3 z-50">
+    <select data-language-selector class="border border-gray-300 rounded-md bg-white px-2 py-1 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-accent">
+      <option value="zh">简体中文</option>
+      <option value="en">English</option>
+      <option value="ms">Bahasa Malaysia</option>
+    </select>
+  </div>
   <main class="min-h-screen grid lg:grid-cols-2">
     <section class="hidden lg:flex bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white p-14 flex-col justify-between">
       <div>
-        <a href="index.html" class="inline-flex items-center text-sm text-blue-200 hover:text-white transition-colors">← 返回首页</a>
+        <a href="index.html" data-i18n-key="login_back_home" class="inline-flex items-center text-sm text-blue-200 hover:text-white transition-colors">← 返回首页</a>
       </div>
       <div class="space-y-6 max-w-lg">
         <p class="text-xs tracking-[0.2em] text-blue-200 uppercase">AdNova Account Setup</p>
-        <h1 class="text-4xl font-semibold leading-tight">3 步完成注册，立刻开始投放和获客。</h1>
+        <h1 data-i18n-key="register_hero_title" class="text-4xl font-semibold leading-tight">3 步完成注册，立刻开始投放和获客。</h1>
         <ul class="space-y-3 text-blue-100 text-sm list-disc list-inside">
-          <li>创建账号并进入控制台</li>
-          <li>选择行业模板快速生成广告</li>
-          <li>连接 Bot 流程自动跟进客户</li>
+          <li data-i18n-key="register_step_1">创建账号并进入控制台</li>
+          <li data-i18n-key="register_step_2">选择行业模板快速生成广告</li>
+          <li data-i18n-key="register_step_3">连接 Bot 流程自动跟进客户</li>
         </ul>
       </div>
-      <p class="text-xs text-blue-200">注册即代表你同意 AdNova 的服务条款与隐私政策。</p>
+      <p data-i18n-key="register_footer_note" class="text-xs text-blue-200">注册即代表你同意 AdNova 的服务条款与隐私政策。</p>
     </section>
 
     <section class="flex items-center justify-center p-6 md:p-10">
       <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-        <a href="index.html" class="lg:hidden inline-flex items-center text-sm text-gray-500 hover:text-accent mb-6">← 返回首页</a>
+        <a href="index.html" data-i18n-key="login_back_home" class="lg:hidden inline-flex items-center text-sm text-gray-500 hover:text-accent mb-6">← 返回首页</a>
 
-        <h2 class="text-3xl font-bold text-primary">创建你的账户</h2>
-        <p class="text-sm text-gray-500 mt-2">只需一分钟，即可开始使用 AI 营销工作流</p>
+        <h2 data-i18n-key="register_title" class="text-3xl font-bold text-primary">创建你的账户</h2>
+        <p data-i18n-key="register_subtitle" class="text-sm text-gray-500 mt-2">只需一分钟，即可开始使用 AI 营销工作流</p>
 
         <form id="register-form" class="space-y-5 mt-8" novalidate>
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">邮箱</label>
+            <label for="email" data-i18n-key="login_email" class="block text-sm font-medium text-gray-700 mb-2">邮箱</label>
             <input id="email" type="email" placeholder="you@example.com" autocomplete="email" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
           </div>
 
           <div>
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">密码</label>
-            <input id="password" type="password" placeholder="至少 6 位，建议包含字母和数字" autocomplete="new-password" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+            <label for="password" data-i18n-key="register_password" class="block text-sm font-medium text-gray-700 mb-2">密码</label>
+            <input id="password" type="password" data-i18n-placeholder="register_password_placeholder" placeholder="至少 6 位，建议包含字母和数字" autocomplete="new-password" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
           </div>
 
           <div>
-            <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-2">确认密码</label>
-            <input id="confirm-password" type="password" placeholder="再次输入密码" autocomplete="new-password" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
+            <label for="confirm-password" data-i18n-key="register_confirm_password" class="block text-sm font-medium text-gray-700 mb-2">确认密码</label>
+            <input id="confirm-password" type="password" data-i18n-placeholder="register_confirm_placeholder" placeholder="再次输入密码" autocomplete="new-password" class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" required>
           </div>
 
-          <button id="register-submit" type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-70 disabled:cursor-not-allowed">注册并开始使用</button>
+          <button id="register-submit" data-i18n-key="register_submit" type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-70 disabled:cursor-not-allowed">注册并开始使用</button>
         </form>
 
         <p id="register-message" class="mt-4 text-sm hidden rounded-lg px-3 py-2"></p>
 
-        <p class="mt-6 text-sm text-gray-600 text-center">已有账号？
-          <a href="login.html" class="text-accent font-medium hover:underline">去登录</a>
+        <p class="mt-6 text-sm text-gray-600 text-center"><span data-i18n-key="register_has_account">已有账号？</span>
+          <a href="login.html" data-i18n-key="register_to_login" class="text-accent font-medium hover:underline">去登录</a>
         </p>
       </div>
     </section>
@@ -83,6 +91,10 @@
       const passwordInput = document.getElementById('password');
       const confirmPasswordInput = document.getElementById('confirm-password');
       const submitBtn = document.getElementById('register-submit');
+      const t = (key, fallback) => {
+        const lang = localStorage.getItem('adnovaLanguage') || 'zh';
+        return (typeof ADNOVA_TRANSLATIONS !== 'undefined' && ADNOVA_TRANSLATIONS[lang] && ADNOVA_TRANSLATIONS[lang][key]) || fallback;
+      };
 
       function showMessage(text, isError = true) {
         message.textContent = text;
@@ -97,7 +109,7 @@
 
       function setLoading(isLoading) {
         submitBtn.disabled = isLoading;
-        submitBtn.textContent = isLoading ? '注册中...' : '注册并开始使用';
+        submitBtn.textContent = isLoading ? t('register_submitting', '注册中...') : t('register_submit', '注册并开始使用');
       }
 
       form.addEventListener('submit', function(event) {
@@ -108,17 +120,17 @@
         const confirmPassword = confirmPasswordInput.value;
 
         if (!email) {
-          showMessage('请输入邮箱地址。');
+          showMessage(t('register_message_empty_email', '请输入邮箱地址。'));
           return;
         }
 
         if (password.length < 6) {
-          showMessage('密码至少需要 6 位。');
+          showMessage(t('register_message_password_short', '密码至少需要 6 位。'));
           return;
         }
 
         if (password !== confirmPassword) {
-          showMessage('两次输入的密码不一致。');
+          showMessage(t('register_message_password_mismatch', '两次输入的密码不一致。'));
           return;
         }
 
@@ -133,11 +145,11 @@
         const loginResult = loginUser(email, password, true);
         if (!loginResult.ok) {
           setLoading(false);
-          showMessage('注册成功，但自动登录失败，请前往登录页重试。');
+          showMessage(t('register_message_auto_login_failed', '注册成功，但自动登录失败，请前往登录页重试。'));
           return;
         }
 
-        showMessage('注册成功，正在跳转到控制台...', false);
+        showMessage(t('register_message_success', '注册成功，正在跳转到控制台...'), false);
         setTimeout(() => {
           window.location.href = 'dashboard.html';
         }, 450);
