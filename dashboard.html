@@ -131,8 +131,7 @@
                             <select data-language-selector class="border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-accent">
                                 <option value="zh">简体中文</option>
                                 <option value="en">English</option>
-                                <option value="ms">Bahasa Malaysia</option>
-                                <option value="formal">书面语言</option>
+                                <option value="ms">Bahasa Melayu</option>
                             </select>
                             <div class="relative">
                                 <input type="text" data-i18n-placeholder="dashboard_search_placeholder" placeholder="搜索..." class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
@@ -432,13 +431,13 @@
                     <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
                         <section class="xl:col-span-2 bg-white rounded-xl shadow-md p-6">
                             <div class="mb-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n-key="ad_gen_title">AI广告生成</h3>
-                                <p class="text-gray-600" data-i18n-key="ad_gen_desc">通过结构化字段填写业务信息，生成可直接用于投放的广告资产。</p>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n-key="ad_gen_title">AI 广告生成</h3>
+                                <p class="text-gray-600" data-i18n-key="ad_gen_desc">填写产品和目标信息，系统将自动生成适合投放的广告文案、标题和行动按钮。</p>
                             </div>
 
                             <div class="mb-5 rounded-lg border border-blue-100 bg-blue-50 px-4 py-3 text-sm text-blue-900">
-                                <p class="font-medium" data-i18n-key="ad_gen_guide_title">填写引导</p>
-                                <p data-i18n-key="ad_gen_guide_desc">请先完成基础信息与受众信息，再补充优惠与交付方式，可显著提升生成结果质量。</p>
+                                <p class="font-medium" data-i18n-key="ad_gen_guide_title">填写说明</p>
+                                <p data-i18n-key="ad_gen_guide_desc">信息越完整，生成结果越准确。</p>
                             </div>
 
                             <form id="ad-generate-form" class="space-y-6">
@@ -446,27 +445,25 @@
                                     <h4 class="text-sm font-semibold text-gray-900 mb-3" data-i18n-key="ad_gen_group_basic">基础信息</h4>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-industry">行业 <span class="text-red-500">*</span></label>
-                                            <select id="ad-industry" data-help="ad_gen_help_industry" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent"></select>
-                                            <p class="text-xs text-gray-500 mt-1" data-i18n-key="ad_gen_help_industry">用于匹配行业策略。</p>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-industry" data-i18n-key="ad_gen_label_industry">行业 <span class="text-red-500">*</span></label>
+                                            <select id="ad-industry" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent"></select>
+                                            <p class="text-xs text-gray-500 mt-1" data-i18n-key="ad_gen_help_industry">用于匹配行业策略与素材建议。</p>
                                         </div>
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-subcategory">细分类目 <span class="text-red-500">*</span></label>
-                                            <input id="ad-subcategory" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_subcategory" placeholder="例如：轻医美、水光护理" data-i18n-title="ad_gen_tip_subcategory" title="请填业务最核心的细分方向。">
-                                            <p class="text-xs text-gray-500 mt-1" data-i18n-key="ad_gen_help_subcategory">建议描述到可直接投放的人群场景。</p>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-subcategory" data-i18n-key="ad_gen_label_subcategory">细分类目 <span class="text-red-500">*</span></label>
+                                            <input id="ad-subcategory" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_subcategory" placeholder="例如：美甲、美睫、洗脸">
                                         </div>
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-business-type">业务类型 <span class="text-red-500">*</span></label>
-                                            <input id="ad-business-type" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_business_type" placeholder="例如：门店直营、线上咨询" data-i18n-title="ad_gen_tip_business_type" title="用于确定转化路径。">
-                                            <p class="text-xs text-gray-500 mt-1" data-i18n-key="ad_gen_help_business_type">影响 CTA 和引导动作设计。</p>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-business-type" data-i18n-key="ad_gen_label_business_type">业务类型 <span class="text-red-500">*</span></label>
+                                            <input id="ad-business-type" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_business_type" placeholder="例如：到店服务、预约制、套餐销售">
                                         </div>
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-brand-name">品牌名称 <span class="text-red-500">*</span></label>
-                                            <input id="ad-brand-name" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_brand_name" placeholder="例如：Luma Clinic">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-brand-name" data-i18n-key="ad_gen_label_brand_name">品牌名称 <span class="text-red-500">*</span></label>
+                                            <input id="ad-brand-name" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_brand_name" placeholder="请输入品牌名称">
                                         </div>
                                         <div class="md:col-span-2">
-                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-product-name">产品/服务名称 <span class="text-red-500">*</span></label>
-                                            <input id="ad-product-name" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_product_name" placeholder="例如：7天焕肤修护计划">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-product-name" data-i18n-key="ad_gen_label_product_name">产品 / 服务名称 <span class="text-red-500">*</span></label>
+                                            <input id="ad-product-name" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_product_name" placeholder="请输入产品或服务名称">
                                         </div>
                                     </div>
                                 </div>
@@ -474,47 +471,43 @@
                                 <div>
                                     <h4 class="text-sm font-semibold text-gray-900 mb-3" data-i18n-key="ad_gen_group_product">产品信息</h4>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-price">价格</label><input id="ad-price" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_price" placeholder="例如：RM299"></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-original-price">原价（可选）</label><input id="ad-original-price" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_original_price" placeholder="例如：RM499"></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-offer">优惠内容</label><input id="ad-offer" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_offer" placeholder="例如：首单立减100 + 免费检测"></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-time-limit">限时条件</label><input id="ad-time-limit" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_time_limit" placeholder="例如：仅限本周"></div>
-                                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-core-selling">核心卖点 <span class="text-red-500">*</span></label><textarea id="ad-core-selling" rows="2" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_core_selling" placeholder="例如：30分钟见效、专业认证、过程可视"></textarea></div>
-                                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-delivery">交付方式</label><input id="ad-delivery" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_delivery" placeholder="例如：到店服务 / 在线咨询 / 全国邮寄"></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-price" data-i18n-key="ad_gen_label_price">价格</label><input id="ad-price" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_price" placeholder="例如：RM99"></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-offer" data-i18n-key="ad_gen_label_offer">优惠内容</label><input id="ad-offer" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_offer" placeholder="例如：限时优惠、买一送一、首单折扣"></div>
+                                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-core-selling" data-i18n-key="ad_gen_label_core_selling">核心卖点 <span class="text-red-500">*</span></label><textarea id="ad-core-selling" rows="2" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_core_selling" placeholder="例如：快速见效、适合敏感肌、当天预约"></textarea></div>
+                                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-delivery" data-i18n-key="ad_gen_label_delivery">交付方式</label><input id="ad-delivery" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_delivery" placeholder="例如：到店、上门、线上咨询"></div>
                                     </div>
                                 </div>
 
                                 <div>
                                     <h4 class="text-sm font-semibold text-gray-900 mb-3" data-i18n-key="ad_gen_group_audience">受众信息</h4>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-age-range">目标客户年龄 <span class="text-red-500">*</span></label><input id="ad-age-range" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_age" placeholder="例如：25-40岁"></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-gender">性别</label><select id="ad-gender" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-region">地区 <span class="text-red-500">*</span></label><input id="ad-region" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_region" placeholder="例如：吉隆坡核心商圈"></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-stage">购买阶段</label><select id="ad-stage" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
-                                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-pain-points">痛点 <span class="text-red-500">*</span></label><textarea id="ad-pain-points" rows="2" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_pain" placeholder="例如：担心效果不稳定、价格不透明"></textarea></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-age-range" data-i18n-key="ad_gen_label_age">目标客户年龄 <span class="text-red-500">*</span></label><input id="ad-age-range" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_age" placeholder="例如：25–40"></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-gender" data-i18n-key="ad_gen_label_gender">性别</label><select id="ad-gender" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-country" data-i18n-key="ad_gen_label_country">国家 / 地区 <span class="text-red-500">*</span></label><select id="ad-country" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-state" data-i18n-key="ad_gen_label_state">州 / 省份 <span class="text-red-500">*</span></label><select id="ad-state" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" disabled></select></div>
+                                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-city" data-i18n-key="ad_gen_label_city">城市 / 地区</label><select id="ad-city" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" disabled></select></div>
+                                        <div id="ad-region-other-wrap" class="md:col-span-2 hidden"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-region-other" data-i18n-key="ad_gen_label_region_other">其他地区（可选）</label><input id="ad-region-other" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_region_other" placeholder="请输入具体州、省或城市"></div>
+                                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-pain-points" data-i18n-key="ad_gen_label_pain">主要需求 / 痛点 <span class="text-red-500">*</span></label><textarea id="ad-pain-points" rows="2" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_pain" placeholder="例如：想改善肤质、希望快速咨询"></textarea></div>
                                     </div>
                                 </div>
 
                                 <div>
                                     <h4 class="text-sm font-semibold text-gray-900 mb-3" data-i18n-key="ad_gen_group_delivery">投放信息</h4>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-platform">投放平台 <span class="text-red-500">*</span></label><select id="ad-platform" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-goal">营销目标 <span class="text-red-500">*</span></label><select id="ad-goal" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-tone">语气风格</label><select id="ad-tone" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-language">输出语言 <span class="text-red-500">*</span></label><select id="ad-language" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-platform" data-i18n-key="ad_gen_label_platform">投放平台 <span class="text-red-500">*</span></label><select id="ad-platform" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-goal" data-i18n-key="ad_gen_label_goal">营销目标 <span class="text-red-500">*</span></label><select id="ad-goal" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-tone" data-i18n-key="ad_gen_label_tone">语气风格</label><select id="ad-tone" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-language" data-i18n-key="ad_gen_label_language">输出语言 <span class="text-red-500">*</span></label><select id="ad-language" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
                                     </div>
                                 </div>
 
-                                <button id="generate-ads-btn" type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium transition-colors" data-i18n-key="ad_gen_submit">生成广告资产</button>
+                                <button id="generate-ads-btn" type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium transition-colors" data-i18n-key="ad_gen_submit">生成广告</button>
                             </form>
                         </section>
 
                         <aside class="bg-white rounded-xl shadow-md p-6 h-fit sticky top-4">
-                            <h4 class="text-md font-semibold text-gray-900 mb-3" data-i18n-key="ad_gen_ai_preview">AI预览</h4>
+                            <h4 class="text-md font-semibold text-gray-900 mb-3" data-i18n-key="ad_gen_ai_preview">AI 生成预览</h4>
                             <div id="ad-live-preview" class="space-y-3 text-sm text-gray-700"></div>
-                            <div class="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-500 space-y-1">
-                                <p data-i18n-key="ad_gen_preview_hint_1">系统会根据您的平台和受众自动调整文案结构。</p>
-                                <p data-i18n-key="ad_gen_preview_hint_2">“书面语言”模式将默认使用正式表达和统一术语。</p>
-                            </div>
                         </aside>
                     </div>
 
@@ -527,16 +520,13 @@
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead>
                                     <tr>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">生成时间</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">行业</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">细分类目</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">平台</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">营销目标</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">语气风格</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">语言</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">标题预览</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">状态</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">操作</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase" data-i18n-key="ad_gen_history_time">时间</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase" data-i18n-key="ad_gen_history_industry">行业</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase" data-i18n-key="ad_gen_history_goal">目标</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase" data-i18n-key="ad_gen_history_platform">平台</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase" data-i18n-key="ad_gen_history_language">语言</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase" data-i18n-key="ad_gen_history_status">状态</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase" data-i18n-key="ad_gen_history_action">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody id="ad-history-body" class="bg-white divide-y divide-gray-200"></tbody>
@@ -1822,7 +1812,7 @@
             const tbody = document.getElementById('ad-history-body');
             if (!tbody) return;
             if (!appState.ads.length) {
-                setEmptyTableState('ad-history-body', 10, AdnovaI18n.t('ad_gen_history_empty'));
+                setEmptyTableState('ad-history-body', 7, AdnovaI18n.t('ad_gen_history_empty'));
                 return;
             }
 
@@ -1830,12 +1820,9 @@
                 <tr>
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${formatDateTime(item.createdAt)}</td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.industryLabel || '--'}</td>
-                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.subcategory || '--'}</td>
-                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.platformLabel || '--'}</td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.goalLabel || '--'}</td>
-                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.toneLabel || '--'}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.platformLabel || '--'}</td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.languageLabel || '--'}</td>
-                    <td class="px-4 py-4 text-sm text-gray-900 max-w-xs truncate">${item.titlePreview || '--'}</td>
                     <td class="px-4 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${item.status === '已发布' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">${item.status}</span></td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-600">
                         <div class="flex flex-wrap gap-2">
@@ -2289,16 +2276,37 @@
                     { value: 'female', label: AdnovaI18n.t('ad_gen_gender_female') },
                     { value: 'male', label: AdnovaI18n.t('ad_gen_gender_male') }
                 ],
-                stage: [
-                    { value: 'aware', label: AdnovaI18n.t('ad_gen_stage_aware') },
-                    { value: 'consideration', label: AdnovaI18n.t('ad_gen_stage_consider') },
-                    { value: 'decision', label: AdnovaI18n.t('ad_gen_stage_decision') }
+                country: [
+                    { value: '', label: AdnovaI18n.t('ad_gen_ph_region') },
+                    { value: 'my', label: AdnovaI18n.t('ad_gen_country_my') },
+                    { value: 'cn', label: AdnovaI18n.t('ad_gen_country_cn') },
+                    { value: 'sg', label: AdnovaI18n.t('ad_gen_country_sg') }
                 ],
-                platforms: ['facebook', 'instagram', 'tiktok', 'whatsapp', 'google'].map((v) => ({ value: v, label: v === 'google' ? 'Google' : v.charAt(0).toUpperCase() + v.slice(1) })),
+                regionMap: {
+                    my: {
+                        Selangor: [AdnovaI18n.t('ad_gen_city_all')],
+                        'Kuala Lumpur': [AdnovaI18n.t('ad_gen_city_all')],
+                        Johor: [AdnovaI18n.t('ad_gen_city_all')],
+                        Penang: [AdnovaI18n.t('ad_gen_city_all')],
+                        Perak: [AdnovaI18n.t('ad_gen_city_all')],
+                        Sabah: [AdnovaI18n.t('ad_gen_city_all')],
+                        Sarawak: [AdnovaI18n.t('ad_gen_city_all')],
+                        [AdnovaI18n.t('ad_gen_option_other')]: [AdnovaI18n.t('ad_gen_city_other')]
+                    },
+                    cn: {
+                        Guangdong: ['Guangzhou', 'Shenzhen', 'Foshan', AdnovaI18n.t('ad_gen_option_other')],
+                        Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou', AdnovaI18n.t('ad_gen_option_other')],
+                        Jiangsu: ['Nanjing', 'Suzhou', 'Wuxi', AdnovaI18n.t('ad_gen_option_other')],
+                        Beijing: [AdnovaI18n.t('ad_gen_city_all')],
+                        Shanghai: [AdnovaI18n.t('ad_gen_city_all')],
+                        [AdnovaI18n.t('ad_gen_option_other')]: [AdnovaI18n.t('ad_gen_city_other')]
+                    },
+                    sg: { [AdnovaI18n.t('ad_gen_state_all')]: [AdnovaI18n.t('ad_gen_city_all')] }
+                },
+                platforms: ['facebook', 'instagram', 'tiktok', 'whatsapp'].map((v) => ({ value: v, label: v.charAt(0).toUpperCase() + v.slice(1) })),
                 goals: [
                     { value: 'dm', label: AdnovaI18n.t('ad_gen_goal_dm') },
                     { value: 'leads', label: AdnovaI18n.t('ad_gen_goal_leads') },
-                    { value: 'click', label: AdnovaI18n.t('ad_gen_goal_click') },
                     { value: 'booking', label: AdnovaI18n.t('ad_gen_goal_booking') },
                     { value: 'order', label: AdnovaI18n.t('ad_gen_goal_order') },
                     { value: 'store', label: AdnovaI18n.t('ad_gen_goal_store') }
@@ -2306,19 +2314,13 @@
                 tone: [
                     { value: 'professional', label: AdnovaI18n.t('ad_gen_tone_professional') },
                     { value: 'casual', label: AdnovaI18n.t('ad_gen_tone_casual') },
-                    { value: 'promo', label: AdnovaI18n.t('ad_gen_tone_promo') },
                     { value: 'premium', label: AdnovaI18n.t('ad_gen_tone_premium') },
-                    { value: 'trust', label: AdnovaI18n.t('ad_gen_tone_trust') },
-                    { value: 'urgent', label: AdnovaI18n.t('ad_gen_tone_urgent') }
+                    { value: 'promo', label: AdnovaI18n.t('ad_gen_tone_promo') }
                 ],
                 language: [
                     { value: 'zh', label: '简体中文' },
-                    { value: 'zh-Hant', label: '繁体中文' },
                     { value: 'en', label: 'English' },
-                    { value: 'ms', label: 'Bahasa Malaysia' },
-                    { value: 'zh-en', label: '中英混合' },
-                    { value: 'en-ms', label: '英马混合' },
-                    { value: 'formal', label: AdnovaI18n.t('ad_gen_language_formal') }
+                    { value: 'ms', label: 'Bahasa Melayu' }
                 ]
             };
             return options;
@@ -2330,9 +2332,32 @@
             el.innerHTML = rows.map((row) => `<option value="${row.value}">${row.label}</option>`).join('');
         }
 
+        function fillRegionSelect(selectId, rows, placeholderKey) {
+            const el = document.getElementById(selectId);
+            if (!el) return;
+            el.innerHTML = [`<option value="">${AdnovaI18n.t(placeholderKey)}</option>`, ...rows.map((row) => `<option value="${row}">${row}</option>`)].join('');
+        }
+
+        function buildRegionText(payload) {
+            return [payload.countryLabel, payload.state, payload.city, payload.regionOther].filter(Boolean).join(' / ');
+        }
+
+        function buildCreativeSuggestion(industry) {
+            const map = {
+                beauty: { summary: AdnovaI18n.t('ad_gen_material_beauty') },
+                food: { summary: AdnovaI18n.t('ad_gen_material_food') },
+                decor: { summary: AdnovaI18n.t('ad_gen_material_decor') },
+                education: { summary: AdnovaI18n.t('ad_gen_material_education') }
+            };
+            return map[industry] || { summary: AdnovaI18n.t('ad_gen_material_default') };
+        }
+
         function readAdGeneratePayload() {
             const options = buildAdGenerateOptions();
             const getText = (id) => document.getElementById(id)?.value?.trim() || '';
+            const country = getText('ad-country');
+            const state = getText('ad-state');
+            const city = getText('ad-city');
             return {
                 industry: getText('ad-industry'),
                 subcategory: getText('ad-subcategory'),
@@ -2340,16 +2365,17 @@
                 brandName: getText('ad-brand-name'),
                 productName: getText('ad-product-name'),
                 price: getText('ad-price'),
-                originalPrice: getText('ad-original-price'),
                 offer: getText('ad-offer'),
                 coreSelling: getText('ad-core-selling'),
-                timeLimit: getText('ad-time-limit'),
                 delivery: getText('ad-delivery'),
                 ageRange: getText('ad-age-range'),
                 gender: getText('ad-gender'),
-                region: getText('ad-region'),
+                country,
+                state,
+                city,
+                regionOther: getText('ad-region-other'),
+                region: [country, state, city].filter(Boolean).join(' / '),
                 painPoints: getText('ad-pain-points'),
-                buyingStage: getText('ad-stage'),
                 platform: getText('ad-platform'),
                 goal: getText('ad-goal'),
                 tone: getText('ad-tone'),
@@ -2357,7 +2383,9 @@
                 toneLabel: options.tone.find((item) => item.value === getText('ad-tone'))?.label || '--',
                 platformLabel: options.platforms.find((item) => item.value === getText('ad-platform'))?.label || '--',
                 goalLabel: options.goals.find((item) => item.value === getText('ad-goal'))?.label || '--',
-                languageLabel: options.language.find((item) => item.value === getText('ad-language'))?.label || '--'
+                languageLabel: options.language.find((item) => item.value === getText('ad-language'))?.label || '--',
+                countryLabel: options.country.find((item) => item.value === country)?.label || '--',
+                industryLabel: options.industries.find((item) => item.value === getText('ad-industry'))?.label || '--'
             };
         }
 
@@ -2365,33 +2393,76 @@
             const payload = readAdGeneratePayload();
             const preview = document.getElementById('ad-live-preview');
             if (!preview) return;
-            const missing = ['industry', 'brandName', 'productName', 'painPoints'].filter((key) => !payload[key]);
+            const missing = ['industry', 'brandName', 'productName', 'painPoints', 'goal', 'platform', 'language'].filter((key) => !payload[key]);
             if (missing.length) {
                 preview.innerHTML = `<p class="text-gray-500">${AdnovaI18n.t('ad_gen_preview_empty')}</p>`;
                 return;
             }
             preview.innerHTML = `
-                <div class="rounded-lg border border-gray-200 p-3">
-                    <p class="text-xs text-gray-500 mb-1">${AdnovaI18n.t('ad_gen_preview_direction')}</p>
-                    <p class="font-medium text-gray-900">${payload.brandName}｜${payload.productName}</p>
-                    <p class="mt-2">${AdnovaI18n.t('ad_gen_preview_line', undefined, { platform: payload.platformLabel, goal: payload.goalLabel, tone: payload.toneLabel, language: payload.languageLabel })}</p>
+                <div class="rounded-lg border border-gray-200 p-4 space-y-2">
+                    <p class="text-xs text-gray-500">${AdnovaI18n.t('ad_gen_preview_direction')}</p>
+                    <p><span class="text-gray-500">${AdnovaI18n.t('ad_gen_label_industry')}：</span>${payload.industryLabel || '--'}</p>
+                    <p><span class="text-gray-500">${AdnovaI18n.t('ad_gen_label_goal')}：</span>${payload.goalLabel}</p>
+                    <p><span class="text-gray-500">${AdnovaI18n.t('ad_gen_label_tone')}：</span>${payload.toneLabel}</p>
+                    <p><span class="text-gray-500">${AdnovaI18n.t('ad_gen_label_language')}：</span>${payload.languageLabel}</p>
                 </div>
-                <div class="rounded-lg bg-gray-50 p-3 border border-gray-200">
-                    <p class="text-xs text-gray-500 mb-1">${AdnovaI18n.t('ad_gen_preview_focus')}</p>
-                    <p>${payload.coreSelling || payload.painPoints}</p>
+                <div class="rounded-lg bg-gray-50 p-4 border border-gray-200 space-y-2">
+                    <p class="text-xs text-gray-500">${AdnovaI18n.t('ad_gen_preview_ad_direction')}</p>
+                    <p>${AdnovaI18n.t('ad_gen_preview_line', undefined, { platform: payload.platformLabel, goal: payload.goalLabel, tone: payload.toneLabel, language: payload.languageLabel })}</p>
+                    <p class="text-xs text-gray-500">${AdnovaI18n.t('ad_gen_preview_material')}</p>
+                    <p>${buildCreativeSuggestion(payload.industry).summary}</p>
                 </div>
             `;
+        }
+
+        function toggleOtherRegionField() {
+            const state = document.getElementById('ad-state')?.value;
+            const city = document.getElementById('ad-city')?.value;
+            const wrap = document.getElementById('ad-region-other-wrap');
+            if (!wrap) return;
+            wrap.classList.toggle('hidden', !(state === AdnovaI18n.t('ad_gen_option_other') || city === AdnovaI18n.t('ad_gen_option_other') || city === AdnovaI18n.t('ad_gen_city_other')));
         }
 
         function initAdGenerate() {
             const options = buildAdGenerateOptions();
             fillSelect('ad-industry', options.industries);
             fillSelect('ad-gender', options.gender);
-            fillSelect('ad-stage', options.stage);
             fillSelect('ad-platform', options.platforms);
             fillSelect('ad-goal', options.goals);
             fillSelect('ad-tone', options.tone);
             fillSelect('ad-language', options.language);
+            fillSelect('ad-country', options.country);
+            fillRegionSelect('ad-state', [], 'ad_gen_ph_state');
+            fillRegionSelect('ad-city', [], 'ad_gen_ph_city');
+
+            const countryEl = document.getElementById('ad-country');
+            const stateEl = document.getElementById('ad-state');
+            const cityEl = document.getElementById('ad-city');
+
+            countryEl?.addEventListener('change', () => {
+                const map = options.regionMap[countryEl.value] || {};
+                const states = Object.keys(map);
+                fillRegionSelect('ad-state', states, 'ad_gen_ph_state');
+                fillRegionSelect('ad-city', [], 'ad_gen_ph_city');
+                stateEl.disabled = !states.length;
+                cityEl.disabled = true;
+                toggleOtherRegionField();
+                renderAdPreview();
+            });
+
+            stateEl?.addEventListener('change', () => {
+                const map = options.regionMap[countryEl.value] || {};
+                const cities = map[stateEl.value] || [];
+                fillRegionSelect('ad-city', cities, 'ad_gen_ph_city');
+                cityEl.disabled = !cities.length;
+                toggleOtherRegionField();
+                renderAdPreview();
+            });
+
+            cityEl?.addEventListener('change', () => {
+                toggleOtherRegionField();
+                renderAdPreview();
+            });
 
             const form = document.getElementById('ad-generate-form');
             if (!form) return;
@@ -2399,18 +2470,25 @@
             form.addEventListener('input', renderAdPreview);
             document.addEventListener('adnova:language-change', () => {
                 const old = readAdGeneratePayload();
-                const newOptions = buildAdGenerateOptions();
-                fillSelect('ad-industry', newOptions.industries);
-                fillSelect('ad-gender', newOptions.gender);
-                fillSelect('ad-stage', newOptions.stage);
-                fillSelect('ad-platform', newOptions.platforms);
-                fillSelect('ad-goal', newOptions.goals);
-                fillSelect('ad-tone', newOptions.tone);
-                fillSelect('ad-language', newOptions.language);
+                const refreshed = buildAdGenerateOptions();
+                fillSelect('ad-industry', refreshed.industries);
+                fillSelect('ad-gender', refreshed.gender);
+                fillSelect('ad-platform', refreshed.platforms);
+                fillSelect('ad-goal', refreshed.goals);
+                fillSelect('ad-tone', refreshed.tone);
+                fillSelect('ad-language', refreshed.language);
+                fillSelect('ad-country', refreshed.country);
+                const map = refreshed.regionMap[old.country] || {};
+                fillRegionSelect('ad-state', Object.keys(map), 'ad_gen_ph_state');
+                fillRegionSelect('ad-city', map[old.state] || [], 'ad_gen_ph_city');
                 Object.entries({
-                    'ad-industry': old.industry, 'ad-gender': old.gender, 'ad-stage': old.buyingStage, 'ad-platform': old.platform,
-                    'ad-goal': old.goal, 'ad-tone': old.tone, 'ad-language': old.language
+                    'ad-industry': old.industry, 'ad-gender': old.gender, 'ad-platform': old.platform,
+                    'ad-goal': old.goal, 'ad-tone': old.tone, 'ad-language': old.language,
+                    'ad-country': old.country, 'ad-state': old.state, 'ad-city': old.city, 'ad-region-other': old.regionOther
                 }).forEach(([id, value]) => { const el = document.getElementById(id); if (el && value) el.value = value; });
+                document.getElementById('ad-state').disabled = !old.country;
+                document.getElementById('ad-city').disabled = !old.state;
+                toggleOtherRegionField();
                 renderAdPreview();
                 renderAdHistory();
             });
@@ -2418,7 +2496,8 @@
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
                 const payload = readAdGeneratePayload();
-                const required = ['industry', 'subcategory', 'businessType', 'brandName', 'productName', 'coreSelling', 'ageRange', 'region', 'painPoints', 'platform', 'goal', 'language'];
+                payload.region = buildRegionText(payload);
+                const required = ['industry', 'subcategory', 'businessType', 'brandName', 'productName', 'coreSelling', 'ageRange', 'country', 'state', 'painPoints', 'platform', 'goal', 'language'];
                 if (required.some((key) => !payload[key])) {
                     alert(AdnovaI18n.t('ad_gen_error_required'));
                     return;

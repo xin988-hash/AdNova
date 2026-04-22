@@ -290,37 +290,44 @@ const ADNOVA_TRANSLATIONS = {
 
 const ADNOVA_EXTRA_TRANSLATIONS = {
   zh: {
-    ad_gen_title: 'AI广告生成', ad_gen_desc: '通过结构化字段填写业务信息，生成可直接用于投放的广告资产。',
-    ad_gen_guide_title: '填写引导', ad_gen_guide_desc: '请先完成基础信息与受众信息，再补充优惠与交付方式，可显著提升生成结果质量。',
+    ad_gen_title: 'AI 广告生成', ad_gen_desc: '填写产品和目标信息，系统将自动生成适合投放的广告文案、标题和行动按钮。',
+    ad_gen_guide_title: '填写说明', ad_gen_guide_desc: '信息越完整，生成结果越准确。',
     ad_gen_group_basic: '基础信息', ad_gen_group_product: '产品信息', ad_gen_group_audience: '受众信息', ad_gen_group_delivery: '投放信息',
-    ad_gen_ph_subcategory: '例如：轻医美、水光护理', ad_gen_ph_business_type: '例如：门店直营、线上咨询', ad_gen_ph_brand_name: '例如：Luma Clinic', ad_gen_ph_product_name: '例如：7天焕肤修护计划',
-    ad_gen_ph_price: '例如：RM299', ad_gen_ph_original_price: '例如：RM499', ad_gen_ph_offer: '例如：首单立减100 + 免费检测', ad_gen_ph_time_limit: '例如：仅限本周', ad_gen_ph_core_selling: '例如：30分钟见效、专业认证、过程可视', ad_gen_ph_delivery: '例如：到店服务 / 在线咨询 / 全国邮寄',
-    ad_gen_ph_age: '例如：25-40岁', ad_gen_ph_region: '例如：吉隆坡核心商圈', ad_gen_ph_pain: '例如：担心效果不稳定、价格不透明',
-    ad_gen_help_industry: '用于匹配行业策略。', ad_gen_help_subcategory: '建议描述到可直接投放的人群场景。', ad_gen_help_business_type: '影响 CTA 和引导动作设计。',
-    ad_gen_tip_subcategory: '请填业务最核心的细分方向。', ad_gen_tip_business_type: '用于确定转化路径。', ad_gen_submit: '生成广告资产',
-    ad_gen_ai_preview: 'AI预览', ad_gen_preview_hint_1: '系统会根据您的平台和受众自动调整文案结构。', ad_gen_preview_hint_2: '“书面语言”模式将默认使用正式表达和统一术语。',
-    ad_gen_preview_empty: '请先填写行业、品牌、产品和痛点，系统将实时生成广告方向预览。', ad_gen_preview_direction: '生成方向', ad_gen_preview_focus: '核心表达重点', ad_gen_preview_line: '预计输出至 {platform}，以“{goal}”为目标，采用“{tone}”语气（{language}）。',
-    ad_gen_history_title: '历史记录', ad_gen_history_empty: '暂无历史记录。请先生成首条广告资产。',
+    ad_gen_label_industry: '行业', ad_gen_label_subcategory: '细分类目', ad_gen_label_business_type: '业务类型', ad_gen_label_brand_name: '品牌名称', ad_gen_label_product_name: '产品 / 服务名称',
+    ad_gen_label_price: '价格', ad_gen_label_offer: '优惠内容', ad_gen_label_core_selling: '核心卖点', ad_gen_label_delivery: '交付方式',
+    ad_gen_label_age: '目标客户年龄', ad_gen_label_gender: '性别', ad_gen_label_country: '国家 / 地区', ad_gen_label_state: '州 / 省份', ad_gen_label_city: '城市 / 地区', ad_gen_label_region_other: '其他地区（可选）', ad_gen_label_pain: '主要需求 / 痛点',
+    ad_gen_label_platform: '投放平台', ad_gen_label_goal: '营销目标', ad_gen_label_tone: '语气风格', ad_gen_label_language: '输出语言',
+    ad_gen_ph_subcategory: '例如：美甲、美睫、洗脸', ad_gen_ph_business_type: '例如：到店服务、预约制、套餐销售', ad_gen_ph_brand_name: '请输入品牌名称', ad_gen_ph_product_name: '请输入产品或服务名称',
+    ad_gen_ph_price: '例如：RM99', ad_gen_ph_offer: '例如：限时优惠、买一送一、首单折扣', ad_gen_ph_core_selling: '例如：快速见效、适合敏感肌、当天预约', ad_gen_ph_delivery: '例如：到店、上门、线上咨询',
+    ad_gen_ph_age: '例如：25–40', ad_gen_ph_pain: '例如：想改善肤质、希望快速咨询', ad_gen_ph_region: '请选择国家 / 地区', ad_gen_ph_state: '请选择地区', ad_gen_ph_city: '请选择城市 / 地区', ad_gen_ph_region_other: '请输入具体州、省或城市',
+    ad_gen_help_industry: '用于匹配行业策略与素材建议。', ad_gen_submit: '生成广告', ad_gen_ai_preview: 'AI 生成预览',
+    ad_gen_preview_empty: '填写左侧信息后，这里会显示广告生成方向和内容预览。', ad_gen_preview_direction: '当前投放信息', ad_gen_preview_ad_direction: '系统会生成的广告方向', ad_gen_preview_material: '建议使用的素材类型',
+    ad_gen_preview_line: '预计输出至 {platform}，以“{goal}”为目标，采用“{tone}”语气（{language}）。',
+    ad_gen_history_title: '历史记录', ad_gen_history_empty: '暂无历史记录。请先生成一条广告内容。', ad_gen_history_time: '时间', ad_gen_history_industry: '行业', ad_gen_history_goal: '目标', ad_gen_history_platform: '平台', ad_gen_history_language: '语言', ad_gen_history_status: '状态', ad_gen_history_action: '操作',
     ad_gen_action_view: '查看详情', ad_gen_action_copy: '复制结果', ad_gen_action_regenerate: '重新生成', ad_gen_action_delete: '删除记录', ad_gen_copy_ok: '结果已复制。', ad_gen_delete_ok: '记录已删除。', ad_gen_error_required: '请完成所有必填字段后再生成。',
-    ad_gen_opt_select: '请选择', ad_gen_gender_all: '不限', ad_gen_gender_female: '女性', ad_gen_gender_male: '男性', ad_gen_stage_aware: '认知阶段', ad_gen_stage_consider: '考虑阶段', ad_gen_stage_decision: '决策阶段',
-    ad_gen_goal_dm: '私信', ad_gen_goal_leads: '留资', ad_gen_goal_click: '点击', ad_gen_goal_booking: '预约', ad_gen_goal_order: '下单', ad_gen_goal_store: '到店',
-    ad_gen_tone_professional: '专业正式', ad_gen_tone_casual: '轻松口语', ad_gen_tone_promo: '强促销', ad_gen_tone_premium: '高端品牌感', ad_gen_tone_trust: '亲和可信', ad_gen_tone_urgent: '紧迫感强', ad_gen_language_formal: '书面语言',
+    ad_gen_opt_select: '请选择', ad_gen_gender_all: '不限', ad_gen_gender_female: '女性', ad_gen_gender_male: '男性',
+    ad_gen_goal_dm: '私信', ad_gen_goal_leads: '留资', ad_gen_goal_booking: '预约', ad_gen_goal_order: '下单', ad_gen_goal_store: '到店',
+    ad_gen_tone_professional: '专业正式', ad_gen_tone_casual: '轻松口语', ad_gen_tone_promo: '强促销', ad_gen_tone_premium: '高端品牌感',
+    ad_gen_country_my: '马来西亚', ad_gen_country_cn: '中国', ad_gen_country_sg: '新加坡', ad_gen_option_other: '其他', ad_gen_city_other: '其他地区', ad_gen_state_all: '全部地区', ad_gen_city_all: '全部地区',
+    ad_gen_material_beauty: '建议使用门店环境图、服务前后对比图、顾客体验短视频。', ad_gen_material_food: '建议使用产品特写图、出餐过程视频、门店实拍图。', ad_gen_material_decor: '建议使用施工前后对比图、案例展示图、现场讲解视频。', ad_gen_material_education: '建议使用老师讲解视频、课程海报、学员反馈图。', ad_gen_material_default: '建议使用产品细节图、真实场景图与15秒讲解视频。',
     ad_result_context_rich: '行业：{industry}｜细分类目：{subcategory}｜平台：{platform}｜营销目标：{goal}｜语气：{tone}',
-    ad_result_section_headline: '广告标题', ad_result_section_body: '主文案', ad_result_section_cta: 'CTA按钮文案', ad_result_section_platformFit: '适合平台', ad_result_section_audienceFit: '适合受众', ad_result_section_creativeTips: '推荐素材建议', ad_result_section_whatsapp: 'WhatsApp首句', ad_result_section_botOpening: 'Bot开场白', ad_result_section_faq: 'FAQ回复建议',
+    ad_result_section_headline: '广告标题', ad_result_section_body: '主文案', ad_result_section_cta: 'CTA 按钮文案', ad_result_section_imageSuggestion: '建议图片类型', ad_result_section_videoSuggestion: '建议视频类型', ad_result_section_platformFit: '适合投放的平台', ad_result_section_languageFit: '适合使用的语言版本', ad_result_section_creativeTips: '建议使用的图片 / 视频类型', ad_result_section_whatsapp: 'WhatsApp 首句', ad_result_section_botOpening: 'Bot 开场白', ad_result_section_faq: '常见问题回复建议',
     ad_result_regenerate_item: '单独重生成', ad_result_favorite_item: '标记收藏', ad_result_version_history: '查看版本历史', ad_result_regenerated_suffix: '（已生成新版本）',
-    ad_result_default_offer: '限时权益', ad_result_default_group: '目标人群', ad_result_default_pain: '核心痛点', ad_result_cta_default: '立即咨询', ad_result_tip_1: '建议使用前后对比图并搭配关键数字', ad_result_tip_2: '首屏保留品牌与优惠信息', ad_result_whatsapp_opening: '您好，想了解', ad_result_bot_opening: '您好，欢迎咨询', ad_result_faq_q: '常见问题：费用如何计算', ad_result_faq_a: '回复建议：支持方式'
+    ad_result_default_offer: '限时优惠', ad_result_default_group: '目标人群', ad_result_default_pain: '核心需求', ad_result_cta_default: '立即咨询', ad_result_tip_1: '优先使用明亮干净的主视觉并突出价格与优惠', ad_result_tip_2: '首屏展示品牌、核心卖点与明确行动按钮', ad_result_whatsapp_opening: '您好，想了解', ad_result_bot_opening: '您好，欢迎咨询', ad_result_faq_q: '常见问题：费用如何计算', ad_result_faq_a: '回复建议：支持方式'
   },
-  en: {},
-  ms: {},
-  formal: {
-    dashboard_overview: '总览面板', dashboard_ad_generate: '智能广告生成', dashboard_ad_publish: '广告发布管理', dashboard_templates: '模板资源库', dashboard_bot: '自动回复系统', dashboard_analytics: '数据分析中心', dashboard_settings: '系统设置', dashboard_search_placeholder: '请输入检索关键词…',
-    ad_gen_title: '智能广告生成', ad_gen_desc: '请使用结构化字段填写业务资料，系统将生成可直接用于投放的广告资产。', ad_gen_guide_title: '填写说明', ad_gen_guide_desc: '建议先完成基础信息与受众信息，再补充优惠与交付方式，以提升生成准确度。',
-    ad_gen_group_basic: '基础信息', ad_gen_group_product: '产品信息', ad_gen_group_audience: '受众信息', ad_gen_group_delivery: '投放设置', ad_gen_submit: '生成广告资产', ad_gen_ai_preview: '智能预览', ad_gen_history_title: '历史记录', ad_gen_history_empty: '当前尚无历史记录，请先生成广告资产。',
-    ad_gen_action_view: '查看详情', ad_gen_action_copy: '复制结果', ad_gen_action_regenerate: '重新生成', ad_gen_action_delete: '删除记录', ad_gen_error_required: '请完整填写所有必填字段后再执行生成。',
-    ad_gen_language_formal: '书面语言', ad_result_title: '智能广告生成结果', ad_result_back: '返回广告输入页', ad_result_back_edit: '返回并修改输入', ad_result_to_publish: '进入广告发布页面',
-    ad_result_copy_item: '复制', ad_result_regenerate_item: '单独重生成', ad_result_favorite_item: '收藏', ad_result_version_history: '查看版本记录', ad_result_copy_ok: '已复制至剪贴板。',
-    ad_result_section_headline: '广告标题', ad_result_section_body: '主体文案', ad_result_section_cta: '行动按钮文案', ad_result_section_platformFit: '适配平台', ad_result_section_audienceFit: '适配受众', ad_result_section_creativeTips: '素材建议', ad_result_section_whatsapp: 'WhatsApp 首句', ad_result_section_botOpening: 'Bot 开场语', ad_result_section_faq: '常见问题回复建议'
-  }
+  en: {
+    ad_gen_title: 'AI Ad Generator', ad_gen_desc: 'Fill in product and campaign goals to generate ready-to-run ad copy, headlines, and CTA buttons.', ad_gen_guide_title: 'How to Fill', ad_gen_guide_desc: 'More complete information leads to more accurate output.',
+    ad_gen_group_basic: 'Basic Information', ad_gen_group_product: 'Product Information', ad_gen_group_audience: 'Audience Information', ad_gen_group_delivery: 'Campaign Settings',
+    ad_gen_label_industry: 'Industry', ad_gen_label_subcategory: 'Subcategory', ad_gen_label_business_type: 'Business Type', ad_gen_label_brand_name: 'Brand Name', ad_gen_label_product_name: 'Product / Service Name', ad_gen_label_price: 'Price', ad_gen_label_offer: 'Offer', ad_gen_label_core_selling: 'Key Selling Point', ad_gen_label_delivery: 'Delivery Method', ad_gen_label_age: 'Target Age', ad_gen_label_gender: 'Gender', ad_gen_label_country: 'Country / Region', ad_gen_label_state: 'State / Province', ad_gen_label_city: 'City / Area', ad_gen_label_region_other: 'Other Region (Optional)', ad_gen_label_pain: 'Main Need / Pain Point', ad_gen_label_platform: 'Platform', ad_gen_label_goal: 'Goal', ad_gen_label_tone: 'Tone', ad_gen_label_language: 'Output Language',
+    ad_gen_ph_region: 'Select country / region', ad_gen_ph_state: 'Select state / province', ad_gen_ph_city: 'Select city / area', ad_gen_submit: 'Generate Ads', ad_gen_ai_preview: 'AI Preview', ad_gen_preview_empty: 'Fill in the form to see strategy and output preview here.', ad_gen_preview_direction: 'Current campaign setup', ad_gen_preview_ad_direction: 'Generated ad direction', ad_gen_preview_material: 'Recommended creatives', ad_gen_preview_line: 'Output for {platform}, goal is "{goal}", tone "{tone}" ({language}).', ad_gen_country_my: 'Malaysia', ad_gen_country_cn: 'China', ad_gen_country_sg: 'Singapore', ad_gen_option_other: 'Other', ad_gen_city_other: 'Other area', ad_gen_state_all: 'All Areas', ad_gen_city_all: 'All Areas', ad_result_section_imageSuggestion: 'Recommended Image Type', ad_result_section_videoSuggestion: 'Recommended Video Type', ad_result_section_languageFit: 'Recommended Language Version', ad_result_section_platformFit: 'Recommended Platforms', ad_result_section_creativeTips: 'Recommended Image / Video Direction'
+  },
+  ms: {
+    ad_gen_title: 'Penjana Iklan AI', ad_gen_desc: 'Isi maklumat produk dan sasaran untuk jana tajuk iklan, salinan utama, dan CTA yang sedia digunakan.', ad_gen_guide_title: 'Panduan Isi', ad_gen_guide_desc: 'Maklumat yang lebih lengkap menghasilkan cadangan yang lebih tepat.',
+    ad_gen_group_basic: 'Maklumat Asas', ad_gen_group_product: 'Maklumat Produk', ad_gen_group_audience: 'Maklumat Audiens', ad_gen_group_delivery: 'Tetapan Kempen',
+    ad_gen_label_industry: 'Industri', ad_gen_label_subcategory: 'Subkategori', ad_gen_label_business_type: 'Jenis Perniagaan', ad_gen_label_brand_name: 'Nama Jenama', ad_gen_label_product_name: 'Nama Produk / Servis', ad_gen_label_price: 'Harga', ad_gen_label_offer: 'Promosi', ad_gen_label_core_selling: 'Nilai Teras', ad_gen_label_delivery: 'Cara Penyampaian', ad_gen_label_age: 'Umur Sasaran', ad_gen_label_gender: 'Jantina', ad_gen_label_country: 'Negara / Wilayah', ad_gen_label_state: 'Negeri / Wilayah', ad_gen_label_city: 'Bandar / Kawasan', ad_gen_label_region_other: 'Kawasan Lain (Pilihan)', ad_gen_label_pain: 'Keperluan / Masalah Utama', ad_gen_label_platform: 'Platform Iklan', ad_gen_label_goal: 'Matlamat', ad_gen_label_tone: 'Gaya Bahasa', ad_gen_label_language: 'Bahasa Output',
+    ad_gen_ph_region: 'Pilih negara / wilayah', ad_gen_ph_state: 'Pilih negeri / wilayah', ad_gen_ph_city: 'Pilih bandar / kawasan', ad_gen_submit: 'Jana Iklan', ad_gen_ai_preview: 'Pratonton AI', ad_gen_preview_empty: 'Isi borang di kiri untuk lihat arah iklan dan pratonton kandungan.', ad_gen_preview_direction: 'Tetapan semasa', ad_gen_preview_ad_direction: 'Arah iklan yang akan dijana', ad_gen_preview_material: 'Cadangan bahan kreatif', ad_gen_country_my: 'Malaysia', ad_gen_country_cn: 'China', ad_gen_country_sg: 'Singapura', ad_gen_option_other: 'Lain-lain', ad_gen_city_other: 'Kawasan lain', ad_gen_state_all: 'Semua Kawasan', ad_gen_city_all: 'Semua Kawasan', ad_result_section_imageSuggestion: 'Jenis Imej Dicadangkan', ad_result_section_videoSuggestion: 'Jenis Video Dicadangkan', ad_result_section_languageFit: 'Versi Bahasa Dicadangkan', ad_result_section_platformFit: 'Platform Sesuai', ad_result_section_creativeTips: 'Cadangan Gambar / Video'
+  },
+  formal: {}
 };
 
 Object.keys(ADNOVA_EXTRA_TRANSLATIONS).forEach((lang) => {
