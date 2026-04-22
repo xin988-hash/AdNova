@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdNova - 投放工作台</title>
+    <title data-i18n-page-title="workspace_title">AdNova - 投放工作台</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="script.js"></script>
+    <script src="i18n.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -30,21 +31,28 @@
         <header class="bg-white shadow-sm border-b border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                 <a href="dashboard.html" class="text-xl font-bold text-primary">Ad<span class="text-accent">Nova</span></a>
-                <a href="dashboard.html" class="text-sm text-gray-600 hover:text-accent"><i class="fa fa-arrow-left mr-1"></i>返回后台</a>
+                <div class="flex items-center gap-3">
+                    <select data-language-selector class="border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-accent">
+                        <option value="zh">简体中文</option>
+                        <option value="en">English</option>
+                        <option value="ms">Bahasa Malaysia</option>
+                    </select>
+                    <a href="dashboard.html" class="text-sm text-gray-600 hover:text-accent"><i class="fa fa-arrow-left mr-1"></i><span data-i18n-key="workspace_back_dashboard">返回后台</span></a>
+                </div>
             </div>
         </header>
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-                <h1 class="text-2xl font-bold text-gray-900 mb-2">广告投放工作台</h1>
-                <p class="text-gray-600">这里是下一步页面，整体风格与主站保持一致：白底卡片、蓝色强调色、圆角+轻阴影。</p>
+                <h1 data-i18n-key="workspace_main_title" class="text-2xl font-bold text-gray-900 mb-2">广告投放工作台</h1>
+                <p data-i18n-key="workspace_main_desc" class="text-gray-600">这里是下一步页面，整体风格与主站保持一致：白底卡片、蓝色强调色、圆角+轻阴影。</p>
                 <div id="workspace-source" class="mt-4 p-3 rounded-lg bg-blue-50 text-sm text-blue-900 hidden"></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="lg:col-span-2 space-y-6">
                     <section class="bg-white rounded-xl shadow-md p-6">
-                        <h2 class="text-lg font-semibold text-gray-900 mb-4">步骤 1：选择投放渠道</h2>
+                        <h2 data-i18n-key="workspace_step1" class="text-lg font-semibold text-gray-900 mb-4">步骤 1：选择投放渠道</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="channels">
                             <button data-channel="facebook" class="channel-btn border border-gray-200 rounded-lg p-3 text-left hover:border-accent hover:bg-blue-50 transition-colors">Facebook</button>
                             <button data-channel="instagram" class="channel-btn border border-gray-200 rounded-lg p-3 text-left hover:border-accent hover:bg-blue-50 transition-colors">Instagram</button>
@@ -53,22 +61,22 @@
                     </section>
 
                     <section class="bg-white rounded-xl shadow-md p-6">
-                        <h2 class="text-lg font-semibold text-gray-900 mb-4">步骤 2：预算与时间</h2>
+                        <h2 data-i18n-key="workspace_step2" class="text-lg font-semibold text-gray-900 mb-4">步骤 2：预算与时间</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input id="budget" type="number" placeholder="每日预算（RM）" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
-                            <input id="days" type="number" placeholder="投放天数" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                            <input id="budget" type="number" data-i18n-placeholder="workspace_budget_placeholder" placeholder="每日预算（RM）" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                            <input id="days" type="number" data-i18n-placeholder="workspace_days_placeholder" placeholder="投放天数" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
                         </div>
                     </section>
                 </div>
 
                 <aside class="bg-white rounded-xl shadow-md p-6 h-fit">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">实时预览</h2>
+                    <h2 data-i18n-key="workspace_preview" class="text-lg font-semibold text-gray-900 mb-4">实时预览</h2>
                     <div id="summary" class="space-y-2 text-sm text-gray-700">
                         <p>渠道：未选择</p>
                         <p>预算：--</p>
                         <p>周期：--</p>
                     </div>
-                    <button id="launch-btn" class="mt-6 w-full bg-accent hover:bg-blue-600 text-white py-2.5 rounded-md font-medium transition-colors">开始投放</button>
+                    <button id="launch-btn" data-i18n-key="workspace_launch" class="mt-6 w-full bg-accent hover:bg-blue-600 text-white py-2.5 rounded-md font-medium transition-colors">开始投放</button>
                 </aside>
             </div>
         </main>
@@ -81,14 +89,14 @@
         const daysInput = document.getElementById('days');
         const launchBtn = document.getElementById('launch-btn');
 
-        const state = { channel: '未选择', budget: '--', days: '--' };
+        const state = { channel: '', budget: '--', days: '--' };
         const sourceBox = document.getElementById('workspace-source');
 
         function renderSummary() {
             summary.innerHTML = `
-                <p>渠道：${state.channel}</p>
-                <p>预算：${state.budget === '--' ? '--' : `RM${state.budget}/天`}</p>
-                <p>周期：${state.days === '--' ? '--' : `${state.days} 天`}</p>
+                <p>${AdnovaI18n.t('workspace_label_channel')}：${state.channel || AdnovaI18n.t('workspace_channel_unselected')}</p>
+                <p>${AdnovaI18n.t('workspace_label_budget')}：${state.budget === '--' ? '--' : `RM${state.budget}/${AdnovaI18n.t('workspace_days_unit')}`}</p>
+                <p>${AdnovaI18n.t('workspace_label_period')}：${state.days === '--' ? '--' : `${state.days} ${AdnovaI18n.t('workspace_days_unit')}`}</p>
             `;
         }
 
@@ -102,7 +110,12 @@
             if (!from && !template && !category && !industry) return;
 
             sourceBox.classList.remove('hidden');
-            sourceBox.textContent = `已从「${from || '未知页面'}」进入。已选择：${template || '未命名模板'}${category ? `（${category}）` : ''}${industry ? `，行业：${industry}` : ''}。请继续设置预算并开始投放。`;
+            sourceBox.textContent = AdnovaI18n.t('workspace_from_text', undefined, {
+                from: from || AdnovaI18n.t('workspace_from_unknown'),
+                template: template || AdnovaI18n.t('workspace_tpl_unnamed'),
+                category: category ? AdnovaI18n.t('workspace_from_category', undefined, { category }) : '',
+                industry: industry ? AdnovaI18n.t('workspace_from_industry', undefined, { industry }) : ''
+            });
         }
 
         channelButtons.forEach(btn => {
@@ -125,14 +138,16 @@
         });
 
         launchBtn.addEventListener('click', () => {
-            if (state.channel === '未选择' || state.budget === '--' || state.days === '--') {
-                alert('请先完成渠道、预算和投放天数设置。');
+            if (!state.channel || state.budget === '--' || state.days === '--') {
+                alert(AdnovaI18n.t('workspace_alert_incomplete'));
                 return;
             }
-            alert(`已创建投放计划：${state.channel} / RM${state.budget} / ${state.days}天`);
+            alert(AdnovaI18n.t('workspace_alert_created', undefined, { channel: state.channel, budget: state.budget, days: state.days }));
         });
 
         hydrateFromQuery();
+        renderSummary();
+        document.addEventListener('adnova:language-change', renderSummary);
     </script>
 </body>
 </html>

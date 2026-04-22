@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdNova - AI广告生成结果</title>
+    <title data-i18n-page-title="ad_result_title">AdNova - AI广告生成结果</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="auth.js"></script>
+    <script src="i18n.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -26,34 +27,41 @@
         <header class="bg-white shadow-sm border-b border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                 <a href="dashboard.html" class="text-xl font-bold text-primary">Ad<span class="text-accent">Nova</span></a>
-                <a href="dashboard.html" class="text-sm text-gray-600 hover:text-accent"><i class="fa fa-arrow-left mr-1"></i>返回AI广告输入页</a>
+                <div class="flex items-center gap-3">
+                    <select data-language-selector class="border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-accent">
+                        <option value="zh">简体中文</option>
+                        <option value="en">English</option>
+                        <option value="ms">Bahasa Malaysia</option>
+                    </select>
+                    <a href="dashboard.html" class="text-sm text-gray-600 hover:text-accent"><i class="fa fa-arrow-left mr-1"></i><span data-i18n-key="ad_result_back">返回AI广告输入页</span></a>
+                </div>
             </div>
         </header>
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
             <section class="bg-white rounded-xl shadow-md p-6">
-                <h1 class="text-2xl font-bold text-gray-900 mb-2">AI广告生成结果</h1>
-                <p id="context-line" class="text-gray-600">正在读取您刚刚提交的广告需求...</p>
+                <h1 data-i18n-key="ad_result_title" class="text-2xl font-bold text-gray-900 mb-2">AI广告生成结果</h1>
+                <p id="context-line" data-i18n-key="ad_result_loading" class="text-gray-600">正在读取您刚刚提交的广告需求...</p>
             </section>
 
             <section class="bg-white rounded-xl shadow-md p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-lg font-semibold text-gray-900">广告标题/文案建议</h2>
-                    <button id="copy-all-btn" class="text-sm bg-accent hover:bg-blue-600 text-white px-3 py-1.5 rounded-md">复制全部</button>
+                    <h2 data-i18n-key="ad_result_suggestions" class="text-lg font-semibold text-gray-900">广告标题/文案建议</h2>
+                    <button id="copy-all-btn" data-i18n-key="ad_result_copy_all" class="text-sm bg-accent hover:bg-blue-600 text-white px-3 py-1.5 rounded-md">复制全部</button>
                 </div>
                 <div id="ads-container" class="space-y-4"></div>
             </section>
 
             <section class="bg-white rounded-xl shadow-md p-6">
-                <h2 class="text-lg font-semibold text-gray-900 mb-3">AI词汇与表达教学</h2>
+                <h2 data-i18n-key="ad_result_vocab" class="text-lg font-semibold text-gray-900 mb-3">AI词汇与表达教学</h2>
                 <div id="vocab-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm"></div>
             </section>
 
             <section class="bg-white rounded-xl shadow-md p-6">
-                <h2 class="text-lg font-semibold text-gray-900 mb-3">视频/图片素材拍摄教程（详细）</h2>
+                <h2 data-i18n-key="ad_result_guide" class="text-lg font-semibold text-gray-900 mb-3">视频/图片素材拍摄教程（详细）</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 text-sm text-gray-700">
                     <div class="border border-gray-200 rounded-lg p-4">
-                        <h3 class="font-semibold text-gray-900 mb-2">短视频教程（15-30秒）</h3>
+                        <h3 data-i18n-key="ad_result_video" class="font-semibold text-gray-900 mb-2">短视频教程（15-30秒）</h3>
                         <ol class="list-decimal pl-5 space-y-2">
                             <li><strong>前3秒钩子：</strong>先拍最吸引人的画面（效果对比/热卖场景），并叠加大字标题。</li>
                             <li><strong>中段10-15秒：</strong>展示3个核心卖点（痛点→解决方式→结果），每个卖点3-4秒。</li>
@@ -63,7 +71,7 @@
                         </ol>
                     </div>
                     <div class="border border-gray-200 rounded-lg p-4">
-                        <h3 class="font-semibold text-gray-900 mb-2">图片素材教程（信息流）</h3>
+                        <h3 data-i18n-key="ad_result_image" class="font-semibold text-gray-900 mb-2">图片素材教程（信息流）</h3>
                         <ol class="list-decimal pl-5 space-y-2">
                             <li><strong>主图构图：</strong>产品占画面60%-70%，背景简洁，避免信息过载。</li>
                             <li><strong>文案排版：</strong>标题不超过12字，副标题1行，优惠信息单独高亮。</li>
@@ -76,8 +84,8 @@
             </section>
 
             <section class="bg-white rounded-xl shadow-md p-6 flex flex-wrap gap-3">
-                <a href="dashboard.html#ad-generate" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm">返回修改输入</a>
-                <a href="dashboard.html#ad-publish" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md text-sm">进入广告发布页面</a>
+                <a href="dashboard.html#ad-generate" data-i18n-key="ad_result_back_edit" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm">返回修改输入</a>
+                <a href="dashboard.html#ad-publish" data-i18n-key="ad_result_to_publish" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md text-sm">进入广告发布页面</a>
             </section>
         </main>
     </div>
@@ -145,8 +153,16 @@
         }
 
         const payload = JSON.parse(payloadRaw);
-        const industryMap = { beauty: '美容美发', food: '餐饮美食', decor: '装修设计', fitness: '健身运动', education: '教育培训', retail: '零售购物', service: '生活服务' };
-        const goalMap = { leads: '获取潜在客户', traffic: '增加网站流量' };
+        const industryMap = {
+            beauty: AdnovaI18n.t('ad_result_industry_beauty'),
+            food: AdnovaI18n.t('ad_result_industry_food'),
+            decor: AdnovaI18n.t('ad_result_industry_decor'),
+            fitness: AdnovaI18n.t('ad_result_industry_fitness'),
+            education: AdnovaI18n.t('ad_result_industry_education'),
+            retail: AdnovaI18n.t('ad_result_industry_retail'),
+            service: AdnovaI18n.t('ad_result_industry_service')
+        };
+        const goalMap = { leads: AdnovaI18n.t('ad_result_goal_leads'), traffic: AdnovaI18n.t('ad_result_goal_traffic') };
 
         const baseAds = {
             beauty: [
@@ -181,17 +197,22 @@
         }));
 
         const contextLine = document.getElementById('context-line');
-        contextLine.textContent = `行业：${industryMap[payload.industry] || payload.industry} ｜目标：${goalMap[payload.goal] || payload.goal} ｜地区：${payload.country} / ${payload.city}`;
+        contextLine.textContent = AdnovaI18n.t('ad_result_context', undefined, {
+            industry: industryMap[payload.industry] || payload.industry,
+            goal: goalMap[payload.goal] || payload.goal,
+            country: payload.country,
+            city: payload.city
+        });
 
         const adsContainer = document.getElementById('ads-container');
         adsContainer.innerHTML = generatedAds.map((ad) => `
             <article class="border border-gray-200 rounded-lg p-4">
-                <p class="text-xs text-gray-500 mb-1">广告 ${ad.serialNo}</p>
+                <p class="text-xs text-gray-500 mb-1">${AdnovaI18n.t('ad_result_ad_item', undefined, { serialNo: ad.serialNo })}</p>
                 <h3 class="font-semibold text-gray-900 mb-2">${ad.title}</h3>
                 <p class="text-gray-700 mb-3">${ad.content}</p>
                 <div class="flex items-center justify-between">
                     <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded text-sm">${ad.cta}</button>
-                    <button class="js-copy text-sm text-accent hover:text-blue-700" data-text="${ad.title}\n${ad.content}\nCTA:${ad.cta}"><i class="fa fa-copy mr-1"></i>复制此条</button>
+                    <button class="js-copy text-sm text-accent hover:text-blue-700" data-text="${ad.title}\n${ad.content}\nCTA:${ad.cta}"><i class="fa fa-copy mr-1"></i>${AdnovaI18n.t('ad_result_copy_item')}</button>
                 </div>
             </article>
         `).join('');
@@ -208,21 +229,21 @@
         const vocabList = vocabByTone[payload.tone] || vocabByTone.professional;
         vocabContainer.innerHTML = vocabList.map((word) => `
             <div class="border border-blue-100 bg-blue-50 rounded-lg p-3">
-                <p class="text-xs text-blue-700 mb-1">推荐词汇</p>
+                <p class="text-xs text-blue-700 mb-1">${AdnovaI18n.t('ad_result_recommend_vocab')}</p>
                 <p class="font-medium text-blue-900">${word}</p>
-                <p class="text-xs text-blue-800 mt-1">用法：将该词放在标题前半句，强化价值表达。</p>
+                <p class="text-xs text-blue-800 mt-1">${AdnovaI18n.t('ad_result_vocab_usage')}</p>
             </div>
         `).join('');
 
         document.addEventListener('click', (event) => {
             const copyTarget = event.target.closest('.js-copy');
             if (!copyTarget) return;
-            navigator.clipboard.writeText(copyTarget.dataset.text || '').then(() => alert('已复制该条文案')).catch(() => alert('复制失败，请手动复制'));
+            navigator.clipboard.writeText(copyTarget.dataset.text || '').then(() => alert(AdnovaI18n.t('ad_result_copy_ok'))).catch(() => alert(AdnovaI18n.t('ad_result_copy_fail')));
         });
 
         document.getElementById('copy-all-btn').addEventListener('click', () => {
             const text = generatedAds.map((ad) => `${ad.serialNo}. ${ad.title}\n${ad.content}\nCTA: ${ad.cta}`).join('\n\n');
-            navigator.clipboard.writeText(text).then(() => alert('已复制全部文案')).catch(() => alert('复制失败，请手动复制'));
+            navigator.clipboard.writeText(text).then(() => alert(AdnovaI18n.t('ad_result_copy_all_ok'))).catch(() => alert(AdnovaI18n.t('ad_result_copy_fail')));
         });
 
         const appState = loadAppState();
