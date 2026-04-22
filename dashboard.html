@@ -447,23 +447,14 @@
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-industry" data-i18n-key="ad_gen_label_industry">行业 <span class="text-red-500">*</span></label>
                                             <select id="ad-industry" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent"></select>
-                                            <p class="text-xs text-gray-500 mt-1" data-i18n-key="ad_gen_help_industry">用于匹配行业策略与素材建议。</p>
                                         </div>
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-subcategory" data-i18n-key="ad_gen_label_subcategory">细分类目 <span class="text-red-500">*</span></label>
-                                            <input id="ad-subcategory" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_subcategory" placeholder="例如：美甲、美睫、洗脸">
-                                        </div>
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-business-type" data-i18n-key="ad_gen_label_business_type">业务类型 <span class="text-red-500">*</span></label>
-                                            <input id="ad-business-type" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_business_type" placeholder="例如：到店服务、预约制、套餐销售">
-                                        </div>
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-brand-name" data-i18n-key="ad_gen_label_brand_name">品牌名称 <span class="text-red-500">*</span></label>
-                                            <input id="ad-brand-name" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_brand_name" placeholder="请输入品牌名称">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-product-name" data-i18n-key="ad_gen_label_product_name">产品 / 服务名称 <span class="text-red-500">*</span></label>
+                                            <input id="ad-product-name" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_product_name" placeholder="请输入产品名称">
                                         </div>
                                         <div class="md:col-span-2">
-                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-product-name" data-i18n-key="ad_gen_label_product_name">产品 / 服务名称 <span class="text-red-500">*</span></label>
-                                            <input id="ad-product-name" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_product_name" placeholder="请输入产品或服务名称">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1" for="ad-brand-name" data-i18n-key="ad_gen_label_brand_name">品牌名称（可选）</label>
+                                            <input id="ad-brand-name" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" data-i18n-placeholder="ad_gen_ph_brand_name" placeholder="请输入品牌名称">
                                         </div>
                                     </div>
                                 </div>
@@ -474,20 +465,23 @@
                                         <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-price" data-i18n-key="ad_gen_label_price">价格</label><input id="ad-price" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_price" placeholder="例如：RM99"></div>
                                         <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-offer" data-i18n-key="ad_gen_label_offer">优惠内容</label><input id="ad-offer" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_offer" placeholder="例如：限时优惠、买一送一、首单折扣"></div>
                                         <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-core-selling" data-i18n-key="ad_gen_label_core_selling">核心卖点 <span class="text-red-500">*</span></label><textarea id="ad-core-selling" rows="2" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_core_selling" placeholder="例如：快速见效、适合敏感肌、当天预约"></textarea></div>
-                                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-delivery" data-i18n-key="ad_gen_label_delivery">交付方式</label><input id="ad-delivery" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_delivery" placeholder="例如：到店、上门、线上咨询"></div>
                                     </div>
                                 </div>
 
                                 <div>
                                     <h4 class="text-sm font-semibold text-gray-900 mb-3" data-i18n-key="ad_gen_group_audience">受众信息</h4>
+                                    <div class="grid grid-cols-1 gap-4">
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-target-audience" data-i18n-key="ad_gen_label_target_audience">目标人群 <span class="text-red-500">*</span></label><input id="ad-target-audience" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_target_audience" placeholder="例如：女性 25–40岁"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-900 mb-3" data-i18n-key="ad_gen_group_region">地区信息</h4>
+                                    <p class="text-xs text-gray-500 mb-3" data-i18n-key="ad_gen_region_hint">请选择你的主要投放地区（例如：Selangor / Kuala Lumpur）</p>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-age-range" data-i18n-key="ad_gen_label_age">目标客户年龄 <span class="text-red-500">*</span></label><input id="ad-age-range" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_age" placeholder="例如：25–40"></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-gender" data-i18n-key="ad_gen_label_gender">性别</label><select id="ad-gender" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-country" data-i18n-key="ad_gen_label_country">国家 / 地区 <span class="text-red-500">*</span></label><select id="ad-country" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
-                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-state" data-i18n-key="ad_gen_label_state">州 / 省份 <span class="text-red-500">*</span></label><select id="ad-state" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" disabled></select></div>
-                                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-city" data-i18n-key="ad_gen_label_city">城市 / 地区</label><select id="ad-city" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" disabled></select></div>
-                                        <div id="ad-region-other-wrap" class="md:col-span-2 hidden"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-region-other" data-i18n-key="ad_gen_label_region_other">其他地区（可选）</label><input id="ad-region-other" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_region_other" placeholder="请输入具体州、省或城市"></div>
-                                        <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-pain-points" data-i18n-key="ad_gen_label_pain">主要需求 / 痛点 <span class="text-red-500">*</span></label><textarea id="ad-pain-points" rows="2" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_pain" placeholder="例如：想改善肤质、希望快速咨询"></textarea></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-country" data-i18n-key="ad_gen_label_country">国家</label><input id="ad-country" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 bg-gray-100 text-gray-600" value="马来西亚" readonly disabled></div>
+                                        <div><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-state" data-i18n-key="ad_gen_label_state">州 <span class="text-red-500">*</span></label><select id="ad-state" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select></div>
+                                        <div id="ad-city-wrap" class="md:col-span-2 hidden"><label class="block text-sm font-medium text-gray-700 mb-1" for="ad-city" data-i18n-key="ad_gen_label_city">城市（可选）</label><input id="ad-city" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" data-i18n-placeholder="ad_gen_ph_city_input" placeholder="例如：Petaling Jaya"></div>
                                     </div>
                                 </div>
 
@@ -2271,49 +2265,18 @@
                     { value: 'retail', label: AdnovaI18n.t('ad_result_industry_retail') },
                     { value: 'service', label: AdnovaI18n.t('ad_result_industry_service') }
                 ],
-                gender: [
-                    { value: 'all', label: AdnovaI18n.t('ad_gen_gender_all') },
-                    { value: 'female', label: AdnovaI18n.t('ad_gen_gender_female') },
-                    { value: 'male', label: AdnovaI18n.t('ad_gen_gender_male') }
+                states: [
+                    'Selangor', 'Kuala Lumpur', 'Johor', 'Penang', 'Perak', 'Sabah', 'Sarawak',
+                    'Melaka', 'Negeri Sembilan', 'Pahang', 'Kedah', 'Perlis', 'Terengganu', 'Kelantan'
                 ],
-                country: [
-                    { value: '', label: AdnovaI18n.t('ad_gen_ph_region') },
-                    { value: 'my', label: AdnovaI18n.t('ad_gen_country_my') },
-                    { value: 'cn', label: AdnovaI18n.t('ad_gen_country_cn') },
-                    { value: 'sg', label: AdnovaI18n.t('ad_gen_country_sg') }
-                ],
-                regionMap: {
-                    my: {
-                        Selangor: [AdnovaI18n.t('ad_gen_city_all')],
-                        'Kuala Lumpur': [AdnovaI18n.t('ad_gen_city_all')],
-                        Johor: [AdnovaI18n.t('ad_gen_city_all')],
-                        Penang: [AdnovaI18n.t('ad_gen_city_all')],
-                        Perak: [AdnovaI18n.t('ad_gen_city_all')],
-                        Sabah: [AdnovaI18n.t('ad_gen_city_all')],
-                        Sarawak: [AdnovaI18n.t('ad_gen_city_all')],
-                        [AdnovaI18n.t('ad_gen_option_other')]: [AdnovaI18n.t('ad_gen_city_other')]
-                    },
-                    cn: {
-                        Guangdong: ['Guangzhou', 'Shenzhen', 'Foshan', AdnovaI18n.t('ad_gen_option_other')],
-                        Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou', AdnovaI18n.t('ad_gen_option_other')],
-                        Jiangsu: ['Nanjing', 'Suzhou', 'Wuxi', AdnovaI18n.t('ad_gen_option_other')],
-                        Beijing: [AdnovaI18n.t('ad_gen_city_all')],
-                        Shanghai: [AdnovaI18n.t('ad_gen_city_all')],
-                        [AdnovaI18n.t('ad_gen_option_other')]: [AdnovaI18n.t('ad_gen_city_other')]
-                    },
-                    sg: { [AdnovaI18n.t('ad_gen_state_all')]: [AdnovaI18n.t('ad_gen_city_all')] }
-                },
                 platforms: ['facebook', 'instagram', 'tiktok', 'whatsapp'].map((v) => ({ value: v, label: v.charAt(0).toUpperCase() + v.slice(1) })),
                 goals: [
                     { value: 'dm', label: AdnovaI18n.t('ad_gen_goal_dm') },
-                    { value: 'leads', label: AdnovaI18n.t('ad_gen_goal_leads') },
                     { value: 'booking', label: AdnovaI18n.t('ad_gen_goal_booking') },
-                    { value: 'order', label: AdnovaI18n.t('ad_gen_goal_order') },
-                    { value: 'store', label: AdnovaI18n.t('ad_gen_goal_store') }
+                    { value: 'order', label: AdnovaI18n.t('ad_gen_goal_order') }
                 ],
                 tone: [
                     { value: 'professional', label: AdnovaI18n.t('ad_gen_tone_professional') },
-                    { value: 'casual', label: AdnovaI18n.t('ad_gen_tone_casual') },
                     { value: 'premium', label: AdnovaI18n.t('ad_gen_tone_premium') },
                     { value: 'promo', label: AdnovaI18n.t('ad_gen_tone_promo') }
                 ],
@@ -2339,7 +2302,7 @@
         }
 
         function buildRegionText(payload) {
-            return [payload.countryLabel, payload.state, payload.city, payload.regionOther].filter(Boolean).join(' / ');
+            return [payload.countryLabel, payload.state, payload.city].filter(Boolean).join(' / ');
         }
 
         function buildCreativeSuggestion(industry) {
@@ -2355,27 +2318,21 @@
         function readAdGeneratePayload() {
             const options = buildAdGenerateOptions();
             const getText = (id) => document.getElementById(id)?.value?.trim() || '';
-            const country = getText('ad-country');
+            const country = 'my';
             const state = getText('ad-state');
             const city = getText('ad-city');
             return {
                 industry: getText('ad-industry'),
-                subcategory: getText('ad-subcategory'),
-                businessType: getText('ad-business-type'),
                 brandName: getText('ad-brand-name'),
                 productName: getText('ad-product-name'),
                 price: getText('ad-price'),
                 offer: getText('ad-offer'),
                 coreSelling: getText('ad-core-selling'),
-                delivery: getText('ad-delivery'),
-                ageRange: getText('ad-age-range'),
-                gender: getText('ad-gender'),
+                targetAudience: getText('ad-target-audience'),
                 country,
                 state,
                 city,
-                regionOther: getText('ad-region-other'),
                 region: [country, state, city].filter(Boolean).join(' / '),
-                painPoints: getText('ad-pain-points'),
                 platform: getText('ad-platform'),
                 goal: getText('ad-goal'),
                 tone: getText('ad-tone'),
@@ -2384,7 +2341,7 @@
                 platformLabel: options.platforms.find((item) => item.value === getText('ad-platform'))?.label || '--',
                 goalLabel: options.goals.find((item) => item.value === getText('ad-goal'))?.label || '--',
                 languageLabel: options.language.find((item) => item.value === getText('ad-language'))?.label || '--',
-                countryLabel: options.country.find((item) => item.value === country)?.label || '--',
+                countryLabel: AdnovaI18n.t('ad_gen_country_my'),
                 industryLabel: options.industries.find((item) => item.value === getText('ad-industry'))?.label || '--'
             };
         }
@@ -2393,74 +2350,49 @@
             const payload = readAdGeneratePayload();
             const preview = document.getElementById('ad-live-preview');
             if (!preview) return;
-            const missing = ['industry', 'brandName', 'productName', 'painPoints', 'goal', 'platform', 'language'].filter((key) => !payload[key]);
-            if (missing.length) {
-                preview.innerHTML = `<p class="text-gray-500">${AdnovaI18n.t('ad_gen_preview_empty')}</p>`;
-                return;
-            }
             preview.innerHTML = `
                 <div class="rounded-lg border border-gray-200 p-4 space-y-2">
                     <p class="text-xs text-gray-500">${AdnovaI18n.t('ad_gen_preview_direction')}</p>
                     <p><span class="text-gray-500">${AdnovaI18n.t('ad_gen_label_industry')}：</span>${payload.industryLabel || '--'}</p>
+                    <p><span class="text-gray-500">${AdnovaI18n.t('ad_gen_label_platform')}：</span>${payload.platformLabel || '--'}</p>
                     <p><span class="text-gray-500">${AdnovaI18n.t('ad_gen_label_goal')}：</span>${payload.goalLabel}</p>
                     <p><span class="text-gray-500">${AdnovaI18n.t('ad_gen_label_tone')}：</span>${payload.toneLabel}</p>
-                    <p><span class="text-gray-500">${AdnovaI18n.t('ad_gen_label_language')}：</span>${payload.languageLabel}</p>
+                    <p><span class="text-gray-500">${AdnovaI18n.t('ad_gen_preview_ad_direction')}：</span>${AdnovaI18n.t('ad_gen_preview_direction_value', undefined, { platform: payload.platformLabel || '--', goal: payload.goalLabel || '--', tone: payload.toneLabel || '--' })}</p>
                 </div>
                 <div class="rounded-lg bg-gray-50 p-4 border border-gray-200 space-y-2">
-                    <p class="text-xs text-gray-500">${AdnovaI18n.t('ad_gen_preview_ad_direction')}</p>
-                    <p>${AdnovaI18n.t('ad_gen_preview_line', undefined, { platform: payload.platformLabel, goal: payload.goalLabel, tone: payload.toneLabel, language: payload.languageLabel })}</p>
                     <p class="text-xs text-gray-500">${AdnovaI18n.t('ad_gen_preview_material')}</p>
+                    <p>${AdnovaI18n.t('ad_gen_preview_line', undefined, { platform: payload.platformLabel, goal: payload.goalLabel, tone: payload.toneLabel, language: payload.languageLabel })}</p>
                     <p>${buildCreativeSuggestion(payload.industry).summary}</p>
                 </div>
             `;
         }
 
-        function toggleOtherRegionField() {
+        function toggleCityField() {
             const state = document.getElementById('ad-state')?.value;
-            const city = document.getElementById('ad-city')?.value;
-            const wrap = document.getElementById('ad-region-other-wrap');
+            const wrap = document.getElementById('ad-city-wrap');
             if (!wrap) return;
-            wrap.classList.toggle('hidden', !(state === AdnovaI18n.t('ad_gen_option_other') || city === AdnovaI18n.t('ad_gen_option_other') || city === AdnovaI18n.t('ad_gen_city_other')));
+            wrap.classList.toggle('hidden', !state);
         }
 
         function initAdGenerate() {
             const options = buildAdGenerateOptions();
             fillSelect('ad-industry', options.industries);
-            fillSelect('ad-gender', options.gender);
             fillSelect('ad-platform', options.platforms);
             fillSelect('ad-goal', options.goals);
             fillSelect('ad-tone', options.tone);
             fillSelect('ad-language', options.language);
-            fillSelect('ad-country', options.country);
-            fillRegionSelect('ad-state', [], 'ad_gen_ph_state');
-            fillRegionSelect('ad-city', [], 'ad_gen_ph_city');
-
-            const countryEl = document.getElementById('ad-country');
+            fillRegionSelect('ad-state', options.states, 'ad_gen_ph_state');
+            document.getElementById('ad-country').value = AdnovaI18n.t('ad_gen_country_my');
             const stateEl = document.getElementById('ad-state');
             const cityEl = document.getElementById('ad-city');
 
-            countryEl?.addEventListener('change', () => {
-                const map = options.regionMap[countryEl.value] || {};
-                const states = Object.keys(map);
-                fillRegionSelect('ad-state', states, 'ad_gen_ph_state');
-                fillRegionSelect('ad-city', [], 'ad_gen_ph_city');
-                stateEl.disabled = !states.length;
-                cityEl.disabled = true;
-                toggleOtherRegionField();
-                renderAdPreview();
-            });
-
             stateEl?.addEventListener('change', () => {
-                const map = options.regionMap[countryEl.value] || {};
-                const cities = map[stateEl.value] || [];
-                fillRegionSelect('ad-city', cities, 'ad_gen_ph_city');
-                cityEl.disabled = !cities.length;
-                toggleOtherRegionField();
+                if (!stateEl.value) cityEl.value = '';
+                toggleCityField();
                 renderAdPreview();
             });
 
-            cityEl?.addEventListener('change', () => {
-                toggleOtherRegionField();
+            cityEl?.addEventListener('input', () => {
                 renderAdPreview();
             });
 
@@ -2472,23 +2404,18 @@
                 const old = readAdGeneratePayload();
                 const refreshed = buildAdGenerateOptions();
                 fillSelect('ad-industry', refreshed.industries);
-                fillSelect('ad-gender', refreshed.gender);
                 fillSelect('ad-platform', refreshed.platforms);
                 fillSelect('ad-goal', refreshed.goals);
                 fillSelect('ad-tone', refreshed.tone);
                 fillSelect('ad-language', refreshed.language);
-                fillSelect('ad-country', refreshed.country);
-                const map = refreshed.regionMap[old.country] || {};
-                fillRegionSelect('ad-state', Object.keys(map), 'ad_gen_ph_state');
-                fillRegionSelect('ad-city', map[old.state] || [], 'ad_gen_ph_city');
+                fillRegionSelect('ad-state', refreshed.states, 'ad_gen_ph_state');
+                document.getElementById('ad-country').value = AdnovaI18n.t('ad_gen_country_my');
                 Object.entries({
-                    'ad-industry': old.industry, 'ad-gender': old.gender, 'ad-platform': old.platform,
+                    'ad-industry': old.industry, 'ad-platform': old.platform,
                     'ad-goal': old.goal, 'ad-tone': old.tone, 'ad-language': old.language,
-                    'ad-country': old.country, 'ad-state': old.state, 'ad-city': old.city, 'ad-region-other': old.regionOther
+                    'ad-state': old.state, 'ad-city': old.city
                 }).forEach(([id, value]) => { const el = document.getElementById(id); if (el && value) el.value = value; });
-                document.getElementById('ad-state').disabled = !old.country;
-                document.getElementById('ad-city').disabled = !old.state;
-                toggleOtherRegionField();
+                toggleCityField();
                 renderAdPreview();
                 renderAdHistory();
             });
@@ -2497,7 +2424,7 @@
                 event.preventDefault();
                 const payload = readAdGeneratePayload();
                 payload.region = buildRegionText(payload);
-                const required = ['industry', 'subcategory', 'businessType', 'brandName', 'productName', 'coreSelling', 'ageRange', 'country', 'state', 'painPoints', 'platform', 'goal', 'language'];
+                const required = ['industry', 'productName', 'coreSelling', 'targetAudience', 'state', 'platform', 'goal', 'language'];
                 if (required.some((key) => !payload[key])) {
                     alert(AdnovaI18n.t('ad_gen_error_required'));
                     return;
@@ -2506,6 +2433,7 @@
                 window.location.href = 'ad-generate-result.html';
             });
 
+            toggleCityField();
             renderAdPreview();
         }
 
