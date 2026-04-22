@@ -30,7 +30,7 @@
                 <p id="context-line" class="text-gray-600"></p>
             </section>
 
-            <section class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="result-grid"></section>
+            <section id="result-template" class="bg-white rounded-xl shadow-md p-6 space-y-5"></section>
 
             <section class="bg-white rounded-xl shadow-md p-6 flex flex-wrap gap-3">
                 <a href="dashboard.html#ad-generate" data-i18n-key="ad_result_back_edit" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm">返回修改输入</a>
@@ -43,7 +43,7 @@
 const currentUser = requireAuth();
 if (!currentUser) window.location.href = 'login.html';
 const ADNOVA_APP_STATE_KEY = 'adnovaAppState';
-const sections = ['headline','body','cta','imageSuggestion','videoSuggestion','platformFit','languageFit','creativeTips','whatsapp','botOpening','faq'];
+const sections = ['headline','body','cta','imageSuggestion','videoSuggestion','shootingSuggestion','platformFit','audienceFit','whatsapp','botOpening'];
 
 function createId(){return window.crypto?.randomUUID ? window.crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;}
 function getKey(){return `${ADNOVA_APP_STATE_KEY}:${currentUser?.email||'guest'}`;}
@@ -56,31 +56,31 @@ function toneLabel(value){const map={professional:AdnovaI18n.t('ad_gen_tone_prof
 
 function creativeByIndustry(industry){
   const map={
-    beauty:{img:'门店环境图、服务前后对比图',video:'顾客体验短视频、护理流程讲解视频'},
-    food:{img:'产品特写图、门店实拍图',video:'出餐过程视频、制作过程短视频'},
-    decor:{img:'施工前后对比图、案例展示图',video:'现场讲解视频、工地进度短视频'},
-    education:{img:'课程海报、学员反馈图',video:'老师讲解视频、课堂片段视频'}
+    beauty:{img:'门店环境、产品特写、Before/After 对比、客户体验照',video:'开头3秒：顾客肌肤痛点特写；中段：护理流程与效果展示；结尾：引导私信/预约'},
+    food:{img:'店面环境、招牌菜特写、出餐过程、顾客用餐场景',video:'开头3秒：热菜出锅近景；中段：套餐亮点与价格；结尾：立即下单/WhatsApp 咨询'},
+    decor:{img:'施工现场、完工空间、材料细节、客户验收反馈',video:'开头3秒：改造前画面；中段：设计与施工过程；结尾：预约上门量尺'},
+    education:{img:'课堂互动、课程教材、老师特写、学员反馈',video:'开头3秒：学员成果展示；中段：课程内容与优势；结尾：立即咨询课程名额'}
   };
-  return map[industry]||{img:'产品细节图、真实使用场景图',video:'15 秒产品介绍视频、客户评价视频'};
+  return map[industry]||{img:'门店环境、产品特写、Before/After 对比、客户体验照',video:'开头3秒展示痛点；中段强调卖点与优惠；结尾加入明确CTA'};
 }
 
 function composeResults(input){
-  const product=input.productName||input.brandName||'产品';
-  const goal=input.goalLabel||input.goal||'';
-  const pain=input.painPoints||input.coreSelling||'';
+  const product=input.productName||input.brandName||AdnovaI18n.t('ad_result_default_product');
+  const goal=input.goalLabel||input.goal||AdnovaI18n.t('ad_result_default_goal');
   const creative=creativeByIndustry(input.industry);
+  const offerLine = input.offer || AdnovaI18n.t('ad_result_default_offer');
+  const priceLine = input.price ? ` ${AdnovaI18n.t('ad_result_price_prefix')} ${input.price}` : '';
   return {
-    headline:`${product}｜${input.offer || AdnovaI18n.t('ad_result_default_offer')}`,
-    body:`${input.coreSelling || pain}。针对${input.ageRange || AdnovaI18n.t('ad_result_default_group')}人群，围绕“${pain || AdnovaI18n.t('ad_result_default_pain')}”设计清晰转化路径。`,
-    cta: input.goal==='booking' ? AdnovaI18n.t('ad_gen_goal_booking') : AdnovaI18n.t('ad_result_cta_default'),
+    headline: `${product}｜${offerLine}${priceLine}`,
+    body: `${input.coreSelling || AdnovaI18n.t('ad_result_default_pain')}。专为${input.targetAudience || AdnovaI18n.t('ad_result_default_group')}打造，${offerLine}${priceLine}，名额有限，欢迎立即联系了解详情。`,
+    cta: input.goal==='booking' ? AdnovaI18n.t('ad_gen_goal_booking') : (input.goal==='order' ? AdnovaI18n.t('ad_gen_goal_order') : AdnovaI18n.t('ad_result_cta_default')),
     imageSuggestion: creative.img,
     videoSuggestion: creative.video,
-    platformFit:`${input.platformLabel||input.platform}，适合${goal}。`,
-    languageFit: input.languageLabel || input.language || '--',
-    creativeTips: `${AdnovaI18n.t('ad_result_tip_1')}；${AdnovaI18n.t('ad_result_tip_2')}`,
-    whatsapp: `${AdnovaI18n.t('ad_result_whatsapp_opening')} ${product}，${input.offer || AdnovaI18n.t('ad_result_default_offer')}`,
-    botOpening: `${AdnovaI18n.t('ad_result_bot_opening')} ${product}，请问您更关注效果、价格还是服务流程？`,
-    faq: `${AdnovaI18n.t('ad_result_faq_q')}：${input.price || '--'}；${AdnovaI18n.t('ad_result_faq_a')}：${input.delivery || '--'}`
+    shootingSuggestion: AdnovaI18n.t('ad_result_shooting_template'),
+    platformFit: `${input.platformLabel||input.platform}：${goal}`,
+    audienceFit: input.targetAudience || AdnovaI18n.t('ad_result_default_group'),
+    whatsapp: `${AdnovaI18n.t('ad_result_whatsapp_opening')} ${product}，${offerLine}${priceLine}，现在还有档期吗？`,
+    botOpening: `${AdnovaI18n.t('ad_result_bot_opening')}，我是 ${input.brandName || product} 的顾问。请问您想先了解价格、效果还是预约流程？`
   };
 }
 
@@ -100,10 +100,10 @@ function buildRecord(payload, isView){
 
 function render(record){
   document.getElementById('context-line').textContent = AdnovaI18n.t('ad_result_context_rich', undefined, {
-    industry: record.input.industryLabel || record.input.industry || '--', subcategory: record.input.subcategory || '--', platform: record.input.platformLabel || '--', goal: record.input.goalLabel || '--', tone: toneLabel(record.input.tone)
+    industry: record.input.industryLabel || record.input.industry || '--', platform: record.input.platformLabel || '--', goal: record.input.goalLabel || '--', tone: toneLabel(record.input.tone)
   });
-  const grid = document.getElementById('result-grid');
-  grid.innerHTML = record.results.map((item)=>`<article class="bg-white rounded-xl shadow-md p-5"><div class="flex items-start justify-between mb-3"><h3 class="text-base font-semibold text-gray-900">${item.sectionLabel}</h3><span class="text-xs text-gray-500">v${item.versions.length}</span></div><p class="text-sm text-gray-700 mb-4">${item.content}</p><div class="flex flex-wrap gap-2 text-xs"><button class="px-2 py-1 rounded border text-blue-600 js-copy" data-key="${item.key}"><i class="fa fa-copy"></i> ${AdnovaI18n.t('ad_result_copy_item')}</button><button class="px-2 py-1 rounded border text-gray-700 js-regen" data-key="${item.key}">${AdnovaI18n.t('ad_result_regenerate_item')}</button><button class="px-2 py-1 rounded border text-amber-600 js-fav" data-key="${item.key}">${item.starred?'★':'☆'} ${AdnovaI18n.t('ad_result_favorite_item')}</button><button class="px-2 py-1 rounded border text-gray-700 js-history" data-key="${item.key}">${AdnovaI18n.t('ad_result_version_history')}</button></div></article>`).join('');
+  const template = document.getElementById('result-template');
+  template.innerHTML = record.results.map((item)=>`<article class="border border-gray-200 rounded-lg p-4"><div class="flex items-start justify-between gap-3 mb-2"><h3 class="text-base font-semibold text-gray-900">${item.sectionLabel}</h3><button class="px-2 py-1 rounded border text-blue-600 text-xs js-copy" data-key="${item.key}"><i class="fa fa-copy"></i> ${AdnovaI18n.t('ad_result_copy_item')}</button></div><p class="text-sm text-gray-700 whitespace-pre-line">${item.content}</p></article>`).join('');
 }
 
 async function syncSupabase(record){
@@ -145,9 +145,6 @@ document.addEventListener('click',(e)=>{
   const btn=e.target.closest('button'); if(!btn) return;
   const key=btn.dataset.key; const section=record.results.find((r)=>r.key===key); if(!section) return;
   if(btn.classList.contains('js-copy')) navigator.clipboard.writeText(section.content).then(()=>alert(AdnovaI18n.t('ad_result_copy_ok')));
-  if(btn.classList.contains('js-regen')) {section.content = `${section.content} ${AdnovaI18n.t('ad_result_regenerated_suffix')}`; section.versions.push(section.content); render(record); saveRecord();}
-  if(btn.classList.contains('js-fav')) {section.starred=!section.starred; render(record); saveRecord();}
-  if(btn.classList.contains('js-history')) {alert(section.versions.map((v,idx)=>`v${idx+1}: ${v}`).join('\n\n'));}
 });
 </script>
 </body>
