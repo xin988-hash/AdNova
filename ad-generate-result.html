@@ -17,7 +17,7 @@
                 <a href="dashboard.html" class="text-xl font-bold text-primary">Ad<span class="text-blue-500">Nova</span></a>
                 <div class="flex items-center gap-3">
                     <select data-language-selector class="border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="zh">简体中文</option><option value="en">English</option><option value="ms">Bahasa Malaysia</option><option value="formal">书面语言</option>
+                        <option value="zh">简体中文</option><option value="en">English</option><option value="ms">Bahasa Melayu</option>
                     </select>
                     <a href="dashboard.html#ad-generate" class="text-sm text-gray-600 hover:text-blue-500"><i class="fa fa-arrow-left mr-1"></i><span data-i18n-key="ad_result_back">返回AI广告输入页</span></a>
                 </div>
@@ -43,7 +43,7 @@
 const currentUser = requireAuth();
 if (!currentUser) window.location.href = 'login.html';
 const ADNOVA_APP_STATE_KEY = 'adnovaAppState';
-const sections = ['headline','body','cta','platformFit','audienceFit','creativeTips','whatsapp','botOpening','faq'];
+const sections = ['headline','body','cta','imageSuggestion','videoSuggestion','platformFit','languageFit','creativeTips','whatsapp','botOpening','faq'];
 
 function createId(){return window.crypto?.randomUUID ? window.crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;}
 function getKey(){return `${ADNOVA_APP_STATE_KEY}:${currentUser?.email||'guest'}`;}
@@ -54,17 +54,29 @@ function saveState(state){localStorage.setItem(getKey(), JSON.stringify(state));
 function labelForSection(key){return AdnovaI18n.t(`ad_result_section_${key}`);}
 function toneLabel(value){const map={professional:AdnovaI18n.t('ad_gen_tone_professional'),casual:AdnovaI18n.t('ad_gen_tone_casual'),promo:AdnovaI18n.t('ad_gen_tone_promo'),premium:AdnovaI18n.t('ad_gen_tone_premium'),trust:AdnovaI18n.t('ad_gen_tone_trust'),urgent:AdnovaI18n.t('ad_gen_tone_urgent')}; return map[value]||value;}
 
+function creativeByIndustry(industry){
+  const map={
+    beauty:{img:'门店环境图、服务前后对比图',video:'顾客体验短视频、护理流程讲解视频'},
+    food:{img:'产品特写图、门店实拍图',video:'出餐过程视频、制作过程短视频'},
+    decor:{img:'施工前后对比图、案例展示图',video:'现场讲解视频、工地进度短视频'},
+    education:{img:'课程海报、学员反馈图',video:'老师讲解视频、课堂片段视频'}
+  };
+  return map[industry]||{img:'产品细节图、真实使用场景图',video:'15 秒产品介绍视频、客户评价视频'};
+}
+
 function composeResults(input){
   const product=input.productName||input.brandName||'产品';
   const goal=input.goalLabel||input.goal||'';
-  const region=input.region||'';
   const pain=input.painPoints||input.coreSelling||'';
+  const creative=creativeByIndustry(input.industry);
   return {
     headline:`${product}｜${input.offer || AdnovaI18n.t('ad_result_default_offer')}`,
-    body:`${input.coreSelling || pain}。针对${input.ageRange || AdnovaI18n.t('ad_result_default_group')}，围绕“${pain || AdnovaI18n.t('ad_result_default_pain')}”设计转化路径。`,
+    body:`${input.coreSelling || pain}。针对${input.ageRange || AdnovaI18n.t('ad_result_default_group')}人群，围绕“${pain || AdnovaI18n.t('ad_result_default_pain')}”设计清晰转化路径。`,
     cta: input.goal==='booking' ? AdnovaI18n.t('ad_gen_goal_booking') : AdnovaI18n.t('ad_result_cta_default'),
+    imageSuggestion: creative.img,
+    videoSuggestion: creative.video,
     platformFit:`${input.platformLabel||input.platform}，适合${goal}。`,
-    audienceFit:`重点受众：${input.ageRange || '--'} / ${input.gender || '--'} / ${region || '--'}`,
+    languageFit: input.languageLabel || input.language || '--',
     creativeTips: `${AdnovaI18n.t('ad_result_tip_1')}；${AdnovaI18n.t('ad_result_tip_2')}`,
     whatsapp: `${AdnovaI18n.t('ad_result_whatsapp_opening')} ${product}，${input.offer || AdnovaI18n.t('ad_result_default_offer')}`,
     botOpening: `${AdnovaI18n.t('ad_result_bot_opening')} ${product}，请问您更关注效果、价格还是服务流程？`,
@@ -88,7 +100,7 @@ function buildRecord(payload, isView){
 
 function render(record){
   document.getElementById('context-line').textContent = AdnovaI18n.t('ad_result_context_rich', undefined, {
-    industry: record.input.industry || '--', subcategory: record.input.subcategory || '--', platform: record.input.platformLabel || '--', goal: record.input.goalLabel || '--', tone: toneLabel(record.input.tone)
+    industry: record.input.industryLabel || record.input.industry || '--', subcategory: record.input.subcategory || '--', platform: record.input.platformLabel || '--', goal: record.input.goalLabel || '--', tone: toneLabel(record.input.tone)
   });
   const grid = document.getElementById('result-grid');
   grid.innerHTML = record.results.map((item)=>`<article class="bg-white rounded-xl shadow-md p-5"><div class="flex items-start justify-between mb-3"><h3 class="text-base font-semibold text-gray-900">${item.sectionLabel}</h3><span class="text-xs text-gray-500">v${item.versions.length}</span></div><p class="text-sm text-gray-700 mb-4">${item.content}</p><div class="flex flex-wrap gap-2 text-xs"><button class="px-2 py-1 rounded border text-blue-600 js-copy" data-key="${item.key}"><i class="fa fa-copy"></i> ${AdnovaI18n.t('ad_result_copy_item')}</button><button class="px-2 py-1 rounded border text-gray-700 js-regen" data-key="${item.key}">${AdnovaI18n.t('ad_result_regenerate_item')}</button><button class="px-2 py-1 rounded border text-amber-600 js-fav" data-key="${item.key}">${item.starred?'★':'☆'} ${AdnovaI18n.t('ad_result_favorite_item')}</button><button class="px-2 py-1 rounded border text-gray-700 js-history" data-key="${item.key}">${AdnovaI18n.t('ad_result_version_history')}</button></div></article>`).join('');
@@ -115,7 +127,7 @@ const state = loadState();
 if (!viewing) {
   state.adGenerationDetails = [record, ...state.adGenerationDetails.filter((i)=>i.id!==record.id)].slice(0,40);
   const headline = record.results.find((i)=>i.key==='headline')?.content || '--';
-  state.ads.unshift({id:record.id,createdAt:record.createdAt,industry:record.input.industry,industryLabel:record.input.industry,subcategory:record.input.subcategory,platformLabel:record.input.platformLabel,goalLabel:record.input.goalLabel,toneLabel:toneLabel(record.input.tone),languageLabel:record.input.languageLabel,titlePreview:headline,status:record.status,adsCount:record.results.length});
+  state.ads.unshift({id:record.id,createdAt:record.createdAt,industry:record.input.industry,industryLabel:record.input.industryLabel || record.input.industry,subcategory:record.input.subcategory,platformLabel:record.input.platformLabel,goalLabel:record.input.goalLabel,toneLabel:toneLabel(record.input.tone),languageLabel:record.input.languageLabel,titlePreview:headline,status:record.status,adsCount:record.results.length});
   state.ads = state.ads.slice(0,40);
   saveState(state);
   syncSupabase(record);
