@@ -6,8 +6,7 @@
     <title>AdNova - 用户后台</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-    <script src="script.js"></script>
+        <script src="script.js"></script>
     <script src="i18n.js"></script>
     <script src="auth.js"></script>
     <script>
@@ -88,18 +87,6 @@
                         <a href="#account" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="account">
                             <i class="fa fa-user mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                             <span data-i18n-key="dashboard_account">我的账号</span>
-                        </a>
-                        <a href="#bot" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="bot">
-                            <i class="fa fa-comments mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                            <span data-i18n-key="dashboard_bot">Bot系统</span>
-                        </a>
-                        <a href="#analytics" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="analytics">
-                            <i class="fa fa-bar-chart mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                            <span data-i18n-key="dashboard_analytics">数据分析</span>
-                        </a>
-                        <a href="#settings" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="settings">
-                            <i class="fa fa-cog mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                            <span data-i18n-key="dashboard_settings">设置</span>
                         </a>
                     </div>
                 </nav>
@@ -202,18 +189,6 @@
                                 <i class="fa fa-user mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                                 <span data-i18n-key="dashboard_account">我的账号</span>
                             </a>
-                            <a href="#bot" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="bot">
-                                <i class="fa fa-comments mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                                <span data-i18n-key="dashboard_bot">Bot系统</span>
-                            </a>
-                            <a href="#analytics" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="analytics">
-                                <i class="fa fa-bar-chart mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                                <span data-i18n-key="dashboard_analytics">数据分析</span>
-                            </a>
-                            <a href="#settings" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="settings">
-                                <i class="fa fa-cog mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                                <span data-i18n-key="dashboard_settings">设置</span>
-                            </a>
                         </nav>
                     </div>
                     <div class="flex-shrink-0 flex border-t border-dark-light p-4">
@@ -241,214 +216,39 @@
             <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-gray-50">
                 <!-- 总览页面 -->
                 <div id="dashboard-page" class="page-content">
-                    <!-- 数据卡片 -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">今日点击数</p>
-                                    <p id="kpi-clicks-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
-                                    <p class="text-sm font-medium text-green-600 mt-1">
-                                        <i class="fa fa-arrow-up mr-1"></i>
-                                        <span>暂无对比</span>
-                                    </p>
-                                </div>
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fa fa-mouse-pointer text-accent text-xl"></i>
-                                </div>
-                            </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white rounded-xl shadow-md p-6 lg:col-span-2">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Welcome back</h3>
+                            <p class="text-gray-600">Create, save, and publish high-performing creatives with AI guidance. Your workflow remains simple and fast.</p>
                         </div>
-
-                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">今日私信数</p>
-                                    <p id="kpi-messages-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
-                                    <p class="text-sm font-medium text-green-600 mt-1">
-                                        <i class="fa fa-arrow-up mr-1"></i>
-                                        <span>暂无对比</span>
-                                    </p>
-                                </div>
-                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                                    <i class="fa fa-comments text-green-600 text-xl"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">今日潜在客户数</p>
-                                    <p id="kpi-leads-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
-                                    <p class="text-sm font-medium text-green-600 mt-1">
-                                        <i class="fa fa-arrow-up mr-1"></i>
-                                        <span>暂无对比</span>
-                                    </p>
-                                </div>
-                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                                    <i class="fa fa-users text-purple-600 text-xl"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">转化率</p>
-                                    <p id="kpi-conversion-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
-                                    <p class="text-sm font-medium text-red-600 mt-1">
-                                        <i class="fa fa-arrow-down mr-1"></i>
-                                        <span>暂无对比</span>
-                                    </p>
-                                </div>
-                                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                                    <i class="fa fa-line-chart text-yellow-600 text-xl"></i>
-                                </div>
-                            </div>
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Today</h3>
+                            <p class="text-2xl font-bold text-gray-900">Ready to launch?</p>
+                            <p class="text-sm text-gray-600 mt-2">Generate new ideas or publish a saved variation in a few clicks.</p>
                         </div>
                     </div>
 
-                    <!-- 图表区域 -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                        <!-- 趋势图 -->
-                        <div class="bg-white rounded-xl shadow-md p-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-semibold text-gray-900">7天趋势</h3>
-                                <div class="flex space-x-2">
-                                    <button data-trend-metric="clicks" class="px-3 py-1 text-xs font-medium bg-accent text-white rounded-full">点击</button>
-                                    <button data-trend-metric="messages" class="px-3 py-1 text-xs font-medium bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors">私信</button>
-                                    <button data-trend-metric="leads" class="px-3 py-1 text-xs font-medium bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors">潜在客户</button>
-                                </div>
-                            </div>
-                            <div class="h-64">
-                                <canvas id="trends-chart"></canvas>
-                            </div>
-                        </div>
-
-                        <!-- 漏斗图 -->
-                        <div class="bg-white rounded-xl shadow-md p-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-semibold text-gray-900">转化漏斗</h3>
-                                <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option>最近7天</option>
-                                    <option>最近30天</option>
-                                    <option>最近90天</option>
-                                </select>
-                            </div>
-                            <div class="h-64">
-                                <canvas id="funnel-chart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 最近活动 -->
                     <div class="bg-white rounded-xl shadow-md p-6">
                         <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900">最近活动</h3>
-                            <button class="text-accent hover:text-blue-700 text-sm font-medium">查看全部</button>
+                            <h3 class="text-lg font-semibold text-gray-900">Recent Activity</h3>
+                            <button class="text-accent hover:text-blue-700 text-sm font-medium">View all</button>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead>
                                     <tr>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">活动类型</th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">详情</th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Activity</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                     </tr>
                                 </thead>
-                                <tbody id="recent-activities-body" class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="flex-shrink-0 h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                                    <i class="fa fa-magic text-accent"></i>
-                                                </div>
-                                                <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">AI广告生成</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">生成了3条美容行业广告</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">今天 14:32</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">成功</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="flex-shrink-0 h-8 w-8 bg-purple-100 rounded-full flex items-center justify-center">
-                                                    <i class="fa fa-comments text-purple-600"></i>
-                                                </div>
-                                                <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">Bot导入</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">导入了美容行业预约流程</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">今天 11:15</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">成功</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="flex-shrink-0 h-8 w-8 bg-yellow-100 rounded-full flex items-center justify-center">
-                                                    <i class="fa fa-download text-yellow-600"></i>
-                                                </div>
-                                                <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">广告下载</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">下载了餐饮行业促销广告</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">昨天 16:45</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">成功</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="flex-shrink-0 h-8 w-8 bg-red-100 rounded-full flex items-center justify-center">
-                                                    <i class="fa fa-exclamation-triangle text-red-600"></i>
-                                                </div>
-                                                <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">广告生成失败</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">装修行业广告生成失败</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-500">昨天 10:23</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">失败</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <tbody id="recent-activities-body" class="bg-white divide-y divide-gray-200"></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- AI广告生成页面 -->
                 <div id="ad-generate-page" class="page-content hidden">
                     <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
                         <section class="bg-white rounded-2xl shadow-md border border-purple-100 p-6">
@@ -668,232 +468,6 @@
                 </div>
 
                 <!-- 数据分析页面 -->
-                <div id="analytics-page" class="page-content hidden">
-                    <!-- 数据卡片 -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">平均获客成本 (CPL)</p>
-                                    <p id="analytics-cpl-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
-                                    <p class="text-sm font-medium text-green-600 mt-1">
-                                        <i class="fa fa-arrow-down mr-1"></i>
-                                        <span>暂无对比</span>
-                                    </p>
-                                </div>
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fa fa-money text-accent text-xl"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">总体转化率</p>
-                                    <p id="analytics-conversion-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
-                                    <p class="text-sm font-medium text-green-600 mt-1">
-                                        <i class="fa fa-arrow-up mr-1"></i>
-                                        <span>暂无对比</span>
-                                    </p>
-                                </div>
-                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                                    <i class="fa fa-percent text-green-600 text-xl"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-xl shadow-md p-6 card-hover">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">平均回复时间</p>
-                                    <p id="analytics-response-value" class="text-2xl font-bold text-gray-900 mt-1">--</p>
-                                    <p class="text-sm font-medium text-green-600 mt-1">
-                                        <i class="fa fa-arrow-down mr-1"></i>
-                                        <span>暂无对比</span>
-                                    </p>
-                                </div>
-                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                                    <i class="fa fa-clock-o text-purple-600 text-xl"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 图表区域 -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                        <!-- 广告效果对比 -->
-                        <div class="bg-white rounded-xl shadow-md p-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-semibold text-gray-900">广告效果对比</h3>
-                                <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option>最近30天</option>
-                                    <option>最近7天</option>
-                                    <option>最近90天</option>
-                                </select>
-                            </div>
-                            <div class="h-64">
-                                <canvas id="ads-comparison-chart"></canvas>
-                            </div>
-                        </div>
-
-                        <!-- 客户来源 -->
-                        <div class="bg-white rounded-xl shadow-md p-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-semibold text-gray-900">客户来源</h3>
-                                <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option>最近30天</option>
-                                    <option>最近7天</option>
-                                    <option>最近90天</option>
-                                </select>
-                            </div>
-                            <div class="h-64">
-                                <canvas id="customer-source-chart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 详细数据表格 -->
-                    <div class="bg-white rounded-xl shadow-md p-6">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900">详细数据</h3>
-                            <div class="flex space-x-2">
-                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm font-medium transition-colors">
-                                    <i class="fa fa-download mr-1"></i> 导出
-                                </button>
-                                <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option>所有广告</option>
-                                    <option>AI生成广告</option>
-                                    <option>广告广告</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead>
-                                    <tr>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">广告名称</th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">类型</th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">曝光量</th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">点击量</th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">点击率</th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">转化量</th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">转化率</th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CPL</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="analytics-table-body" class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">美容护肤促销</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">AI生成</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">12,458</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">1,248</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">10.0%</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">89</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">7.1%</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">RM28.5</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">餐厅特惠活动</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">广告</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">8,742</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">699</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">8.0%</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">34</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">4.9%</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">RM35.2</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">装修设计咨询</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">AI生成</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">5,631</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">450</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">8.0%</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">18</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">4.0%</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">RM42.8</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">健身会员招募</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">广告</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">7,892</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">552</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">7.0%</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">22</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">4.0%</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">RM38.6</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 设置页面 -->
                 <div id="settings-page" class="page-content hidden">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <!-- 账号绑定 -->
@@ -1139,7 +713,7 @@
 
             // 初始化页面（支持从 hash 直接进入指定页面）
             const initialHashPage = (window.location.hash || '').replace('#', '');
-            const supportedPages = ['dashboard', 'ad-generate', 'saved-ads', 'ad-publish', 'billing', 'account', 'bot', 'analytics', 'settings'];
+            const supportedPages = ['dashboard', 'ad-generate', 'saved-ads', 'ad-publish', 'billing', 'account'];
             showPage(supportedPages.includes(initialHashPage) ? initialHashPage : 'dashboard');
             
             // 导航点击事件
@@ -1164,7 +738,7 @@
             });
             
             // 初始化图表
-            initCharts();
+            
             initNewUserState();
             initSocialBinding();
             initMediaCenter();
@@ -1250,7 +824,6 @@
                         billing: '账单',
                         account: '我的账号',
                         bot: 'Bot系统',
-                        analytics: '数据分析',
                         settings: '设置'
                     },
                     en: {
@@ -1261,7 +834,6 @@
                         billing: 'Billing',
                         account: 'My Account',
                         bot: 'Bot System',
-                        analytics: 'Analytics',
                         settings: 'Settings'
                     },
                     ms: {
@@ -1272,7 +844,6 @@
                         billing: 'Bil',
                         account: 'Akaun Saya',
                         bot: 'Sistem Bot',
-                        analytics: 'Analitik',
                         settings: 'Tetapan'
                     },
                     formal: {
@@ -1283,7 +854,6 @@
                         billing: '账单管理',
                         account: '我的账号',
                         bot: '自动回复系统',
-                        analytics: '数据分析中心',
                         settings: '系统设置'
                     }
                 };
@@ -1302,140 +872,7 @@
         }
         
         // 初始化图表（新用户空状态：图表存在但无样例业务数据）
-        function initCharts() {
-            const EMPTY_PLUGIN = {
-                id: 'adnovaEmptyState',
-                afterDraw(chart) {
-                    const hasData = chart.data.datasets.some((dataset) => {
-                        const values = dataset.data || [];
-                        return values.some((value) => Number(value) > 0);
-                    });
-                    if (hasData) return;
-
-                    const { ctx, chartArea } = chart;
-                    if (!chartArea) return;
-
-                    const x = (chartArea.left + chartArea.right) / 2;
-                    const y = (chartArea.top + chartArea.bottom) / 2;
-
-                    ctx.save();
-                    ctx.fillStyle = '#6B7280';
-                    ctx.font = '14px Inter, sans-serif';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('暂无数据', x, y - 6);
-                    ctx.font = '12px Inter, sans-serif';
-                    ctx.fillStyle = '#9CA3AF';
-                    ctx.fillText('完成广告生成并开始投放后自动显示', x, y + 16);
-                    ctx.restore();
-                }
-            };
-
-            const commonEmptyOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: { beginAtZero: true, suggestedMax: 10, ticks: { stepSize: 2 } }
-                }
-            };
-
-            const trendsCtx = document.getElementById('trends-chart');
-            if (trendsCtx) {
-                new Chart(trendsCtx, {
-                    type: 'line',
-                    plugins: [EMPTY_PLUGIN],
-                    data: {
-                        labels: ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7'],
-                        datasets: [{
-                            label: '点击数',
-                            data: [0, 0, 0, 0, 0, 0, 0],
-                            borderColor: '#3B82F6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.08)',
-                            tension: 0.4,
-                            fill: true
-                        }]
-                    },
-                    options: commonEmptyOptions
-                });
-            }
-
-            const funnelCtx = document.getElementById('funnel-chart');
-            if (funnelCtx) {
-                new Chart(funnelCtx, {
-                    type: 'bar',
-                    plugins: [EMPTY_PLUGIN],
-                    data: {
-                        labels: ['曝光', '点击', '私信', '留资'],
-                        datasets: [{
-                            label: '用户数量',
-                            data: [0, 0, 0, 0],
-                            backgroundColor: [
-                                'rgba(59, 130, 246, 0.35)',
-                                'rgba(59, 130, 246, 0.3)',
-                                'rgba(59, 130, 246, 0.25)',
-                                'rgba(59, 130, 246, 0.2)'
-                            ],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        ...commonEmptyOptions,
-                        indexAxis: 'y'
-                    }
-                });
-            }
-
-            const adsComparisonCtx = document.getElementById('ads-comparison-chart');
-            if (adsComparisonCtx) {
-                new Chart(adsComparisonCtx, {
-                    type: 'bar',
-                    plugins: [EMPTY_PLUGIN],
-                    data: {
-                        labels: ['广告A', '广告B', '广告C', '广告D'],
-                        datasets: [{
-                            label: '点击量',
-                            data: [0, 0, 0, 0],
-                            backgroundColor: '#3B82F6',
-                            order: 2
-                        }, {
-                            label: '转化量',
-                            data: [0, 0, 0, 0],
-                            backgroundColor: '#22C55E',
-                            order: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { position: 'top' } },
-                        scales: { y: { beginAtZero: true, suggestedMax: 10 } }
-                    }
-                });
-            }
-
-            const customerSourceCtx = document.getElementById('customer-source-chart');
-            if (customerSourceCtx) {
-                new Chart(customerSourceCtx, {
-                    type: 'doughnut',
-                    plugins: [EMPTY_PLUGIN],
-                    data: {
-                        labels: ['Facebook', 'Instagram', 'WhatsApp', '其他'],
-                        datasets: [{
-                            data: [0, 0, 0, 0],
-                            backgroundColor: ['#BFDBFE', '#FBCFE8', '#BBF7D0', '#E5E7EB'],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { position: 'bottom' } }
-                    }
-                });
-            }
-        }
+        function initCharts() {}
 
         function setEmptyTableState(tbodyId, colSpan, message) {
             const tbody = document.getElementById(tbodyId);
@@ -1459,7 +896,7 @@
             renderPublishAdOptions();
             renderPublishMaterials();
             renderPublishPlatforms();
-            setEmptyTableState('analytics-table-body', 8, '暂无分析数据，完成投放后会自动生成报表。');
+            
         }
 
         function renderRecentActivities() {
@@ -1598,7 +1035,7 @@
                     runPanel.innerHTML=`<h4 class="text-lg font-semibold">Run Ads Publishing</h4><p class="text-sm text-gray-600">Everything is prepared. Just paste it into Meta Ads Manager to launch your ad.</p><div class="rounded-xl border border-purple-100 p-4"><p><b>Selected ad content:</b> ${item?.title||'No saved ad selected'}</p><p><b>Targeting suggestion:</b> ${item?.audience||'Interest + lookalike audience'}</p><p><b>Budget suggestion:</b> ${item?.budget||'RM80/day'}</p><p><b>Platform reminder:</b> Meta Ads Manager</p></div><div class="flex flex-wrap gap-3"><button id="copy-ad-copy" class="px-4 py-2 rounded-lg border">Copy Copywriting</button><button id="copy-ad-all" class="px-4 py-2 rounded-lg border">Copy Everything</button><a href="https://adsmanager.facebook.com/" target="_blank" class="px-4 py-2 rounded-lg bg-accent text-white">Open Meta Ads Manager</a></div>`;
                 } else {
                     runPanel.innerHTML='';
-                    contentPanel.innerHTML=`<h4 class="text-lg font-semibold">Create Content Publishing</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><select id="publish-content-platform" class="border border-purple-100 rounded-xl px-3 py-2"><option>Facebook</option><option>Instagram</option></select><select id="publish-content-type" class="border border-purple-100 rounded-xl px-3 py-2"><option>Post</option><option>Reels</option></select></div><div id="content-publish-view" class="rounded-xl border border-purple-100 p-4 text-sm"></div><div class="flex flex-wrap gap-3"><button id="copy-caption" class="px-4 py-2 rounded-lg border">Copy Caption</button><button id="copy-content-all" class="px-4 py-2 rounded-lg border">Copy Everything</button><a href="https://www.facebook.com/" target="_blank" class="px-4 py-2 rounded-lg border">Open Facebook</a><a href="https://www.instagram.com/" target="_blank" class="px-4 py-2 rounded-lg border">Open Instagram</a></div>`;
+                    contentPanel.innerHTML=`<h4 class="text-lg font-semibold">Create Content Publishing</h4><div class="rounded-xl border border-purple-100 bg-purple-50/40 p-4 text-sm"><p class="font-semibold text-purple-700 mb-2">Smart Insight</p><div class="grid grid-cols-2 gap-2"><span>Engagement Score: 81/100</span><span>Best Platform Fit: Instagram Reels</span><span>Recommended Format: Short vertical video</span><span>Expected Reach Potential: Medium-High</span></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><select id="publish-content-platform" class="border border-purple-100 rounded-xl px-3 py-2"><option>Facebook</option><option>Instagram</option></select><select id="publish-content-type" class="border border-purple-100 rounded-xl px-3 py-2"><option>Post</option><option>Reels</option></select></div><div id="content-publish-view" class="rounded-xl border border-purple-100 p-4 text-sm"></div><div class="flex flex-wrap gap-3"><button id="copy-caption" class="px-4 py-2 rounded-lg border">Copy Caption</button><button id="copy-content-all" class="px-4 py-2 rounded-lg border">Copy Everything</button><a href="https://www.facebook.com/" target="_blank" class="px-4 py-2 rounded-lg border">Open Facebook</a><a href="https://www.instagram.com/" target="_blank" class="px-4 py-2 rounded-lg border">Open Instagram</a></div>`;
                     const updateView=()=>{const p=document.getElementById('publish-content-platform')?.value||'Facebook';const t=document.getElementById('publish-content-type')?.value||'Post';const v=document.getElementById('content-publish-view');if(v)v.innerHTML=`Preparing <b>${p} ${t}</b> package. Copy and paste into ${p}.`;};
                     document.getElementById('publish-content-platform')?.addEventListener('change',updateView);
                     document.getElementById('publish-content-type')?.addEventListener('change',updateView);
@@ -2011,7 +1448,7 @@ if (target.classList.contains('js-download-ad')) {
         }
         function refreshModeFields(){const c=modeConfig();const g=document.getElementById('ad-goal');const p=document.getElementById('ad-platform');const ct=document.getElementById('ad-content-type');const budget=document.getElementById('ad-budget-suggestion');document.getElementById('mode-fields-title').textContent=c.title;g.innerHTML='<option value=>'+(currentGenerationMode==='run_ads'?'Campaign Goal':'Content Goal')+'</option>'+c.goals.map(v=>`<option>${v}</option>`).join('');p.innerHTML='<option value=>'+(currentGenerationMode==='run_ads'?'Platform':'Content Platform')+'</option>'+c.platforms.map(v=>`<option>${v}</option>`).join('');if(currentGenerationMode==='run_ads'){budget.classList.remove('hidden');ct.classList.add('hidden');}else{budget.classList.add('hidden');ct.classList.remove('hidden');ct.innerHTML='<option value=>Content Type</option>'+c.contentTypes.map(v=>`<option>${v}</option>`).join('');}document.querySelectorAll('.mode-btn').forEach(btn=>{const on=btn.dataset.mode===currentGenerationMode;btn.className='mode-btn px-4 py-2 rounded-lg text-sm font-semibold '+(on?'bg-white text-gray-900 shadow':'text-gray-600');});}
         function initAdGenerate(){document.getElementById('ad-tone').innerHTML='<option value=>Tone</option><option>Professional</option><option>Friendly</option><option>Premium</option>';document.getElementById('ad-language').innerHTML='<option value=>Language</option><option>English</option><option>Bahasa Melayu</option><option>中文</option>';document.querySelectorAll('.mode-btn').forEach(btn=>btn.addEventListener('click',()=>{currentGenerationMode=btn.dataset.mode;refreshModeFields();}));refreshModeFields();document.getElementById('ad-generate-form')?.addEventListener('submit',(e)=>{e.preventDefault();const payload={industry:document.getElementById('ad-industry').value.trim(),productName:document.getElementById('ad-product-name').value.trim(),offer:document.getElementById('ad-offer').value.trim(),targetAudience:document.getElementById('ad-target-audience').value.trim(),platform:document.getElementById('ad-platform').value,goal:document.getElementById('ad-goal').value,budget:document.getElementById('ad-budget-suggestion').value.trim(),contentType:document.getElementById('ad-content-type').value};renderGeneratedCards(payload);});}
-        function renderGeneratedCards(payload){const wrap=document.getElementById('ad-generated-results');const empty=document.getElementById('ad-empty-state');if(!wrap||!empty)return;const cards=[1,2,3].map(i=>currentGenerationMode==='run_ads'?{title:`${payload.productName||'Ad'} Title ${i}`,copy:`${payload.offer||'Offer'} tailored for ${payload.targetAudience||'your audience'}.`,cta:'Send Message Now',video:'Scene 1 hook, scene 2 offer, scene 3 CTA',image:'Show product in use with brand colors',tips:'Use natural lighting and clear close-ups',audience:`${payload.targetAudience||'Local audience'} + lookalike`,budget:payload.budget||'RM80/day'}:{title:`${payload.productName||'Content'} Hook ${i}`,copy:`${payload.offer||'Value story'} for ${payload.targetAudience||'community'}.`,caption:'Save this for later and follow for more updates.',video:'5-8 second hook, value point, CTA',hook:'Stop scrolling! Here is what most people miss...',hashtags:'#business #marketing #content',image:'UGC style vertical visual',tips:'Fast pacing, subtitle first line bold',platform:`${payload.platform||'Facebook'} ${payload.contentType||'Post'}`});wrap.innerHTML=cards.map((x,idx)=>`<article class="rounded-2xl border border-purple-100 shadow-sm p-5 bg-white"><h4 class="font-semibold text-gray-900 mb-3">Version ${idx+1}</h4>${currentGenerationMode==='run_ads'?`<p><b>Title:</b> ${x.title}</p><p><b>Main Copy:</b> ${x.copy}</p><p><b>CTA:</b> ${x.cta}</p><p><b>Video Script:</b> ${x.video}</p><p><b>Image Suggestion:</b> ${x.image}</p><p><b>Shooting Tips:</b> ${x.tips}</p><p><b>Suggested Audience:</b> ${x.audience}</p><p><b>Suggested Budget:</b> ${x.budget}</p>`:`<p><b>Hook / Post Title:</b> ${x.title}</p><p><b>Main Copy:</b> ${x.copy}</p><p><b>Caption:</b> ${x.caption}</p><p><b>Video Script:</b> ${x.video}</p><p><b>Opening Hook:</b> ${x.hook}</p><p><b>Hashtag Suggestions:</b> ${x.hashtags}</p><p><b>Image Suggestion:</b> ${x.image}</p><p><b>Shooting Tips:</b> ${x.tips}</p><p><b>Suggested Platform:</b> ${x.platform}</p>`}<div class="mt-4 flex gap-2"><button class="px-3 py-1.5 rounded-lg border js-save-generated" data-title="${x.title}" data-preview="${x.copy}" data-audience="${x.audience||''}" data-budget="${x.budget||''}">Save</button><button class="px-3 py-1.5 rounded-lg border">Regenerate</button><button class="px-3 py-1.5 rounded-lg border js-copy-variation" data-copy="${x.title} ${x.copy}">Copy</button></div></article>`).join('');empty.classList.add('hidden');wrap.classList.remove('hidden');}
+        function renderGeneratedCards(payload){const wrap=document.getElementById('ad-generated-results');const empty=document.getElementById('ad-empty-state');if(!wrap||!empty)return;const boost=(payload.offer?8:0)+(payload.targetAudience?6:0)+(payload.platform?4:0);const cards=[1,2,3].map(i=>currentGenerationMode==='run_ads'?{title:`${payload.productName||'Ad'} Title ${i}`,copy:`${payload.offer||'Offer'} tailored for ${payload.targetAudience||'your audience'}.`,cta:'Send Message Now',video:'Scene 1 hook, scene 2 offer, scene 3 CTA',image:'Show product in use with brand colors',tips:'Use natural lighting and clear close-ups',audience:`${payload.targetAudience||'Local audience'} + lookalike`,budget:payload.budget||'RM80/day'}:{title:`${payload.productName||'Content'} Hook ${i}`,copy:`${payload.offer||'Value story'} for ${payload.targetAudience||'community'}.`,caption:'Save this for later and follow for more updates.',video:'5-8 second hook, value point, CTA',hook:'Stop scrolling! Here is what most people miss...',hashtags:'#business #marketing #content',image:'UGC style vertical visual',tips:'Fast pacing, subtitle first line bold',platform:`${payload.platform||'Facebook'} ${payload.contentType||'Post'}`});const predict=(i)=>currentGenerationMode==='run_ads'?`<div class="mt-4 rounded-xl border border-purple-100 bg-purple-50/40 p-3 text-sm"><p class="font-semibold text-purple-700 mb-2">AI Prediction</p><div class="grid grid-cols-2 gap-2 text-gray-700"><span>Estimated CTR: ${(2.1+i*0.4+boost/20).toFixed(1)}%</span><span>Engagement Score: ${74+i*4+boost}/100</span><span>Conversion Potential: ${payload.goal==='Sales'?'High':'Medium'}</span><span>Suggested Budget: ${payload.budget||'RM30–RM50/day'}</span><span class="col-span-2">Audience Match: ${payload.targetAudience?'Strong':'Moderate'}</span></div><p class="text-purple-800 mt-2">This version is best for message-based campaigns.</p></div>`:`<div class="mt-4 rounded-xl border border-purple-100 bg-purple-50/40 p-3 text-sm"><p class="font-semibold text-purple-700 mb-2">Performance Estimate</p><div class="grid grid-cols-2 gap-2 text-gray-700"><span>Engagement Score: ${72+i*5+boost}/100</span><span>Scroll-Stop: ${payload.contentType==='Reels'?'High':'Medium'}</span><span>Virality Potential: ${payload.contentType==='Reels'?'High':'Growing'}</span><span>Platform Fit: ${payload.platform||'Facebook'}</span><span class="col-span-2">Content Format Fit: ${payload.contentType||'Post'}</span></div><p class="text-purple-800 mt-2">This version is optimized for engagement.</p></div>`;wrap.innerHTML=cards.map((x,idx)=>`<article class="rounded-2xl border border-purple-100 shadow-sm p-5 bg-white"><h4 class="font-semibold text-gray-900 mb-3">Version ${idx+1}</h4>${currentGenerationMode==='run_ads'?`<p><b>Title:</b> ${x.title}</p><p><b>Main Copy:</b> ${x.copy}</p><p><b>CTA:</b> ${x.cta}</p><p><b>Video Script:</b> ${x.video}</p><p><b>Image Suggestion:</b> ${x.image}</p><p><b>Shooting Tips:</b> ${x.tips}</p><p><b>Suggested Audience:</b> ${x.audience}</p><p><b>Suggested Budget:</b> ${x.budget}</p>`:`<p><b>Hook / Post Title:</b> ${x.title}</p><p><b>Main Copy:</b> ${x.copy}</p><p><b>Caption:</b> ${x.caption}</p><p><b>Video Script:</b> ${x.video}</p><p><b>Opening Hook:</b> ${x.hook}</p><p><b>Hashtag Suggestions:</b> ${x.hashtags}</p><p><b>Image Suggestion:</b> ${x.image}</p><p><b>Shooting Tips:</b> ${x.tips}</p><p><b>Suggested Platform:</b> ${x.platform}</p>`}${predict(idx+1)}<div class="mt-4 flex gap-2"><button class="px-3 py-1.5 rounded-lg border js-save-generated" data-title="${x.title}" data-preview="${x.copy}" data-audience="${x.audience||''}" data-budget="${x.budget||''}">Save</button><button class="px-3 py-1.5 rounded-lg border">Regenerate</button><button class="px-3 py-1.5 rounded-lg border js-copy-variation" data-copy="${x.title} ${x.copy}">Copy</button></div></article>`).join('');empty.classList.add('hidden');wrap.classList.remove('hidden');}
 
         function initBotSystem() {
             const industrySelect = document.getElementById('bot-industry');
