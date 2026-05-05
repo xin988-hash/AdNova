@@ -73,10 +73,23 @@
                             <i class="fa fa-magic mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                             <span data-i18n-key="dashboard_ad_generate">AI广告生成</span>
                         </a>
+                        <a href="#saved-ads" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="saved-ads">
+                            <i class="fa fa-bookmark mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                            <span data-i18n-key="dashboard_saved_ads">已保存广告</span>
+                        </a>
                         <a href="#ad-publish" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-publish">
                             <i class="fa fa-bullhorn mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                             <span data-i18n-key="dashboard_ad_publish">广告发布</span>
                         </a>
+                        <a href="#billing" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="billing">
+                            <i class="fa fa-credit-card mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                            <span data-i18n-key="dashboard_billing">账单</span>
+                        </a>
+                        <a href="#account" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="account">
+                            <i class="fa fa-user mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                            <span data-i18n-key="dashboard_account">我的账号</span>
+                        </a>
+                        <div class="sidebar-section-label">Tools</div>
                         <a href="#bot" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="bot">
                             <i class="fa fa-comments mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                             <span data-i18n-key="dashboard_bot">Bot系统</span>
@@ -174,10 +187,23 @@
                                 <i class="fa fa-magic mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                                 <span data-i18n-key="dashboard_ad_generate">AI广告生成</span>
                             </a>
+                            <a href="#saved-ads" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="saved-ads">
+                                <i class="fa fa-bookmark mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                                <span data-i18n-key="dashboard_saved_ads">已保存广告</span>
+                            </a>
                             <a href="#ad-publish" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-publish">
                                 <i class="fa fa-bullhorn mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                                 <span data-i18n-key="dashboard_ad_publish">广告发布</span>
                             </a>
+                            <a href="#billing" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="billing">
+                                <i class="fa fa-credit-card mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                                <span data-i18n-key="dashboard_billing">账单</span>
+                            </a>
+                            <a href="#account" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="account">
+                                <i class="fa fa-user mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
+                                <span data-i18n-key="dashboard_account">我的账号</span>
+                            </a>
+                            <div class="sidebar-section-label">Tools</div>
                             <a href="#bot" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="bot">
                                 <i class="fa fa-comments mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                                 <span data-i18n-key="dashboard_bot">Bot系统</span>
@@ -527,6 +553,38 @@
                     </div>
                 </div>
 
+                <!-- 已保存广告页面 -->
+                <div id="saved-ads-page" class="page-content hidden">
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n-key="dashboard_saved_ads">已保存广告</h3>
+                                <p class="text-gray-600">查看、复制、再生成或删除已保存的 AI 广告记录。</p>
+                            </div>
+                            <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium" data-page="ad-generate">
+                                <i class="fa fa-magic mr-1"></i> 新建广告
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">时间</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">广告标题</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">行业</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">平台</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">状态</th>
+                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="saved-ads-body" class="bg-white divide-y divide-gray-200"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 广告发布页面 -->
                 <div id="ad-publish-page" class="page-content hidden">
                     <div class="bg-white rounded-xl shadow-md p-6 mb-6">
@@ -583,6 +641,65 @@
                                 确认并发布
                             </button>
                             <p class="text-xs text-gray-500 mt-3">系统会自动校验所选平台最低日预算规则（以页面显示规则为准）。</p>
+                        </aside>
+                    </div>
+                </div>
+
+                <!-- 账单页面 -->
+                <div id="billing-page" class="page-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <section class="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n-key="dashboard_billing">账单</h3>
+                            <p class="text-gray-600 mb-6">管理套餐、订阅额度与付款设置。</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-5 rounded-xl border border-accent bg-blue-50">
+                                    <p class="text-sm text-gray-600 mb-1">当前套餐</p>
+                                    <p class="text-2xl font-bold text-gray-900">专业版</p>
+                                    <p class="text-sm text-gray-600 mt-2">有效期至：2026-12-31</p>
+                                </div>
+                                <div class="p-5 rounded-xl border border-gray-200">
+                                    <p class="text-sm text-gray-600 mb-1">本月广告生成</p>
+                                    <p class="text-2xl font-bold text-gray-900">50 / 50</p>
+                                    <div class="w-full bg-gray-200 rounded-full h-2 mt-3"><div class="bg-accent h-2 rounded-full" style="width: 100%"></div></div>
+                                </div>
+                            </div>
+                            <div class="mt-6 overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead><tr><th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">日期</th><th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">项目</th><th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">金额</th><th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">状态</th></tr></thead>
+                                    <tbody class="bg-white divide-y divide-gray-200"><tr><td class="px-4 py-4 text-sm text-gray-900">2026-05-01</td><td class="px-4 py-4 text-sm text-gray-900">专业版订阅</td><td class="px-4 py-4 text-sm text-gray-900">RM199</td><td class="px-4 py-4"><span class="badge badge-success">已支付</span></td></tr></tbody>
+                                </table>
+                            </div>
+                        </section>
+                        <aside class="bg-white rounded-xl shadow-md p-6 h-fit">
+                            <h4 class="text-md font-semibold text-gray-900 mb-4">套餐操作</h4>
+                            <button class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium mb-3">升级套餐</button>
+                            <button class="w-full bg-white border border-gray-300 text-gray-700 py-3 rounded-md font-medium hover:bg-gray-50">管理付款方式</button>
+                        </aside>
+                    </div>
+                </div>
+
+                <!-- 我的账号页面 -->
+                <div id="account-page" class="page-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <section class="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n-key="dashboard_account">我的账号</h3>
+                            <p class="text-gray-600 mb-6">查看账户资料、语言偏好与登录状态。</p>
+                            <div class="flex items-center gap-4 p-4 rounded-xl border border-gray-200 mb-6">
+                                <div class="w-14 h-14 rounded-full bg-accent text-white flex items-center justify-center text-2xl"><i class="fa fa-user"></i></div>
+                                <div>
+                                    <p id="account-user-email" class="font-semibold text-gray-900">-</p>
+                                    <p class="text-sm text-gray-500">Pro User</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div><label class="block text-sm font-medium text-gray-700 mb-1">显示名称</label><input id="account-display-name" class="w-full border border-gray-300 rounded-md px-3 py-2" placeholder="AdNova User"></div>
+                                <div><label class="block text-sm font-medium text-gray-700 mb-1">语言</label><select data-language-selector class="premium-select w-full"><option value="zh">简体中文</option><option value="en">English</option><option value="ms">Bahasa Melayu</option></select></div>
+                            </div>
+                        </section>
+                        <aside class="bg-white rounded-xl shadow-md p-6 h-fit">
+                            <h4 class="text-md font-semibold text-gray-900 mb-4">账户控制</h4>
+                            <a href="index.html" class="w-full mb-3 inline-flex justify-center bg-white border border-gray-300 text-gray-700 py-3 rounded-md font-medium hover:bg-gray-50">返回首页</a>
+                            <button id="account-logout-btn" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium">退出账号</button>
                         </aside>
                     </div>
                 </div>
@@ -1179,7 +1296,7 @@
 
             // 初始化页面（支持从 hash 直接进入指定页面）
             const initialHashPage = (window.location.hash || '').replace('#', '');
-            const supportedPages = ['dashboard', 'ad-generate', 'ad-publish', 'bot', 'analytics', 'settings'];
+            const supportedPages = ['dashboard', 'ad-generate', 'saved-ads', 'ad-publish', 'billing', 'account', 'bot', 'analytics', 'settings'];
             showPage(supportedPages.includes(initialHashPage) ? initialHashPage : 'dashboard');
             
             // 导航点击事件
@@ -1233,6 +1350,11 @@
 
             if (sidebarUserName) sidebarUserName.textContent = userName;
             if (mobileUserName) mobileUserName.textContent = userName;
+
+            const accountEmail = document.getElementById('account-user-email');
+            const accountDisplayName = document.getElementById('account-display-name');
+            if (accountEmail) accountEmail.textContent = email;
+            if (accountDisplayName) accountDisplayName.value = userName;
         }
 
         function initLogoutActions() {
@@ -1252,10 +1374,15 @@
 
             bindLogout('logout-btn');
             bindLogout('logout-btn-mobile');
+            bindLogout('account-logout-btn');
         }
         
         // 显示指定页面
         function showPage(pageName) {
+            if (window.location.hash !== `#${pageName}`) {
+                history.replaceState(null, '', `#${pageName}`);
+            }
+
             // 隐藏所有页面
             document.querySelectorAll('.page-content').forEach(page => {
                 page.classList.add('hidden');
@@ -1275,7 +1402,10 @@
                     zh: {
                         dashboard: '总览',
                         'ad-generate': 'AI广告生成',
+                        'saved-ads': '已保存广告',
                         'ad-publish': '广告发布',
+                        billing: '账单',
+                        account: '我的账号',
                         bot: 'Bot系统',
                         analytics: '数据分析',
                         settings: '设置'
@@ -1283,15 +1413,32 @@
                     en: {
                         dashboard: 'Overview',
                         'ad-generate': 'AI Ad Generation',
+                        'saved-ads': 'Saved Ads',
                         'ad-publish': 'Ad Publishing',
+                        billing: 'Billing',
+                        account: 'My Account',
                         bot: 'Bot System',
                         analytics: 'Analytics',
                         settings: 'Settings'
                     },
+                    ms: {
+                        dashboard: 'Gambaran Keseluruhan',
+                        'ad-generate': 'Penjanaan Iklan AI',
+                        'saved-ads': 'Iklan Disimpan',
+                        'ad-publish': 'Penerbitan Iklan',
+                        billing: 'Bil',
+                        account: 'Akaun Saya',
+                        bot: 'Sistem Bot',
+                        analytics: 'Analitik',
+                        settings: 'Tetapan'
+                    },
                     formal: {
                         dashboard: '总览面板',
                         'ad-generate': '智能广告生成',
+                        'saved-ads': '已保存广告',
                         'ad-publish': '广告发布管理',
+                        billing: '账单管理',
+                        account: '我的账号',
                         bot: '自动回复系统',
                         analytics: '数据分析中心',
                         settings: '系统设置'
@@ -1462,6 +1609,7 @@
         function initNewUserState() {
             renderRecentActivities();
             renderAdHistory();
+            renderSavedAds();
             renderBotHistory();
             renderMediaQueue();
             renderAdOptions();
@@ -1517,6 +1665,38 @@
                     </td>
                 </tr>
             `).join('');
+        }
+
+
+        function renderSavedAds() {
+            const tbody = document.getElementById('saved-ads-body');
+            if (!tbody) return;
+            if (!appState.ads.length) {
+                setEmptyTableState('saved-ads-body', 6, '暂无已保存广告，请先在 AI 广告生成页面创建广告。');
+                return;
+            }
+
+            tbody.innerHTML = appState.ads.map((item) => {
+                const detail = (appState.adGenerationDetails || []).find((ad) => ad.id === item.id);
+                const title = detail?.headline || item.productName || item.goalLabel || 'AI 广告';
+                return `
+                    <tr>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${formatDateTime(item.createdAt)}</td>
+                        <td class="px-4 py-4 text-sm text-gray-900 font-medium">${title}</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.industryLabel || '--'}</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.platformLabel || '--'}</td>
+                        <td class="px-4 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${item.status === '已发布' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">${item.status}</span></td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-600">
+                            <div class="flex flex-wrap gap-2">
+                                <button class="text-accent hover:text-blue-700 js-history-view" data-id="${item.id}">${AdnovaI18n.t('ad_gen_action_view')}</button>
+                                <button class="text-accent hover:text-blue-700 js-history-copy" data-id="${item.id}">${AdnovaI18n.t('ad_gen_action_copy')}</button>
+                                <button class="text-accent hover:text-blue-700 js-history-regenerate" data-id="${item.id}">${AdnovaI18n.t('ad_gen_action_regenerate')}</button>
+                                <button class="text-red-500 hover:text-red-700 js-history-delete" data-id="${item.id}">${AdnovaI18n.t('ad_gen_action_delete')}</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
         }
 
         function renderBotHistory() {
@@ -1735,6 +1915,7 @@
                 if (adRecord) adRecord.status = '已发布';
                 saveAppState();
                 renderAdHistory();
+                renderSavedAds();
                 pushActivity('广告发布', `${(selectedAd.titlePreview || selectedAd.industryLabel || '广告').slice(0, 12)}... 已投放到 ${platforms.map((key) => PLATFORM_RULES[key].label).join('/')}`, '成功');
                 toast('广告发布成功，计划已创建。');
             });
@@ -1864,6 +2045,7 @@
                 saveAppState();
                 renderMediaQueue();
                 renderAdHistory();
+                renderSavedAds();
                 pushActivity('广告发布', `${pending.adSummary} 已发布到 ${pending.platformLabel}`, '成功');
                 toast(`发布成功：${pending.platformLabel}`);
             });
@@ -2078,6 +2260,7 @@
                 toggleCityField();
                 renderAdPreview();
                 renderAdHistory();
+                renderSavedAds();
             });
 
             form.addEventListener('submit', function(event) {
@@ -2156,6 +2339,7 @@
                     appState.adGenerationDetails = appState.adGenerationDetails.filter((item) => item.id !== target.dataset.id);
                     saveAppState();
                     renderAdHistory();
+                    renderSavedAds();
                     toast(AdnovaI18n.t('ad_gen_delete_ok'));
                     return;
                 }
