@@ -76,10 +76,6 @@
                             <i class="fa fa-bullhorn mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                             <span data-i18n-key="dashboard_ad_publish">广告发布</span>
                         </a>
-                        <a href="#templates" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="templates">
-                            <i class="fa fa-th-large mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                            <span data-i18n-key="dashboard_templates">模板库</span>
-                        </a>
                         <a href="#bot" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="bot">
                             <i class="fa fa-comments mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                             <span data-i18n-key="dashboard_bot">Bot系统</span>
@@ -175,10 +171,6 @@
                             <a href="#ad-publish" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="ad-publish">
                                 <i class="fa fa-bullhorn mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
                                 <span data-i18n-key="dashboard_ad_publish">广告发布</span>
-                            </a>
-                            <a href="#templates" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="templates">
-                                <i class="fa fa-th-large mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
-                                <span data-i18n-key="dashboard_templates">模板库</span>
                             </a>
                             <a href="#bot" class="group flex items-center px-2 py-3 text-sm font-medium rounded-md hover:bg-dark-light transition-colors" data-page="bot">
                                 <i class="fa fa-comments mr-3 text-gray-400 group-hover:text-accent transition-colors"></i>
@@ -385,12 +377,12 @@
                                                     <i class="fa fa-download text-yellow-600"></i>
                                                 </div>
                                                 <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">模板下载</div>
+                                                    <div class="text-sm font-medium text-gray-900">广告下载</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">下载了餐饮行业促销模板</div>
+                                            <div class="text-sm text-gray-900">下载了餐饮行业促销广告</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-500">昨天 16:45</div>
@@ -529,17 +521,6 @@
                     </div>
                 </div>
 
-                <!-- 模板确认页面（AI生成后自动跳转） -->
-                <div id="template-confirm-page" class="page-content hidden">
-                    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">模板确认</h3>
-                        <p class="text-gray-600">请先确认要使用的 AI 模板，确认后将自动跳转到“广告发布”页面继续设置投放规则。</p>
-                    </div>
-                    <div id="template-confirm-container" class="bg-white rounded-xl shadow-md p-6">
-                        <p class="text-gray-500">暂无待确认模板，请先到 AI广告生成 页面创建内容。</p>
-                    </div>
-                </div>
-
                 <!-- 广告发布页面 -->
                 <div id="ad-publish-page" class="page-content hidden">
                     <div class="bg-white rounded-xl shadow-md p-6 mb-6">
@@ -550,11 +531,11 @@
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <section class="lg:col-span-2 space-y-6">
                             <div class="bg-white rounded-xl shadow-md p-6">
-                                <h4 class="text-md font-semibold text-gray-900 mb-4">1) 选择已确认模板</h4>
-                                <select id="publish-template-select" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option value="">请选择模板</option>
+                                <h4 class="text-md font-semibold text-gray-900 mb-4">1) 选择广告记录</h4>
+                                <select id="publish-ad-select" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <option value="">请选择广告记录</option>
                                 </select>
-                                <p id="publish-template-desc" class="text-sm text-gray-500 mt-2">请选择模板后查看广告标题与内容。</p>
+                                <p id="publish-ad-desc" class="text-sm text-gray-500 mt-2">请选择广告记录后查看广告标题与内容。</p>
                             </div>
 
                             <div class="bg-white rounded-xl shadow-md p-6">
@@ -587,7 +568,7 @@
                         <aside class="bg-white rounded-xl shadow-md p-6 h-fit">
                             <h4 class="text-md font-semibold text-gray-900 mb-3">发布前检查</h4>
                             <div id="publish-summary" class="text-sm text-gray-700 space-y-2 mb-4">
-                                <p>模板：未选择</p>
+                                <p>广告：未选择</p>
                                 <p>素材：0 个</p>
                                 <p>平台：未选择</p>
                                 <p>预算：--</p>
@@ -597,296 +578,6 @@
                             </button>
                             <p class="text-xs text-gray-500 mt-3">系统会自动校验所选平台最低日预算规则（以页面显示规则为准）。</p>
                         </aside>
-                    </div>
-                </div>
-
-                <!-- 模板库页面 -->
-                <div id="templates-page" class="page-content hidden">
-                    <!-- 搜索和筛选 -->
-                    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                            <div class="flex-1">
-                                <div class="relative">
-                                    <input type="text" placeholder="搜索模板..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
-                                    <i class="fa fa-search absolute left-3 top-3 text-gray-400"></i>
-                                </div>
-                            </div>
-                            <div class="flex space-x-2">
-                                <select class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option>所有行业</option>
-                                    <option>美容</option>
-                                    <option>餐饮</option>
-                                    <option>装修</option>
-                                    <option>健身</option>
-                                    <option>教育</option>
-                                </select>
-                                <select class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option>所有类型</option>
-                                    <option>促销活动</option>
-                                    <option>新品上市</option>
-                                    <option>品牌宣传</option>
-                                    <option>节日营销</option>
-                                </select>
-                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-md focus:outline-none">
-                                    <i class="fa fa-filter"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 模板分类 -->
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">热门分类</h3>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fa fa-scissors text-accent text-xl"></i>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">美容</p>
-                                <p class="text-xs text-gray-500">128个模板</p>
-                            </div>
-                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fa fa-cutlery text-red-600 text-xl"></i>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">餐饮</p>
-                                <p class="text-xs text-gray-500">96个模板</p>
-                            </div>
-                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fa fa-home text-yellow-600 text-xl"></i>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">装修</p>
-                                <p class="text-xs text-gray-500">72个模板</p>
-                            </div>
-                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fa fa-heartbeat text-green-600 text-xl"></i>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">健身</p>
-                                <p class="text-xs text-gray-500">54个模板</p>
-                            </div>
-                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fa fa-graduation-cap text-purple-600 text-xl"></i>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">教育</p>
-                                <p class="text-xs text-gray-500">48个模板</p>
-                            </div>
-                            <div class="bg-white rounded-xl shadow-sm p-4 text-center cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fa fa-ellipsis-h text-gray-600 text-xl"></i>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">更多</p>
-                                <p class="text-xs text-gray-500">查看全部</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 推荐模板 -->
-                    <div class="mb-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-900">推荐模板</h3>
-                            <a href="#" class="text-accent hover:text-blue-700 text-sm font-medium">查看全部</a>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <!-- 模板1 -->
-                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="美容模板" class="w-full h-48 object-cover">
-                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                                        美容
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <h4 class="font-semibold text-gray-900 mb-2">高级护肤套餐</h4>
-                                    <p class="text-sm text-gray-600 mb-4">专业护肤方案，让肌肤焕发年轻光彩</p>
-                                    <div class="flex space-x-2">
-                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-download mr-1"></i> 下载
-                                        </button>
-                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-edit mr-1"></i> 编辑
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 模板2 -->
-                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="餐饮模板" class="w-full h-48 object-cover">
-                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                                        餐饮
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <h4 class="font-semibold text-gray-900 mb-2">美食特惠套餐</h4>
-                                    <p class="text-sm text-gray-600 mb-4">精选食材，匠心制作，满足您的味蕾</p>
-                                    <div class="flex space-x-2">
-                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-download mr-1"></i> 下载
-                                        </button>
-                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-edit mr-1"></i> 编辑
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 模板3 -->
-                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="装修模板" class="w-full h-48 object-cover">
-                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                                        装修
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <h4 class="font-semibold text-gray-900 mb-2">家居装修设计</h4>
-                                    <p class="text-sm text-gray-600 mb-4">专业设计师团队，打造您的理想家园</p>
-                                    <div class="flex space-x-2">
-                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-download mr-1"></i> 下载
-                                        </button>
-                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-edit mr-1"></i> 编辑
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 模板4 -->
-                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="健身模板" class="w-full h-48 object-cover">
-                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                                        健身
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <h4 class="font-semibold text-gray-900 mb-2">健身会员特惠</h4>
-                                    <p class="text-sm text-gray-600 mb-4">专业健身指导，科学训练计划，塑造完美身材</p>
-                                    <div class="flex space-x-2">
-                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-download mr-1"></i> 下载
-                                        </button>
-                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-edit mr-1"></i> 编辑
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 最新模板 -->
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-900">最新模板</h3>
-                            <a href="#" class="text-accent hover:text-blue-700 text-sm font-medium">查看全部</a>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <!-- 模板5 -->
-                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="美容模板" class="w-full h-48 object-cover">
-                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                                        美容
-                                    </div>
-                                    <div class="absolute top-2 left-2 bg-accent text-white rounded-full px-2 py-1 text-xs font-medium">
-                                        新
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <h4 class="font-semibold text-gray-900 mb-2">美发造型优惠</h4>
-                                    <p class="text-sm text-gray-600 mb-4">时尚造型设计，展现您的独特魅力</p>
-                                    <div class="flex space-x-2">
-                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-download mr-1"></i> 下载
-                                        </button>
-                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-edit mr-1"></i> 编辑
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 模板6 -->
-                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="餐饮模板" class="w-full h-48 object-cover">
-                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                                        餐饮
-                                    </div>
-                                    <div class="absolute top-2 left-2 bg-accent text-white rounded-full px-2 py-1 text-xs font-medium">
-                                        新
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <h4 class="font-semibold text-gray-900 mb-2">咖啡时光</h4>
-                                    <p class="text-sm text-gray-600 mb-4">精品咖啡，享受悠闲时光</p>
-                                    <div class="flex space-x-2">
-                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-download mr-1"></i> 下载
-                                        </button>
-                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-edit mr-1"></i> 编辑
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 模板7 -->
-                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="装修模板" class="w-full h-48 object-cover">
-                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                                        装修
-                                    </div>
-                                    <div class="absolute top-2 left-2 bg-accent text-white rounded-full px-2 py-1 text-xs font-medium">
-                                        新
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <h4 class="font-semibold text-gray-900 mb-2">办公室装修</h4>
-                                    <p class="text-sm text-gray-600 mb-4">专业办公空间设计，提升企业形象</p>
-                                    <div class="flex space-x-2">
-                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-download mr-1"></i> 下载
-                                        </button>
-                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-edit mr-1"></i> 编辑
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 模板8 -->
-                            <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-                                <div class="relative">
-                                    <img src="https://images.unsplash.com/photo-1579027989536-b7b1f875659b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="教育模板" class="w-full h-48 object-cover">
-                                    <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                                        教育
-                                    </div>
-                                    <div class="absolute top-2 left-2 bg-accent text-white rounded-full px-2 py-1 text-xs font-medium">
-                                        新
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <h4 class="font-semibold text-gray-900 mb-2">少儿编程课程</h4>
-                                    <p class="text-sm text-gray-600 mb-4">培养孩子逻辑思维，开启编程之旅</p>
-                                    <div class="flex space-x-2">
-                                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-download mr-1"></i> 下载
-                                        </button>
-                                        <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors">
-                                            <i class="fa fa-edit mr-1"></i> 编辑
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -1107,7 +798,7 @@
                                 <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-accent">
                                     <option>所有广告</option>
                                     <option>AI生成广告</option>
-                                    <option>模板广告</option>
+                                    <option>广告广告</option>
                                 </select>
                             </div>
                         </div>
@@ -1157,7 +848,7 @@
                                             <div class="text-sm font-medium text-gray-900">餐厅特惠活动</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">模板</span>
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">广告</span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">8,742</div>
@@ -1209,7 +900,7 @@
                                             <div class="text-sm font-medium text-gray-900">健身会员招募</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">模板</span>
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">广告</span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900">7,892</div>
@@ -1384,7 +1075,7 @@
                                         <i class="fa fa-eye-slash"></i>
                                     </button>
                                 </div>
-                                <p class="text-xs text-gray-500 mt-1">用于模板编辑功能（可选）</p>
+                                <p class="text-xs text-gray-500 mt-1">用于广告编辑功能（可选）</p>
                             </div>
 
                             <button class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium transition-colors">
@@ -1410,9 +1101,8 @@
         function defaultAppState() {
             return {
                 ads: [],
-                generatedTemplates: [],
                 adGenerationDetails: [],
-                selectedTemplateId: '',
+                selectedAdId: '',
                 materials: [],
                 publishPlans: [],
                 botDeployments: [],
@@ -1483,7 +1173,7 @@
 
             // 初始化页面（支持从 hash 直接进入指定页面）
             const initialHashPage = (window.location.hash || '').replace('#', '');
-            const supportedPages = ['dashboard', 'ad-generate', 'template-confirm', 'ad-publish', 'templates', 'bot', 'analytics', 'settings'];
+            const supportedPages = ['dashboard', 'ad-generate', 'ad-publish', 'bot', 'analytics', 'settings'];
             showPage(supportedPages.includes(initialHashPage) ? initialHashPage : 'dashboard');
             
             // 导航点击事件
@@ -1579,8 +1269,6 @@
                     zh: {
                         dashboard: '总览',
                         'ad-generate': 'AI广告生成',
-                        templates: '模板库',
-                        'template-confirm': '模板确认',
                         'ad-publish': '广告发布',
                         bot: 'Bot系统',
                         analytics: '数据分析',
@@ -1589,8 +1277,6 @@
                     en: {
                         dashboard: 'Overview',
                         'ad-generate': 'AI Ad Generation',
-                        templates: 'Templates',
-                        'template-confirm': 'Template Confirmation',
                         'ad-publish': 'Ad Publishing',
                         bot: 'Bot System',
                         analytics: 'Analytics',
@@ -1599,8 +1285,6 @@
                     formal: {
                         dashboard: '总览面板',
                         'ad-generate': '智能广告生成',
-                        templates: '模板资源库',
-                        'template-confirm': '模板确认',
                         'ad-publish': '广告发布管理',
                         bot: '自动回复系统',
                         analytics: '数据分析中心',
@@ -1775,8 +1459,7 @@
             renderBotHistory();
             renderMediaQueue();
             renderAdOptions();
-            renderTemplateConfirm();
-            renderPublishTemplateOptions();
+            renderPublishAdOptions();
             renderPublishMaterials();
             renderPublishPlatforms();
             setEmptyTableState('analytics-table-body', 8, '暂无分析数据，完成投放后会自动生成报表。');
@@ -1887,88 +1570,60 @@
             google: { label: 'Google Ads', minDailyBudget: 30 }
         };
 
-        function renderTemplateConfirm() {
-            const container = document.getElementById('template-confirm-container');
-            if (!container) return;
-            const selected = appState.generatedTemplates.find((item) => item.id === appState.selectedTemplateId);
-            if (!selected) {
-                container.innerHTML = '<p class="text-gray-500">暂无待确认模板，请先到 AI广告生成 页面创建内容。</p>';
-                return;
-            }
-
-            container.innerHTML = `
-                <div class="border border-gray-200 rounded-lg p-5">
-                    <p class="text-xs text-gray-500 mb-2">${selected.industryLabel} · ${selected.goalLabel} · ${formatDateTime(selected.createdAt)}</p>
-                    <h4 class="text-lg font-semibold text-gray-900 mb-2">${selected.title}</h4>
-                    <p class="text-gray-700 mb-3">${selected.content}</p>
-                    <button id="confirm-template-btn" class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium">
-                        确认使用此模板并进入广告发布
-                    </button>
-                </div>
-            `;
-
-            const confirmBtn = document.getElementById('confirm-template-btn');
-            if (confirmBtn) {
-                confirmBtn.addEventListener('click', () => {
-                    showPage('ad-publish');
-                    renderPublishTemplateOptions();
-                    renderPublishSummary();
-                    toast('模板已确认，继续完成广告发布设置。');
-                });
-            }
-        }
-
-        function renderPublishTemplateOptions() {
-            const select = document.getElementById('publish-template-select');
+        function renderPublishAdOptions() {
+            const select = document.getElementById('publish-ad-select');
             if (!select) return;
             const prev = select.value;
-            select.innerHTML = '<option value="">请选择模板</option>';
-            appState.generatedTemplates.forEach((item) => {
+            select.innerHTML = '<option value="">请选择广告记录</option>';
+            appState.ads.forEach((item) => {
                 const option = document.createElement('option');
                 option.value = item.id;
-                option.textContent = `${item.industryLabel} - ${item.title.slice(0, 18)}`;
-                if (item.id === (appState.selectedTemplateId || prev)) option.selected = true;
+                option.textContent = `${formatDateTime(item.createdAt)} - ${item.industryLabel || '--'} - ${item.goalLabel || '--'}`;
+                if (item.id === (appState.selectedAdId || prev)) option.selected = true;
                 select.appendChild(option);
             });
-            renderPublishTemplateDesc();
+            renderPublishAdDesc();
             renderPublishMaterials();
             renderPublishSummary();
         }
 
-        function renderPublishTemplateDesc() {
-            const desc = document.getElementById('publish-template-desc');
-            const select = document.getElementById('publish-template-select');
+        function renderPublishAdDesc() {
+            const desc = document.getElementById('publish-ad-desc');
+            const select = document.getElementById('publish-ad-select');
             if (!desc || !select) return;
-            const selected = appState.generatedTemplates.find((item) => item.id === select.value);
-            desc.textContent = selected ? `标题：${selected.title} | CTA：${selected.cta}` : '请选择模板后查看广告标题与内容。';
+            const selected = appState.ads.find((item) => item.id === select.value);
+            desc.textContent = selected ? `标题：${selected.titlePreview || '--'} | 目标：${selected.goalLabel || '--'}` : '请选择广告记录后查看广告标题与内容。';
         }
 
         function renderPublishMaterials() {
             const list = document.getElementById('publish-material-list');
-            const select = document.getElementById('publish-template-select');
+            const select = document.getElementById('publish-ad-select');
             if (!list || !select) return;
-            const templateId = select.value || appState.selectedTemplateId;
-            const materials = appState.materials.filter((item) => item.templateId === templateId);
+            const adId = select.value || appState.selectedAdId;
+            const materials = appState.materials.filter((item) => item.adId === adId);
             if (!materials.length) {
                 list.innerHTML = '<p class="text-gray-500">暂无素材，请先上传图片或视频。</p>';
                 return;
             }
             list.innerHTML = materials.map((item) => `
-                <label class="flex items-center justify-between border border-gray-200 rounded-lg px-3 py-2">
-                    <span><input type="checkbox" class="mr-2 publish-material-item" value="${item.id}">${item.fileName}（${item.fileType}）</span>
-                    <span class="text-xs text-gray-500">${formatDateTime(item.createdAt)}</span>
+                <label class="flex items-center justify-between border border-gray-200 rounded-md p-3">
+                    <span><input type="checkbox" class="publish-material-item mr-2" value="${item.id}" checked>${item.fileName} · ${item.fileType}</span>
+                    <span class="text-xs text-gray-400">${formatDateTime(item.createdAt)}</span>
                 </label>
             `).join('');
         }
 
+
         function renderPublishPlatforms() {
-            const container = document.getElementById('publish-platform-list');
-            if (!container) return;
-            container.innerHTML = Object.entries(PLATFORM_RULES).map(([key, rule]) => `
-                <label class="border border-gray-200 rounded-lg p-3 cursor-pointer hover:border-accent">
-                    <input type="checkbox" class="mr-2 publish-platform-item" value="${key}">
-                    <span class="font-medium text-gray-900">${rule.label}</span>
-                    <p class="text-xs text-gray-500 mt-1">最低日预算 RM${rule.minDailyBudget}</p>
+            const list = document.getElementById('publish-platform-list');
+            if (!list) return;
+            list.innerHTML = Object.entries(PLATFORM_RULES).map(([key, rule]) => `
+                <label class="flex items-start gap-3 border border-gray-200 rounded-md p-3 text-sm">
+                    <input type="checkbox" class="publish-platform-item mt-1" value="${key}">
+                    <span>
+                        <span class="font-medium text-gray-900">${rule.label}</span>
+                        <span class="block text-xs text-gray-500">最低日预算 RM${rule.minDailyBudget}</span>
+                    </span>
                 </label>
             `).join('');
         }
@@ -1976,14 +1631,14 @@
         function renderPublishSummary() {
             const summary = document.getElementById('publish-summary');
             if (!summary) return;
-            const templateId = document.getElementById('publish-template-select')?.value || '';
-            const selected = appState.generatedTemplates.find((item) => item.id === templateId);
+            const adId = document.getElementById('publish-ad-select')?.value || '';
+            const selected = appState.ads.find((item) => item.id === adId);
             const materialCount = document.querySelectorAll('.publish-material-item:checked').length;
             const selectedPlatforms = Array.from(document.querySelectorAll('.publish-platform-item:checked')).map((item) => PLATFORM_RULES[item.value]?.label || item.value);
             const budget = document.getElementById('publish-daily-budget')?.value || '--';
             const days = document.getElementById('publish-days')?.value || '--';
             summary.innerHTML = `
-                <p>模板：${selected ? selected.title : '未选择'}</p>
+                <p>广告：${selected ? (selected.titlePreview || selected.industryLabel || '已选择') : '未选择'}</p>
                 <p>素材：${materialCount} 个</p>
                 <p>平台：${selectedPlatforms.length ? selectedPlatforms.join('、') : '未选择'}</p>
                 <p>预算：${budget === '--' ? '--' : `RM${budget}/天 · ${days}天`}</p>
@@ -1991,34 +1646,33 @@
         }
 
         function initAdPublishWorkflow() {
-            const templateSelect = document.getElementById('publish-template-select');
+            const adSelect = document.getElementById('publish-ad-select');
             const uploadBtn = document.getElementById('publish-upload-material-btn');
             const materialInput = document.getElementById('publish-material-input');
             const confirmBtn = document.getElementById('confirm-publish-btn');
             const budgetInput = document.getElementById('publish-daily-budget');
             const daysInput = document.getElementById('publish-days');
-            if (!templateSelect || !uploadBtn || !materialInput || !confirmBtn || !budgetInput || !daysInput) return;
+            if (!adSelect || !uploadBtn || !materialInput || !confirmBtn || !budgetInput || !daysInput) return;
 
-            templateSelect.addEventListener('change', () => {
-                appState.selectedTemplateId = templateSelect.value;
+            adSelect.addEventListener('change', () => {
+                appState.selectedAdId = adSelect.value;
                 saveAppState();
-                renderPublishTemplateDesc();
+                renderPublishAdDesc();
                 renderPublishMaterials();
                 renderPublishSummary();
-                renderTemplateConfirm();
             });
 
             uploadBtn.addEventListener('click', () => {
-                const templateId = templateSelect.value;
+                const adId = adSelect.value;
                 const files = Array.from(materialInput.files || []);
-                if (!templateId || !files.length) {
-                    alert('请先选择模板并上传至少一个素材文件。');
+                if (!adId || !files.length) {
+                    alert('请先选择广告记录并上传至少一个素材文件。');
                     return;
                 }
                 files.forEach((file) => {
                     appState.materials.unshift({
                         id: createId(),
-                        templateId,
+                        adId,
                         fileName: file.name,
                         fileType: file.type.includes('video') ? '视频' : '图片',
                         createdAt: new Date().toISOString()
@@ -2038,15 +1692,15 @@
             });
 
             confirmBtn.addEventListener('click', () => {
-                const templateId = templateSelect.value;
-                const selectedTemplate = appState.generatedTemplates.find((item) => item.id === templateId);
+                const adId = adSelect.value;
+                const selectedAd = appState.ads.find((item) => item.id === adId);
                 const materialIds = Array.from(document.querySelectorAll('.publish-material-item:checked')).map((item) => item.value);
                 const platforms = Array.from(document.querySelectorAll('.publish-platform-item:checked')).map((item) => item.value);
                 const dailyBudget = Number(budgetInput.value);
                 const days = Number(daysInput.value);
 
-                if (!selectedTemplate || !materialIds.length || !platforms.length || !dailyBudget || !days) {
-                    alert('请完成模板、素材、平台、预算、天数选择后再发布。');
+                if (!selectedAd || !materialIds.length || !platforms.length || !dailyBudget || !days) {
+                    alert('请完成广告、素材、平台、预算、天数选择后再发布。');
                     return;
                 }
 
@@ -2064,18 +1718,18 @@
 
                 appState.publishPlans.unshift({
                     id: createId(),
-                    templateId,
+                    adId,
                     materialIds,
                     platforms,
                     dailyBudget,
                     days,
                     createdAt: new Date().toISOString()
                 });
-                const adRecord = appState.ads.find((item) => item.id === selectedTemplate.adRecordId);
+                const adRecord = appState.ads.find((item) => item.id === selectedAd.id);
                 if (adRecord) adRecord.status = '已发布';
                 saveAppState();
                 renderAdHistory();
-                pushActivity('广告发布', `${selectedTemplate.title.slice(0, 12)}... 已投放到 ${platforms.map((key) => PLATFORM_RULES[key].label).join('/')}`, '成功');
+                pushActivity('广告发布', `${(selectedAd.titlePreview || selectedAd.industryLabel || '广告').slice(0, 12)}... 已投放到 ${platforms.map((key) => PLATFORM_RULES[key].label).join('/')}`, '成功');
                 toast('广告发布成功，计划已创建。');
             });
         }
@@ -2463,42 +2117,6 @@
                 if (target.classList.contains('js-download-ad')) {
                     toast(`已加入下载队列：${target.dataset.title || '广告'}`);
                     return;
-                }
-
-                if (target.classList.contains('js-use-template')) {
-                    const templateId = target.dataset.templateId;
-                    const chosen = appState.generatedTemplates.find((item) => item.id === templateId);
-                    if (!chosen) {
-                        toast('模板不存在，请重新生成');
-                        return;
-                    }
-                    appState.selectedTemplateId = templateId;
-                    saveAppState();
-                    renderTemplateConfirm();
-                    renderPublishTemplateOptions();
-                    showPage('template-confirm');
-                    return;
-                }
-
-                if (target.matches('#templates-page button')) {
-                    const actionText = target.textContent.replace(/\s+/g, '');
-                    const card = target.closest('.card-hover');
-                    const templateName = card?.querySelector('h4')?.textContent?.trim() || '模板';
-                    const templateCategory = card?.querySelector('.absolute.top-2.right-2')?.textContent?.trim() || '通用';
-
-                    if (actionText.includes('编辑')) {
-                        const url = new URL('workspace.html', window.location.href);
-                        url.searchParams.set('from', 'dashboard-templates');
-                        url.searchParams.set('category', templateCategory);
-                        url.searchParams.set('template', templateName);
-                        window.location.href = url.toString();
-                        return;
-                    }
-
-                    if (actionText.includes('下载')) {
-                        toast(`已下载模板：${templateName}`);
-                        return;
-                    }
                 }
 
 

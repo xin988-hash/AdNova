@@ -70,7 +70,6 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#features" data-i18n-key="nav_features" class="text-primary hover:text-accent px-3 py-2 text-sm font-medium transition-colors">功能</a>
-                    <a href="#templates" data-i18n-key="nav_templates" class="text-primary hover:text-accent px-3 py-2 text-sm font-medium transition-colors">模板库</a>
                     <a href="#pricing" data-i18n-key="nav_pricing" class="text-primary hover:text-accent px-3 py-2 text-sm font-medium transition-colors">定价</a>
                     <a href="#demo" data-i18n-key="nav_demo" class="text-primary hover:text-accent px-3 py-2 text-sm font-medium transition-colors">演示</a>
                     <div class="ml-4 flex items-center">
@@ -91,7 +90,6 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#features" data-i18n-key="nav_features" class="block text-primary hover:text-accent px-3 py-2 text-base font-medium transition-colors">功能</a>
-                <a href="#templates" data-i18n-key="nav_templates" class="block text-primary hover:text-accent px-3 py-2 text-base font-medium transition-colors">模板库</a>
                 <a href="#pricing" data-i18n-key="nav_pricing" class="block text-primary hover:text-accent px-3 py-2 text-base font-medium transition-colors">定价</a>
                 <a href="#demo" data-i18n-key="nav_demo" class="block text-primary hover:text-accent px-3 py-2 text-base font-medium transition-colors">演示</a>
                 <div class="pt-4 pb-3 border-t border-gray-200">
@@ -151,32 +149,10 @@
                             <i class="fa fa-check text-success mr-2"></i> <span data-i18n-key="feature_ai_item_1">智能文案生成</span>
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa fa-check text-success mr-2"></i> <span data-i18n-key="feature_ai_item_2">多行业模板</span>
+                            <i class="fa fa-check text-success mr-2"></i> <span data-i18n-key="feature_ai_item_2">多行业适配</span>
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
                             <i class="fa fa-check text-success mr-2"></i> <span data-i18n-key="feature_ai_item_3">多语言支持</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- 模板库 -->
-                <div class="bg-white rounded-xl shadow-md p-8 card-hover">
-                    <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fa fa-th-large text-accent text-2xl"></i>
-                    </div>
-                    <h3 data-i18n-key="feature_template_title" class="text-xl font-bold text-primary mb-3">模板库</h3>
-                    <p data-i18n-key="feature_template_desc" class="text-gray-600 mb-4">
-                        精选高质量广告模板，覆盖美容、餐饮、装修等多个行业，一键使用或自定义编辑
-                    </p>
-                    <ul class="space-y-2 mb-6">
-                        <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa fa-check text-success mr-2"></i> <span data-i18n-key="feature_template_item_1">行业分类模板</span>
-                        </li>
-                        <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa fa-check text-success mr-2"></i> <span data-i18n-key="feature_template_item_2">一键下载使用</span>
-                        </li>
-                        <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa fa-check text-success mr-2"></i> <span data-i18n-key="feature_template_item_3">支持自定义编辑</span>
                         </li>
                     </ul>
                 </div>
@@ -192,7 +168,7 @@
                     </p>
                     <ul class="space-y-2 mb-6">
                         <li class="flex items-center text-sm text-gray-600">
-                            <i class="fa fa-check text-success mr-2"></i> <span data-i18n-key="feature_bot_item_1">行业对话模板</span>
+                            <i class="fa fa-check text-success mr-2"></i> <span data-i18n-key="feature_bot_item_1">行业对话流程</span>
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
                             <i class="fa fa-check text-success mr-2"></i> <span data-i18n-key="feature_bot_item_2">一键导入ManyChat</span>
@@ -357,168 +333,6 @@
         </div>
     </section>
 
-    <!-- 模板库预览 -->
-    <section id="templates" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">模板库</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    精选高质量广告模板，一键使用，快速创建专业广告
-                </p>
-            </div>
-
-            <!-- 分类标签 -->
-            <div class="flex flex-wrap justify-center mb-8 gap-2">
-                <button class="template-category-btn bg-accent text-white px-4 py-2 rounded-full text-sm font-medium">全部</button>
-                <button class="template-category-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-medium transition-colors">美容</button>
-                <button class="template-category-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-medium transition-colors">餐饮</button>
-                <button class="template-category-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-medium transition-colors">装修</button>
-            </div>
-
-            <!-- 模板展示 -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- 美容模板1 -->
-                <div class="template-card bg-white rounded-xl shadow-md overflow-hidden card-hover" data-category="美容">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="美容模板" class="w-full h-48 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                            美容
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-primary mb-2">高级护肤套餐</h3>
-                        <p class="text-sm text-gray-600 mb-4">专业护肤方案，让肌肤焕发年轻光彩</p>
-                        <div class="flex space-x-2">
-                            <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                <i class="fa fa-download mr-1"></i> 下载
-                            </button>
-                            <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors js-template-edit">
-                                <i class="fa fa-edit mr-1"></i> 编辑
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 餐饮模板1 -->
-                <div class="template-card bg-white rounded-xl shadow-md overflow-hidden card-hover" data-category="餐饮">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="餐饮模板" class="w-full h-48 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                            餐饮
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-primary mb-2">美食特惠套餐</h3>
-                        <p class="text-sm text-gray-600 mb-4">精选食材，匠心制作，满足您的味蕾</p>
-                        <div class="flex space-x-2">
-                            <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                <i class="fa fa-download mr-1"></i> 下载
-                            </button>
-                            <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors js-template-edit">
-                                <i class="fa fa-edit mr-1"></i> 编辑
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 装修模板1 -->
-                <div class="template-card bg-white rounded-xl shadow-md overflow-hidden card-hover" data-category="装修">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="装修模板" class="w-full h-48 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                            装修
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-primary mb-2">家居装修设计</h3>
-                        <p class="text-sm text-gray-600 mb-4">专业设计师团队，打造您的理想家园</p>
-                        <div class="flex space-x-2">
-                            <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                <i class="fa fa-download mr-1"></i> 下载
-                            </button>
-                            <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors js-template-edit">
-                                <i class="fa fa-edit mr-1"></i> 编辑
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 美容模板2 -->
-                <div class="template-card bg-white rounded-xl shadow-md overflow-hidden card-hover" data-category="美容">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="美容模板" class="w-full h-48 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                            美容
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-primary mb-2">美发造型优惠</h3>
-                        <p class="text-sm text-gray-600 mb-4">时尚造型设计，展现您的独特魅力</p>
-                        <div class="flex space-x-2">
-                            <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                <i class="fa fa-download mr-1"></i> 下载
-                            </button>
-                            <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors js-template-edit">
-                                <i class="fa fa-edit mr-1"></i> 编辑
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 餐饮模板2 -->
-                <div class="template-card bg-white rounded-xl shadow-md overflow-hidden card-hover" data-category="餐饮">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="餐饮模板" class="w-full h-48 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                            餐饮
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-primary mb-2">咖啡时光</h3>
-                        <p class="text-sm text-gray-600 mb-4">精品咖啡，享受悠闲时光</p>
-                        <div class="flex space-x-2">
-                            <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                <i class="fa fa-download mr-1"></i> 下载
-                            </button>
-                            <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors js-template-edit">
-                                <i class="fa fa-edit mr-1"></i> 编辑
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 装修模板2 -->
-                <div class="template-card bg-white rounded-xl shadow-md overflow-hidden card-hover" data-category="装修">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="装修模板" class="w-full h-48 object-cover">
-                        <div class="absolute top-2 right-2 bg-white rounded-full px-2 py-1 text-xs font-medium text-gray-600">
-                            装修
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-primary mb-2">办公室装修</h3>
-                        <p class="text-sm text-gray-600 mb-4">专业办公空间设计，提升企业形象</p>
-                        <div class="flex space-x-2">
-                            <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded text-sm font-medium transition-colors">
-                                <i class="fa fa-download mr-1"></i> 下载
-                            </button>
-                            <button class="flex-1 bg-accent hover:bg-blue-600 text-white py-2 rounded text-sm font-medium transition-colors js-template-edit">
-                                <i class="fa fa-edit mr-1"></i> 编辑
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="dashboard.html" class="inline-flex items-center text-accent hover:text-blue-700 font-medium">
-                    查看更多模板
-                    <i class="fa fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
     <!-- 客户案例 -->
     <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -582,7 +396,7 @@
                         </div>
                     </div>
                     <p class="text-gray-600 mb-4">
-                        "模板库的设计非常专业，我们直接使用了几个模板，效果非常好。数据分析功能让我们能清晰看到广告效果，及时调整策略。"
+                        "AI生成的广告内容很专业，我们直接用于投放，效果非常好。数据分析功能让我们能清晰看到广告效果，及时调整策略。"
                     </p>
                     <div class="flex items-center text-sm text-gray-500">
                         <i class="fa fa-quote-left text-gray-300 mr-2"></i>
@@ -620,7 +434,7 @@
                             </li>
                             <li class="flex items-center text-gray-600">
                                 <i class="fa fa-check text-success mr-2"></i>
-                                <span data-i18n-key="plan_free_item_2">基础模板库访问</span>
+                                <span data-i18n-key="plan_free_item_2">基础素材管理</span>
                             </li>
                             <li class="flex items-center text-gray-600">
                                 <i class="fa fa-check text-success mr-2"></i>
@@ -660,7 +474,7 @@
                             </li>
                             <li class="flex items-center text-gray-600">
                                 <i class="fa fa-check text-success mr-2"></i>
-                                <span data-i18n-key="plan_pro_item_2">完整模板库访问</span>
+                                <span data-i18n-key="plan_pro_item_2">完整素材管理</span>
                             </li>
                             <li class="flex items-center text-gray-600">
                                 <i class="fa fa-check text-success mr-2"></i>
@@ -697,7 +511,7 @@
                             </li>
                             <li class="flex items-center text-gray-600">
                                 <i class="fa fa-check text-success mr-2"></i>
-                                <span data-i18n-key="plan_enterprise_item_2">专属模板设计</span>
+                                <span data-i18n-key="plan_enterprise_item_2">专属广告方案</span>
                             </li>
                             <li class="flex items-center text-gray-600">
                                 <i class="fa fa-check text-success mr-2"></i>
@@ -770,7 +584,6 @@
                     <h4 class="text-lg font-semibold mb-4">产品</h4>
                     <ul class="space-y-2">
                         <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">功能</a></li>
-                        <li><a href="#templates" class="text-gray-400 hover:text-white transition-colors">模板库</a></li>
                         <li><a href="#pricing" class="text-gray-400 hover:text-white transition-colors">定价</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">API文档</a></li>
                     </ul>
@@ -840,46 +653,6 @@
                         mobileMenu.classList.add('hidden');
                     }
                 }
-            });
-        });
-
-        // 模板分类筛选
-        document.querySelectorAll('.template-category-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                // 更新按钮样式
-                document.querySelectorAll('.template-category-btn').forEach(btn => {
-                    btn.classList.remove('bg-accent', 'text-white');
-                    btn.classList.add('bg-gray-200', 'text-gray-700');
-                });
-                this.classList.remove('bg-gray-200', 'text-gray-700');
-                this.classList.add('bg-accent', 'text-white');
-                
-                // 筛选模板
-                const category = this.textContent.trim();
-                document.querySelectorAll('.template-card').forEach(card => {
-                    if (category === '全部' || card.dataset.category === category) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // 模板编辑：跳转到下一步工作台
-        document.querySelectorAll('.template-card').forEach((card) => {
-            const title = card.querySelector('h3')?.textContent?.trim() || '模板';
-            const category = card.dataset.category || '通用';
-            const editButton = card.querySelector('.js-template-edit');
-            if (!editButton) return;
-
-            editButton.addEventListener('click', (event) => {
-                event.preventDefault();
-                const url = new URL('workspace.html', window.location.href);
-                url.searchParams.set('from', 'templates');
-                url.searchParams.set('category', category);
-                url.searchParams.set('template', title);
-                window.location.href = url.toString();
             });
         });
 
