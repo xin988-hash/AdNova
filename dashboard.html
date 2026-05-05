@@ -450,64 +450,59 @@
 
                 <!-- AI广告生成页面 -->
                 <div id="ad-generate-page" class="page-content hidden">
-                    <section class="bg-white rounded-xl shadow-md p-6 mb-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">AI Generation</h3>
-                        <p class="text-gray-600 mb-5">Fill in the details and generate 3 ready-to-use results.</p>
-                        <div class="inline-flex rounded-xl bg-gray-100 p-1 mb-5" id="generation-mode-switch">
-                            <button type="button" class="mode-btn px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-900 shadow" data-mode="run_ads">Run Ads</button>
-                            <button type="button" class="mode-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-600" data-mode="create_content">Create Content</button>
-                        </div>
-                        <form id="ad-generate-form" class="space-y-4">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <input id="ad-industry" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Industry">
-                                <input id="ad-product-name" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Product / Service Name">
-                                <input id="ad-brand-name" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Brand Name (optional)">
-                                <input id="ad-offer" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Offer / Promotion">
-                                <input id="ad-target-audience" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Target Audience">
-                                <input id="ad-country" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2 bg-gray-100" value="Malaysia" readonly>
-                                <input id="ad-state" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" placeholder="State">
-                                <input id="ad-city" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" placeholder="City (optional)">
-                                <select id="ad-goal" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select>
-                                <select id="ad-platform" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select>
-                                <select id="ad-tone" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select>
-                                <select id="ad-language" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2"></select>
-                                <input id="ad-budget-suggestion" class="ad-form-field w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Budget suggestion" />
+                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                        <section class="bg-white rounded-2xl shadow-md border border-purple-100 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-xl font-semibold text-gray-900">AI Generation Workspace</h3>
+                                <div class="inline-flex rounded-xl bg-purple-50 p-1" id="generation-mode-switch">
+                                    <button type="button" class="mode-btn px-4 py-2 rounded-lg text-sm font-semibold" data-mode="run_ads">Run Ads</button>
+                                    <button type="button" class="mode-btn px-4 py-2 rounded-lg text-sm font-semibold" data-mode="create_content">Create Content</button>
+                                </div>
                             </div>
-                            <button id="generate-ads-btn" type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-md font-medium">Generate 3 Results</button>
-                        </form>
-                    </section>
-                    <section class="bg-white rounded-xl shadow-md p-6 mb-6">
-                        <div id="ad-empty-state" class="text-sm text-gray-500">Fill in the details and generate 3 ready-to-use results.</div>
-                        <div id="ad-generated-results" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-4"></div>
-                    </section>
+                            <p class="text-sm text-gray-600 mb-6">Enter business details, choose a mode, and generate 3 ready-to-use packages.</p>
+                            <form id="ad-generate-form" class="space-y-6">
+                                <div>
+                                    <h4 class="text-sm font-semibold text-purple-700 uppercase tracking-wide mb-3">Base Info</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <input id="ad-industry" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5" placeholder="Industry (e.g. Beauty, F&B, Real Estate)">
+                                        <input id="ad-product-name" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5" placeholder="Product / Service Name">
+                                        <input id="ad-brand-name" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5" placeholder="Brand Name (optional)">
+                                        <input id="ad-offer" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5" placeholder="Offer / Promotion">
+                                        <input id="ad-target-audience" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5" placeholder="Target Audience">
+                                        <input id="ad-country" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5" placeholder="Location / Country">
+                                        <input id="ad-state" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5" placeholder="State">
+                                        <input id="ad-city" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5" placeholder="City (optional)">
+                                        <select id="ad-tone" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5"></select>
+                                        <select id="ad-language" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5"></select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 id="mode-fields-title" class="text-sm font-semibold text-purple-700 uppercase tracking-wide mb-3">Run Ads Setup</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <select id="ad-goal" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5"></select>
+                                        <input id="ad-budget-suggestion" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5" placeholder="Budget Suggestion">
+                                        <select id="ad-platform" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5"></select>
+                                        <select id="ad-content-type" class="ad-form-field w-full border border-purple-100 rounded-xl px-3 py-2.5 hidden"></select>
+                                    </div>
+                                </div>
+                                <button id="generate-ads-btn" type="submit" class="w-full bg-accent hover:bg-blue-600 text-white py-3 rounded-xl font-semibold">Generate 3 Results</button>
+                            </form>
+                        </section>
+                        <section class="bg-white rounded-2xl shadow-md border border-purple-100 p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Generated Results</h3>
+                            <p id="ad-empty-state" class="text-sm text-gray-500">Fill in the details and generate 3 ready-to-use results.</p>
+                            <div id="ad-generated-results" class="hidden space-y-4 mt-4"></div>
+                        </section>
+                    </div>
                 </div>
 
                 <!-- 已保存广告页面 -->
                 <div id="saved-ads-page" class="page-content hidden">
-                    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                            <div>
-                                <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n-key="dashboard_saved_ads">已保存广告</h3>
-                                <p class="text-gray-600">查看、复制、再生成或删除已保存的 AI 广告记录。</p>
-                            </div>
-                            <button class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium" data-page="ad-generate">
-                                <i class="fa fa-magic mr-1"></i> 新建广告
-                            </button>
-                        </div>
-                    </div>
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-6"><h3 class="text-lg font-semibold text-gray-900 mb-2">Saved Results</h3><p class="text-gray-600">Only items you explicitly saved appear here.</p></div>
                     <div class="bg-white rounded-xl shadow-md overflow-hidden">
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200">
-                                <thead>
-                                    <tr>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">时间</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">广告标题</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">行业</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">平台</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">状态</th>
-                                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">操作</th>
-                                    </tr>
-                                </thead>
+                                <thead><tr><th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Saved Date</th><th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Title</th><th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Short Preview</th><th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Mode</th><th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Industry</th><th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Action</th></tr></thead>
                                 <tbody id="saved-ads-body" class="bg-white divide-y divide-gray-200"></tbody>
                             </table>
                         </div>
@@ -516,77 +511,17 @@
 
                 <!-- 广告发布页面 -->
                 <div id="ad-publish-page" class="page-content hidden">
-                    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">广告发布</h3>
-                        <p class="text-gray-600">按所选平台规则配置投放，支持多平台发布、素材选择、预算与天数设置。</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <section class="lg:col-span-2 space-y-6">
-                            <div class="bg-white rounded-xl shadow-md p-6">
-                                <h4 class="text-md font-semibold text-gray-900 mb-4">1) 选择广告记录</h4>
-                                <select id="publish-ad-select" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option value="">请选择广告记录</option>
-                                </select>
-                                <p id="publish-ad-desc" class="text-sm text-gray-500 mt-2">请选择广告记录后查看广告标题与内容。</p>
-                            </div>
-
-                            <div class="bg-white rounded-xl shadow-md p-6">
-                                <h4 class="text-md font-semibold text-gray-900 mb-4">2) 选择素材</h4>
-                                <div class="flex flex-wrap gap-3 mb-4">
-                                    <input id="publish-material-input" type="file" multiple accept="image/*,video/*" class="border border-gray-300 rounded-md px-3 py-2">
-                                    <button id="publish-upload-material-btn" class="bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium">
-                                        <i class="fa fa-upload mr-1"></i>上传素材
-                                    </button>
-                                </div>
-                                <div id="publish-material-list" class="space-y-2 text-sm text-gray-700"></div>
-                            </div>
-
-                            <div class="bg-white rounded-xl shadow-md p-6">
-                                <h4 class="text-md font-semibold text-gray-900 mb-4">3) 投放平台与预算</h4>
-                                <div id="publish-platform-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4"></div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">每日预算（RM）</label>
-                                        <input id="publish-daily-budget" type="number" min="1" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" placeholder="例如 80">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">投放天数</label>
-                                        <input id="publish-days" type="number" min="1" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" placeholder="例如 7">
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <aside class="bg-white rounded-xl shadow-md p-6 h-fit">
-                            <h4 class="text-md font-semibold text-gray-900 mb-3">发布前检查</h4>
-                            <div id="publish-summary" class="text-sm text-gray-700 space-y-2 mb-4">
-                                <p>广告：未选择</p>
-                                <p>素材：0 个</p>
-                                <p>平台：未选择</p>
-                                <p>预算：--</p>
-                            </div>
-                            <button id="confirm-publish-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-md font-medium">
-                                确认并发布
-                            </button>
-                            <p class="text-xs text-gray-500 mt-3">系统会自动校验所选平台最低日预算规则（以页面显示规则为准）。</p>
-                        </aside>
-                    </div>
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-6"><h3 class="text-lg font-semibold text-gray-900 mb-2">Publish Prep</h3><p class="text-gray-600">Choose a flow and prepare for manual publishing.</p></div>
+                    <div class="bg-white rounded-2xl shadow-md border border-purple-100 p-6 mb-6"><div class="inline-flex rounded-xl bg-purple-50 p-1" id="publish-mode-switch"><button type="button" class="publish-mode-btn px-4 py-2 rounded-lg text-sm font-semibold" data-mode="run_ads">Run Ads</button><button type="button" class="publish-mode-btn px-4 py-2 rounded-lg text-sm font-semibold" data-mode="create_content">Create Content</button></div></div>
+                    <div id="publish-run-ads-panel" class="bg-white rounded-2xl shadow-md border border-purple-100 p-6 space-y-4"></div>
+                    <div id="publish-content-panel" class="bg-white rounded-2xl shadow-md border border-purple-100 p-6 space-y-4 hidden"></div>
                 </div>
 
                 <!-- 账单页面 -->
                 <div id="billing-page" class="page-content hidden">
-                    <div class="bg-white rounded-xl shadow-md p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-6">Billing</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="rounded-xl border border-gray-200 p-5"><p class="text-xl font-bold">Free</p><p class="text-3xl font-bold mt-2">RM0<span class="text-sm font-normal">/mo</span></p><ul class="mt-4 text-sm text-gray-600 space-y-1"><li>Limited generation only</li><li>No publishing</li><li>No advanced workflow</li></ul><button class="w-full mt-4 border border-gray-300 rounded-md py-2">Current Plan</button></div>
-                            <div class="rounded-xl border-2 border-accent bg-blue-50 p-5"><p class="text-xl font-bold">Pro</p><p class="text-3xl font-bold mt-2">RM199<span class="text-sm font-normal">/mo</span></p><ul class="mt-4 text-sm text-gray-600 space-y-1"><li>AI generation for Ads and Content</li><li>More results</li><li>Save and copy workflow</li><li>Publishing preparation</li></ul><button class="w-full mt-4 bg-accent text-white rounded-md py-2">Upgrade to Pro</button></div>
-                            <div class="rounded-xl border border-purple-200 bg-gradient-to-br from-purple-50 to-white p-5"><p class="text-xl font-bold">Business</p><p class="text-3xl font-bold mt-2">RM399<span class="text-sm font-normal">/mo</span></p><ul class="mt-4 text-sm text-gray-600 space-y-1"><li>Everything in Pro</li><li>Premium workflow</li><li>Advanced options</li><li>Future automation / bot-ready structure</li></ul><button class="w-full mt-4 bg-purple-600 text-white rounded-md py-2">Upgrade to Business</button></div>
-                        </div>
-                    </div>
+                    <div class="bg-white rounded-xl shadow-md p-6"><h3 class="text-lg font-semibold text-gray-900 mb-6">Billing</h3><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="rounded-xl border border-gray-200 p-5"><p class="text-xl font-bold">Free</p><p class="text-3xl font-bold mt-2">RM0<span class="text-sm font-normal">/mo</span></p><ul class="mt-4 text-sm text-gray-600 space-y-1"><li>Limited generation only</li></ul></div><div class="rounded-xl border-2 border-accent bg-blue-50 p-5"><p class="text-xl font-bold">Pro</p><p class="text-3xl font-bold mt-2">RM199<span class="text-sm font-normal">/mo</span></p><ul class="mt-4 text-sm text-gray-600 space-y-1"><li>Main paid plan</li><li>Ads + content workflows</li></ul></div><div class="rounded-xl border border-purple-200 bg-gradient-to-br from-purple-50 to-white p-5"><p class="text-xl font-bold">Business</p><p class="text-3xl font-bold mt-2">RM399<span class="text-sm font-normal">/mo</span></p><ul class="mt-4 text-sm text-gray-600 space-y-1"><li>Advanced premium plan</li></ul></div></div></div>
                 </div>
-
-                <!-- 我的账号页面 -->
+<!-- 我的账号页面 -->
                 <div id="account-page" class="page-content hidden">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <section class="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
@@ -1579,32 +1514,17 @@
         function renderSavedAds() {
             const tbody = document.getElementById('saved-ads-body');
             if (!tbody) return;
-            if (!appState.ads.length) {
-                setEmptyTableState('saved-ads-body', 6, '暂无已保存广告，请先在 AI 广告生成页面创建广告。');
-                return;
-            }
-
-            tbody.innerHTML = appState.ads.map((item) => {
-                const detail = (appState.adGenerationDetails || []).find((ad) => ad.id === item.id);
-                const title = detail?.headline || item.productName || item.goalLabel || 'AI 广告';
-                return `
-                    <tr>
-                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${formatDateTime(item.createdAt)}</td>
-                        <td class="px-4 py-4 text-sm text-gray-900 font-medium">${title}</td>
-                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.industryLabel || '--'}</td>
-                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${item.platformLabel || '--'}</td>
-                        <td class="px-4 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${item.status === '已发布' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">${item.status}</span></td>
-                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-600">
-                            <div class="flex flex-wrap gap-2">
-                                <button class="text-accent hover:text-blue-700 js-history-view" data-id="${item.id}">${AdnovaI18n.t('ad_gen_action_view')}</button>
-                                <button class="text-accent hover:text-blue-700 js-history-copy" data-id="${item.id}">${AdnovaI18n.t('ad_gen_action_copy')}</button>
-                                <button class="text-accent hover:text-blue-700 js-history-regenerate" data-id="${item.id}">${AdnovaI18n.t('ad_gen_action_regenerate')}</button>
-                                <button class="text-red-500 hover:text-red-700 js-history-delete" data-id="${item.id}">${AdnovaI18n.t('ad_gen_action_delete')}</button>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
+            const items = (appState.savedPackages || []).slice();
+            if (!items.length) { setEmptyTableState('saved-ads-body', 6, 'No saved items yet. Save a generated result to view it here.'); return; }
+            tbody.innerHTML = items.map((item) => `
+                <tr>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${formatDateTime(item.savedAt)}</td>
+                    <td class="px-4 py-4 text-sm font-semibold text-gray-900">${item.title}</td>
+                    <td class="px-4 py-4 text-sm text-gray-600">${item.preview}</td>
+                    <td class="px-4 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs rounded-full ${item.mode==='run_ads'?'bg-indigo-100 text-indigo-700':'bg-pink-100 text-pink-700'}">${item.mode==='run_ads'?'Run Ads':'Create Content'}</span></td>
+                    <td class="px-4 py-4 text-sm text-gray-900">${item.industry || '--'}</td>
+                    <td class="px-4 py-4"><button class="text-accent hover:text-blue-700 js-history-view" data-id="${item.id}">View</button></td>
+                </tr>`).join('');
         }
 
         function renderBotHistory() {
@@ -1658,175 +1578,36 @@
             `).join('');
         }
 
-        const PLATFORM_RULES = {
-            facebook: { label: 'Facebook', minDailyBudget: 20 },
-            instagram: { label: 'Instagram', minDailyBudget: 15 },
-            google: { label: 'Google Ads', minDailyBudget: 30 }
-        };
-
-        function renderPublishAdOptions() {
-            const select = document.getElementById('publish-ad-select');
-            if (!select) return;
-            const prev = select.value;
-            select.innerHTML = '<option value="">请选择广告记录</option>';
-            appState.ads.forEach((item) => {
-                const option = document.createElement('option');
-                option.value = item.id;
-                option.textContent = `${formatDateTime(item.createdAt)} - ${item.industryLabel || '--'} - ${item.goalLabel || '--'}`;
-                if (item.id === (appState.selectedAdId || prev)) option.selected = true;
-                select.appendChild(option);
-            });
-            renderPublishAdDesc();
-            renderPublishMaterials();
-            renderPublishSummary();
-        }
-
-        function renderPublishAdDesc() {
-            const desc = document.getElementById('publish-ad-desc');
-            const select = document.getElementById('publish-ad-select');
-            if (!desc || !select) return;
-            const selected = appState.ads.find((item) => item.id === select.value);
-            desc.textContent = selected ? `标题：${selected.titlePreview || '--'} | 目标：${selected.goalLabel || '--'}` : '请选择广告记录后查看广告标题与内容。';
-        }
-
-        function renderPublishMaterials() {
-            const list = document.getElementById('publish-material-list');
-            const select = document.getElementById('publish-ad-select');
-            if (!list || !select) return;
-            const adId = select.value || appState.selectedAdId;
-            const materials = appState.materials.filter((item) => item.adId === adId);
-            if (!materials.length) {
-                list.innerHTML = '<p class="text-gray-500">暂无素材，请先上传图片或视频。</p>';
-                return;
-            }
-            list.innerHTML = materials.map((item) => `
-                <label class="flex items-center justify-between border border-gray-200 rounded-md p-3">
-                    <span><input type="checkbox" class="publish-material-item mr-2" value="${item.id}" checked>${item.fileName} · ${item.fileType}</span>
-                    <span class="text-xs text-gray-400">${formatDateTime(item.createdAt)}</span>
-                </label>
-            `).join('');
-        }
-
-
-        function renderPublishPlatforms() {
-            const list = document.getElementById('publish-platform-list');
-            if (!list) return;
-            list.innerHTML = Object.entries(PLATFORM_RULES).map(([key, rule]) => `
-                <label class="flex items-start gap-3 border border-gray-200 rounded-md p-3 text-sm">
-                    <input type="checkbox" class="publish-platform-item mt-1" value="${key}">
-                    <span>
-                        <span class="font-medium text-gray-900">${rule.label}</span>
-                        <span class="block text-xs text-gray-500">最低日预算 RM${rule.minDailyBudget}</span>
-                    </span>
-                </label>
-            `).join('');
-        }
-
-        function renderPublishSummary() {
-            const summary = document.getElementById('publish-summary');
-            if (!summary) return;
-            const adId = document.getElementById('publish-ad-select')?.value || '';
-            const selected = appState.ads.find((item) => item.id === adId);
-            const materialCount = document.querySelectorAll('.publish-material-item:checked').length;
-            const selectedPlatforms = Array.from(document.querySelectorAll('.publish-platform-item:checked')).map((item) => PLATFORM_RULES[item.value]?.label || item.value);
-            const budget = document.getElementById('publish-daily-budget')?.value || '--';
-            const days = document.getElementById('publish-days')?.value || '--';
-            summary.innerHTML = `
-                <p>广告：${selected ? (selected.titlePreview || selected.industryLabel || '已选择') : '未选择'}</p>
-                <p>素材：${materialCount} 个</p>
-                <p>平台：${selectedPlatforms.length ? selectedPlatforms.join('、') : '未选择'}</p>
-                <p>预算：${budget === '--' ? '--' : `RM${budget}/天 · ${days}天`}</p>
-            `;
-        }
+        function renderPublishAdOptions() {}
+        function renderPublishAdDesc() {}
+        function renderPublishMaterials() {}
+        function renderPublishPlatforms() {}
+        function renderPublishSummary() {}
 
         function initAdPublishWorkflow() {
-            const adSelect = document.getElementById('publish-ad-select');
-            const uploadBtn = document.getElementById('publish-upload-material-btn');
-            const materialInput = document.getElementById('publish-material-input');
-            const confirmBtn = document.getElementById('confirm-publish-btn');
-            const budgetInput = document.getElementById('publish-daily-budget');
-            const daysInput = document.getElementById('publish-days');
-            if (!adSelect || !uploadBtn || !materialInput || !confirmBtn || !budgetInput || !daysInput) return;
-
-            adSelect.addEventListener('change', () => {
-                appState.selectedAdId = adSelect.value;
-                saveAppState();
-                renderPublishAdDesc();
-                renderPublishMaterials();
-                renderPublishSummary();
-            });
-
-            uploadBtn.addEventListener('click', () => {
-                const adId = adSelect.value;
-                const files = Array.from(materialInput.files || []);
-                if (!adId || !files.length) {
-                    alert('请先选择广告记录并上传至少一个素材文件。');
-                    return;
+            const runPanel=document.getElementById('publish-run-ads-panel');
+            const contentPanel=document.getElementById('publish-content-panel');
+            const buttons=document.querySelectorAll('.publish-mode-btn');
+            let mode='run_ads';
+            const getLatestSaved=()=> (appState.savedPackages||[])[0];
+            const render=()=>{
+                buttons.forEach(b=>{const on=b.dataset.mode===mode;b.className='publish-mode-btn px-4 py-2 rounded-lg text-sm font-semibold '+(on?'bg-white text-gray-900 shadow':'text-gray-600');});
+                runPanel.classList.toggle('hidden',mode!=='run_ads'); contentPanel.classList.toggle('hidden',mode!=='create_content');
+                const item=getLatestSaved();
+                if(mode==='run_ads'){
+                    runPanel.innerHTML=`<h4 class="text-lg font-semibold">Run Ads Publishing</h4><p class="text-sm text-gray-600">Everything is prepared. Just paste it into Meta Ads Manager to launch your ad.</p><div class="rounded-xl border border-purple-100 p-4"><p><b>Selected ad content:</b> ${item?.title||'No saved ad selected'}</p><p><b>Targeting suggestion:</b> ${item?.audience||'Interest + lookalike audience'}</p><p><b>Budget suggestion:</b> ${item?.budget||'RM80/day'}</p><p><b>Platform reminder:</b> Meta Ads Manager</p></div><div class="flex flex-wrap gap-3"><button id="copy-ad-copy" class="px-4 py-2 rounded-lg border">Copy Copywriting</button><button id="copy-ad-all" class="px-4 py-2 rounded-lg border">Copy Everything</button><a href="https://adsmanager.facebook.com/" target="_blank" class="px-4 py-2 rounded-lg bg-accent text-white">Open Meta Ads Manager</a></div>`;
+                } else {
+                    runPanel.innerHTML='';
+                    contentPanel.innerHTML=`<h4 class="text-lg font-semibold">Create Content Publishing</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><select id="publish-content-platform" class="border border-purple-100 rounded-xl px-3 py-2"><option>Facebook</option><option>Instagram</option></select><select id="publish-content-type" class="border border-purple-100 rounded-xl px-3 py-2"><option>Post</option><option>Reels</option></select></div><div id="content-publish-view" class="rounded-xl border border-purple-100 p-4 text-sm"></div><div class="flex flex-wrap gap-3"><button id="copy-caption" class="px-4 py-2 rounded-lg border">Copy Caption</button><button id="copy-content-all" class="px-4 py-2 rounded-lg border">Copy Everything</button><a href="https://www.facebook.com/" target="_blank" class="px-4 py-2 rounded-lg border">Open Facebook</a><a href="https://www.instagram.com/" target="_blank" class="px-4 py-2 rounded-lg border">Open Instagram</a></div>`;
+                    const updateView=()=>{const p=document.getElementById('publish-content-platform')?.value||'Facebook';const t=document.getElementById('publish-content-type')?.value||'Post';const v=document.getElementById('content-publish-view');if(v)v.innerHTML=`Preparing <b>${p} ${t}</b> package. Copy and paste into ${p}.`;};
+                    document.getElementById('publish-content-platform')?.addEventListener('change',updateView);
+                    document.getElementById('publish-content-type')?.addEventListener('change',updateView);
+                    updateView();
                 }
-                files.forEach((file) => {
-                    appState.materials.unshift({
-                        id: createId(),
-                        adId,
-                        fileName: file.name,
-                        fileType: file.type.includes('video') ? '视频' : '图片',
-                        createdAt: new Date().toISOString()
-                    });
-                });
-                saveAppState();
-                renderPublishMaterials();
-                renderPublishSummary();
-                materialInput.value = '';
-                toast(`已上传 ${files.length} 个素材`);
-            });
-
-            document.addEventListener('change', (event) => {
-                if (event.target.matches('.publish-material-item, .publish-platform-item, #publish-daily-budget, #publish-days')) {
-                    renderPublishSummary();
-                }
-            });
-
-            confirmBtn.addEventListener('click', () => {
-                const adId = adSelect.value;
-                const selectedAd = appState.ads.find((item) => item.id === adId);
-                const materialIds = Array.from(document.querySelectorAll('.publish-material-item:checked')).map((item) => item.value);
-                const platforms = Array.from(document.querySelectorAll('.publish-platform-item:checked')).map((item) => item.value);
-                const dailyBudget = Number(budgetInput.value);
-                const days = Number(daysInput.value);
-
-                if (!selectedAd || !materialIds.length || !platforms.length || !dailyBudget || !days) {
-                    alert('请完成广告、素材、平台、预算、天数选择后再发布。');
-                    return;
-                }
-
-                const requiredMin = Math.max(...platforms.map((platform) => PLATFORM_RULES[platform]?.minDailyBudget || 0));
-                if (dailyBudget < requiredMin) {
-                    alert(`当前所选平台要求最低日预算 RM${requiredMin}，请调整后再发布。`);
-                    return;
-                }
-
-                const unbound = platforms.find((platform) => !hasBoundPublishingAccount(platform));
-                if (unbound) {
-                    alert(`请先在设置页绑定 ${PLATFORM_RULES[unbound].label} 账号后再发布。`);
-                    return;
-                }
-
-                appState.publishPlans.unshift({
-                    id: createId(),
-                    adId,
-                    materialIds,
-                    platforms,
-                    dailyBudget,
-                    days,
-                    createdAt: new Date().toISOString()
-                });
-                const adRecord = appState.ads.find((item) => item.id === selectedAd.id);
-                if (adRecord) adRecord.status = '已发布';
-                saveAppState();
-                renderAdHistory();
-                renderSavedAds();
-                pushActivity('广告发布', `${(selectedAd.titlePreview || selectedAd.industryLabel || '广告').slice(0, 12)}... 已投放到 ${platforms.map((key) => PLATFORM_RULES[key].label).join('/')}`, '成功');
-                toast('广告发布成功，计划已创建。');
-            });
+            };
+            buttons.forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;render();}));
+            document.addEventListener('click',(e)=>{if(e.target.id==='copy-ad-copy'||e.target.id==='copy-ad-all'||e.target.id==='copy-caption'||e.target.id==='copy-content-all'){toast('Copied to clipboard');}});
+            render();
         }
 
         function initTrendMetricSwitcher() {
@@ -2156,7 +1937,21 @@
                     return;
                 }
 
-                if (target.classList.contains('js-download-ad')) {
+                
+                if (target.classList.contains('js-save-generated')) {
+                    appState.savedPackages = appState.savedPackages || [];
+                    appState.savedPackages.unshift({id:createId(),title:target.dataset.title,preview:target.dataset.preview,audience:target.dataset.audience,budget:target.dataset.budget,mode:currentGenerationMode,industry:document.getElementById('ad-industry')?.value?.trim()||'',savedAt:new Date().toISOString()});
+                    saveAppState();
+                    renderSavedAds();
+                    toast('Saved successfully');
+                    return;
+                }
+
+                if (target.classList.contains('js-copy-variation')) {
+                    navigator.clipboard.writeText(target.dataset.copy || '').then(()=>toast('Copied')).catch(()=>toast('Copy failed'));
+                    return;
+                }
+if (target.classList.contains('js-download-ad')) {
                     toast(`已加入下载队列：${target.dataset.title || '广告'}`);
                     return;
                 }
@@ -2209,13 +2004,15 @@
         
 
         let currentGenerationMode = 'run_ads';
-        function modeConfig(){return currentGenerationMode==='run_ads'?{goals:['messages','leads','bookings','sales'],platforms:['Facebook Ads','Instagram Ads']}:{goals:['engagement','reach','traffic','brand awareness'],platforms:['Facebook','Instagram','Reels','TikTok']};}
-        function refreshModeFields(){const c=modeConfig();const g=document.getElementById('ad-goal');const p=document.getElementById('ad-platform');if(g)g.innerHTML='<option value="">Goal</option>'+c.goals.map(v=>`<option>${v}</option>`).join('');if(p)p.innerHTML='<option value="">Platform</option>'+c.platforms.map(v=>`<option>${v}</option>`).join('');const b=document.getElementById('ad-budget-suggestion');if(b)b.parentElement.classList.toggle('hidden',currentGenerationMode!=='run_ads');document.querySelectorAll('.mode-btn').forEach(btn=>{const on=btn.dataset.mode===currentGenerationMode;btn.className='mode-btn px-4 py-2 rounded-lg text-sm font-medium '+(on?'bg-white text-gray-900 shadow':'text-gray-600');});}
-        function renderGeneratedCards(payload){const wrap=document.getElementById('ad-generated-results');const empty=document.getElementById('ad-empty-state');if(!wrap||!empty)return;const items=[1,2,3].map(i=> currentGenerationMode==='run_ads'?{title:`${payload.productName||'Ad'} Variant ${i}`,copy:`${payload.offer||'Offer'} for ${payload.targetAudience||'audience'}`,cta:'Get Started',video:'Hook, Problem, Solution, CTA',image:'Lifestyle image with product focus',tips:'Natural light, close-up shots',extra1:'Audience: interest + lookalike',extra2:`Budget: ${payload.budget||'RM80/day'}`}:{title:`${payload.productName||'Content'} Hook ${i}`,copy:`${payload.offer||'Story angle'} for ${payload.targetAudience||'audience'}`,caption:'Short caption with CTA',video:'3-scene script with voiceover',hook:'Stop scrolling hook',hashtags:'#malaysia #smallbusiness #viral',image:'UGC style frame',tips:'Fast cuts, subtitle on',extra1:'Platform: Reels',extra2:'Best posting window: evening'});
-wrap.innerHTML=items.map((x,idx)=>`<div class="rounded-xl border border-gray-200 p-4"><h4 class="font-semibold mb-2">Variation ${idx+1}</h4><p><b>${currentGenerationMode==='run_ads'?'Title':'Post Title / Hook'}:</b> ${x.title}</p><p><b>Main Copy:</b> ${x.copy}</p><p><b>${currentGenerationMode==='run_ads'?'CTA':'Caption'}:</b> ${currentGenerationMode==='run_ads'?x.cta:x.caption}</p><p><b>Video Script:</b> ${x.video}</p><p><b>${currentGenerationMode==='run_ads'?'Image Suggestion':'Opening Hook'}:</b> ${currentGenerationMode==='run_ads'?x.image:x.hook}</p><p><b>Shooting Tips:</b> ${x.tips}</p><p><b>${currentGenerationMode==='run_ads'?'Suggested Audience':'Hashtag Suggestions'}:</b> ${x.extra1}</p><p><b>${currentGenerationMode==='run_ads'?'Suggested Budget':'Suggested Platform'}:</b> ${x.extra2}</p><div class="mt-3 flex gap-2"><button class="px-3 py-1 rounded-md border">Save</button><button class="px-3 py-1 rounded-md border">Regenerate</button><button class="px-3 py-1 rounded-md border js-copy-variation" data-copy="${x.title} ${x.copy}">Copy</button></div></div>`).join('');
-empty.classList.add('hidden');wrap.classList.remove('hidden');}
+        function modeConfig(){
+            return currentGenerationMode==='run_ads'
+                ? {title:'Run Ads Setup', goals:['Messages','Leads','Bookings','Sales'], platforms:['Meta Ads'], contentTypes:[]}
+                : {title:'Content Setup', goals:['Engagement','Reach','Traffic','Brand Awareness'], platforms:['Facebook','Instagram'], contentTypes:['Post','Reels']};
+        }
+        function refreshModeFields(){const c=modeConfig();const g=document.getElementById('ad-goal');const p=document.getElementById('ad-platform');const ct=document.getElementById('ad-content-type');const budget=document.getElementById('ad-budget-suggestion');document.getElementById('mode-fields-title').textContent=c.title;g.innerHTML='<option value=>'+(currentGenerationMode==='run_ads'?'Campaign Goal':'Content Goal')+'</option>'+c.goals.map(v=>`<option>${v}</option>`).join('');p.innerHTML='<option value=>'+(currentGenerationMode==='run_ads'?'Platform':'Content Platform')+'</option>'+c.platforms.map(v=>`<option>${v}</option>`).join('');if(currentGenerationMode==='run_ads'){budget.classList.remove('hidden');ct.classList.add('hidden');}else{budget.classList.add('hidden');ct.classList.remove('hidden');ct.innerHTML='<option value=>Content Type</option>'+c.contentTypes.map(v=>`<option>${v}</option>`).join('');}document.querySelectorAll('.mode-btn').forEach(btn=>{const on=btn.dataset.mode===currentGenerationMode;btn.className='mode-btn px-4 py-2 rounded-lg text-sm font-semibold '+(on?'bg-white text-gray-900 shadow':'text-gray-600');});}
+        function initAdGenerate(){document.getElementById('ad-tone').innerHTML='<option value=>Tone</option><option>Professional</option><option>Friendly</option><option>Premium</option>';document.getElementById('ad-language').innerHTML='<option value=>Language</option><option>English</option><option>Bahasa Melayu</option><option>中文</option>';document.querySelectorAll('.mode-btn').forEach(btn=>btn.addEventListener('click',()=>{currentGenerationMode=btn.dataset.mode;refreshModeFields();}));refreshModeFields();document.getElementById('ad-generate-form')?.addEventListener('submit',(e)=>{e.preventDefault();const payload={industry:document.getElementById('ad-industry').value.trim(),productName:document.getElementById('ad-product-name').value.trim(),offer:document.getElementById('ad-offer').value.trim(),targetAudience:document.getElementById('ad-target-audience').value.trim(),platform:document.getElementById('ad-platform').value,goal:document.getElementById('ad-goal').value,budget:document.getElementById('ad-budget-suggestion').value.trim(),contentType:document.getElementById('ad-content-type').value};renderGeneratedCards(payload);});}
+        function renderGeneratedCards(payload){const wrap=document.getElementById('ad-generated-results');const empty=document.getElementById('ad-empty-state');if(!wrap||!empty)return;const cards=[1,2,3].map(i=>currentGenerationMode==='run_ads'?{title:`${payload.productName||'Ad'} Title ${i}`,copy:`${payload.offer||'Offer'} tailored for ${payload.targetAudience||'your audience'}.`,cta:'Send Message Now',video:'Scene 1 hook, scene 2 offer, scene 3 CTA',image:'Show product in use with brand colors',tips:'Use natural lighting and clear close-ups',audience:`${payload.targetAudience||'Local audience'} + lookalike`,budget:payload.budget||'RM80/day'}:{title:`${payload.productName||'Content'} Hook ${i}`,copy:`${payload.offer||'Value story'} for ${payload.targetAudience||'community'}.`,caption:'Save this for later and follow for more updates.',video:'5-8 second hook, value point, CTA',hook:'Stop scrolling! Here is what most people miss...',hashtags:'#business #marketing #content',image:'UGC style vertical visual',tips:'Fast pacing, subtitle first line bold',platform:`${payload.platform||'Facebook'} ${payload.contentType||'Post'}`});wrap.innerHTML=cards.map((x,idx)=>`<article class="rounded-2xl border border-purple-100 shadow-sm p-5 bg-white"><h4 class="font-semibold text-gray-900 mb-3">Version ${idx+1}</h4>${currentGenerationMode==='run_ads'?`<p><b>Title:</b> ${x.title}</p><p><b>Main Copy:</b> ${x.copy}</p><p><b>CTA:</b> ${x.cta}</p><p><b>Video Script:</b> ${x.video}</p><p><b>Image Suggestion:</b> ${x.image}</p><p><b>Shooting Tips:</b> ${x.tips}</p><p><b>Suggested Audience:</b> ${x.audience}</p><p><b>Suggested Budget:</b> ${x.budget}</p>`:`<p><b>Hook / Post Title:</b> ${x.title}</p><p><b>Main Copy:</b> ${x.copy}</p><p><b>Caption:</b> ${x.caption}</p><p><b>Video Script:</b> ${x.video}</p><p><b>Opening Hook:</b> ${x.hook}</p><p><b>Hashtag Suggestions:</b> ${x.hashtags}</p><p><b>Image Suggestion:</b> ${x.image}</p><p><b>Shooting Tips:</b> ${x.tips}</p><p><b>Suggested Platform:</b> ${x.platform}</p>`}<div class="mt-4 flex gap-2"><button class="px-3 py-1.5 rounded-lg border js-save-generated" data-title="${x.title}" data-preview="${x.copy}" data-audience="${x.audience||''}" data-budget="${x.budget||''}">Save</button><button class="px-3 py-1.5 rounded-lg border">Regenerate</button><button class="px-3 py-1.5 rounded-lg border js-copy-variation" data-copy="${x.title} ${x.copy}">Copy</button></div></article>`).join('');empty.classList.add('hidden');wrap.classList.remove('hidden');}
 
-        // 初始化Bot系统功能
         function initBotSystem() {
             const industrySelect = document.getElementById('bot-industry');
             const flowSelect = document.getElementById('bot-flow');
