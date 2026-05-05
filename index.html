@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <script src="script.js"></script>
+    <script src="auth.js"></script>
     <script src="i18n.js"></script>
     <script>
         tailwind.config = {
@@ -67,8 +68,11 @@
                             <option value="en">English</option>
                             <option value="ms">Bahasa Malaysia</option>
                         </select>
-                        <a href="login.html" data-i18n-key="nav_login" class="text-accent hover:text-accent-dark px-3 py-2 text-sm font-medium transition-colors">登录</a>
-                        <a href="register.html" data-i18n-key="nav_trial" class="ml-1 bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">免费试用</a>
+                        <a href="login.html" data-auth-guest data-i18n-key="nav_login" class="header-action-link text-accent hover:text-accent-dark px-3 py-2 text-sm font-medium transition-colors">登录</a>
+                        <a href="register.html" data-auth-guest data-i18n-key="nav_trial" class="header-action-button ml-1 bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">免费试用</a>
+                        <span data-auth-user class="header-account-pill hidden text-sm font-medium"><i class="fa fa-user-circle text-accent"></i><span data-auth-user-name>Account</span></span>
+                        <a href="dashboard.html" data-auth-user data-i18n-key="nav_open_app" class="header-action-button hidden bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">打开应用</a>
+                        <button type="button" data-auth-user data-auth-logout data-i18n-key="dashboard_logout" class="header-action-link hidden text-accent hover:text-accent-dark px-3 py-2 text-sm font-medium transition-colors">退出</button>
                     </div>
                 </div>
                 <div class="flex md:hidden items-center gap-2">
@@ -92,8 +96,10 @@
                 <a href="#pricing" data-i18n-key="nav_pricing" class="block text-primary hover:text-accent px-3 py-2 text-base font-medium transition-colors">定价</a>
                 <a href="#demo" data-i18n-key="nav_demo" class="block text-primary hover:text-accent px-3 py-2 text-base font-medium transition-colors">演示</a>
                 <div class="pt-4 pb-3 border-t border-gray-200">
-                    <a href="login.html" data-i18n-key="nav_login" class="block text-accent hover:text-accent-dark px-3 py-2 text-base font-medium transition-colors">登录</a>
-                    <a href="register.html" data-i18n-key="nav_trial" class="mt-3 block bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-base font-medium transition-colors text-center">免费试用</a>
+                    <a href="login.html" data-auth-guest data-i18n-key="nav_login" class="block text-accent hover:text-accent-dark px-3 py-2 text-base font-medium transition-colors">登录</a>
+                    <a href="register.html" data-auth-guest data-i18n-key="nav_trial" class="mt-3 block bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-base font-medium transition-colors text-center">免费试用</a>
+                    <a href="dashboard.html" data-auth-user data-i18n-key="nav_open_app" class="hidden mt-3 block bg-accent hover:bg-blue-600 text-white px-4 py-2 rounded-md text-base font-medium transition-colors text-center">打开应用</a>
+                    <button type="button" data-auth-user data-auth-logout data-i18n-key="dashboard_logout" class="hidden w-full text-left text-accent hover:text-accent-dark px-3 py-2 text-base font-medium transition-colors">退出</button>
                 </div>
             </div>
         </div>
@@ -810,6 +816,24 @@
                 
                 adOutput.innerHTML = outputHtml;
             }, 1500);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof getCurrentUser !== 'function') return;
+            const user = getCurrentUser();
+            document.querySelectorAll('[data-auth-guest]').forEach((el) => el.classList.toggle('hidden', Boolean(user)));
+            document.querySelectorAll('[data-auth-user]').forEach((el) => el.classList.toggle('hidden', !user));
+            document.querySelectorAll('[data-auth-user-name]').forEach((el) => {
+                el.textContent = user?.email ? user.email.split('@')[0] : 'Account';
+            });
+            document.querySelectorAll('[data-auth-logout]').forEach((button) => {
+                button.addEventListener('click', function() {
+                    logoutUser();
+                    window.location.href = 'index.html';
+                });
+            });
         });
     </script>
 </body>

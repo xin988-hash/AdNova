@@ -667,6 +667,58 @@ body {
     }
 }
 
+
+/* Restore Tailwind responsive display utilities that are used by the premium layout. */
+@media (min-width: 640px) {
+    .sm\:flex { display: flex !important; }
+    .sm\:inline-flex { display: inline-flex !important; }
+    .sm\:grid { display: grid !important; }
+}
+
+@media (min-width: 768px) {
+    .md\:flex { display: flex !important; }
+    .md\:inline-flex { display: inline-flex !important; }
+    .md\:grid { display: grid !important; }
+}
+
+@media (min-width: 1024px) {
+    .lg\:flex { display: flex !important; }
+    .lg\:inline-flex { display: inline-flex !important; }
+    .lg\:grid { display: grid !important; }
+}
+
+.header-action-link,
+.header-action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+}
+
+.header-account-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    border: 1px solid var(--border-soft);
+    border-radius: 999px;
+    background: rgba(255,255,255,.78);
+    color: #3c3652;
+    padding: .45rem .85rem;
+    box-shadow: 0 8px 22px rgba(31,28,69,.05);
+}
+
+.sidebar-section-label {
+    color: rgba(255,255,255,.48);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .85rem .75rem .35rem;
+}
+
 /* Premium AdNova SaaS design system */
 
 :root {
