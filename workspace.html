@@ -103,16 +103,14 @@
         function hydrateFromQuery() {
             const params = new URLSearchParams(window.location.search);
             const from = params.get('from');
-            const template = params.get('template');
             const category = params.get('category');
             const industry = params.get('industry');
 
-            if (!from && !template && !category && !industry) return;
+            if (!from && !category && !industry) return;
 
             sourceBox.classList.remove('hidden');
             sourceBox.textContent = AdnovaI18n.t('workspace_from_text', undefined, {
                 from: from || AdnovaI18n.t('workspace_from_unknown'),
-                template: template || AdnovaI18n.t('workspace_tpl_unnamed'),
                 category: category ? AdnovaI18n.t('workspace_from_category', undefined, { category }) : '',
                 industry: industry ? AdnovaI18n.t('workspace_from_industry', undefined, { industry }) : ''
             });

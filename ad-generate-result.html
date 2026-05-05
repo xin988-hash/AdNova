@@ -30,7 +30,7 @@
                 <p id="context-line" class="text-gray-600"></p>
             </section>
 
-            <section id="result-template" class="bg-white rounded-xl shadow-md p-6 space-y-5"></section>
+            <section id="result-list" class="bg-white rounded-xl shadow-md p-6 space-y-5"></section>
 
             <section class="bg-white rounded-xl shadow-md p-6 flex flex-wrap gap-3">
                 <a href="dashboard.html#ad-generate" data-i18n-key="ad_result_back_edit" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm">返回修改输入</a>
@@ -47,7 +47,7 @@ const sections = ['headline','body','cta','imageSuggestion','videoSuggestion','s
 
 function createId(){return window.crypto?.randomUUID ? window.crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;}
 function getKey(){return `${ADNOVA_APP_STATE_KEY}:${currentUser?.email||'guest'}`;}
-function defaultState(){return {ads:[],generatedTemplates:[],adGenerationDetails:[],selectedTemplateId:'',materials:[],publishPlans:[],botDeployments:[],activities:[],mediaQueue:[],socialBindings:{facebook:false,instagram:false,whatsapp:false,telegram:false}};}
+function defaultState(){return {ads:[],adGenerationDetails:[],materials:[],publishPlans:[],botDeployments:[],activities:[],mediaQueue:[],socialBindings:{facebook:false,instagram:false,whatsapp:false,telegram:false}};}
 function loadState(){try{const p=JSON.parse(localStorage.getItem(getKey())||'{}'); return {...defaultState(),...p,socialBindings:{...defaultState().socialBindings,...(p.socialBindings||{})}};}catch(_){return defaultState();}}
 function saveState(state){localStorage.setItem(getKey(), JSON.stringify(state));}
 
@@ -76,7 +76,7 @@ function composeResults(input){
     cta: input.goal==='booking' ? AdnovaI18n.t('ad_gen_goal_booking') : (input.goal==='order' ? AdnovaI18n.t('ad_gen_goal_order') : AdnovaI18n.t('ad_result_cta_default')),
     imageSuggestion: creative.img,
     videoSuggestion: creative.video,
-    shootingSuggestion: AdnovaI18n.t('ad_result_shooting_template'),
+    shootingSuggestion: AdnovaI18n.t('ad_result_shooting_guide'),
     platformFit: `${input.platformLabel||input.platform}：${goal}`,
     audienceFit: input.targetAudience || AdnovaI18n.t('ad_result_default_group'),
     whatsapp: `${AdnovaI18n.t('ad_result_whatsapp_opening')} ${product}，${offerLine}${priceLine}，现在还有档期吗？`,
@@ -102,8 +102,8 @@ function render(record){
   document.getElementById('context-line').textContent = AdnovaI18n.t('ad_result_context_rich', undefined, {
     industry: record.input.industryLabel || record.input.industry || '--', platform: record.input.platformLabel || '--', goal: record.input.goalLabel || '--', tone: toneLabel(record.input.tone)
   });
-  const template = document.getElementById('result-template');
-  template.innerHTML = record.results.map((item)=>`<article class="border border-gray-200 rounded-lg p-4"><div class="flex items-start justify-between gap-3 mb-2"><h3 class="text-base font-semibold text-gray-900">${item.sectionLabel}</h3><button class="px-2 py-1 rounded border text-blue-600 text-xs js-copy" data-key="${item.key}"><i class="fa fa-copy"></i> ${AdnovaI18n.t('ad_result_copy_item')}</button></div><p class="text-sm text-gray-700 whitespace-pre-line">${item.content}</p></article>`).join('');
+  const resultList = document.getElementById('result-list');
+  resultList.innerHTML = record.results.map((item)=>`<article class="border border-gray-200 rounded-lg p-4"><div class="flex items-start justify-between gap-3 mb-2"><h3 class="text-base font-semibold text-gray-900">${item.sectionLabel}</h3><button class="px-2 py-1 rounded border text-blue-600 text-xs js-copy" data-key="${item.key}"><i class="fa fa-copy"></i> ${AdnovaI18n.t('ad_result_copy_item')}</button></div><p class="text-sm text-gray-700 whitespace-pre-line">${item.content}</p></article>`).join('');
 }
 
 async function syncSupabase(record){
